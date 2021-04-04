@@ -1,6 +1,6 @@
 
-> ### For correct user dysplay in commit:
+> ### __For correct user dysplay in commit:__
 >
-> it config user.name *User_login*
+> `git config user.name *User_login*`
 >
-> git config user.email *User_email*
+> `git config user.email *User_email*`
