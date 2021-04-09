@@ -1,0 +1,21 @@
+
+#Some garbage
+*.DS_store
+
+# Object files
+*.o
+
+#out file
+*.a
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Forse ignore
+*LOCAL*
+
+# Xcode stuff
+*.xcodeprojpft/
