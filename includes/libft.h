@@ -82,7 +82,7 @@ char			*ft_strncat(char *dst, char *src, size_t n);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strnstr(const char *h, const char *n, size_t len);
-int				ft_strncmp(char *s1, char *s2, size_t n);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isdigit(int c);
