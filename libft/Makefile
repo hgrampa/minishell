@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/31 11:39:03 by hgrampa           #+#    #+#              #
-#    Updated: 2021/02/08 10:20:53 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/13 18:54:09 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,8 @@ SRC_STRINGS		= 	ft_atoi.c \
 					ft_ultoa_base.c \
 					ft_utoa_base.c \
 					ft_nwrd.c \
+					ft_concat.c \
+					ft_strndup.c
 
 SRC				+= $(SRC_STRINGS)
 OBJ_STRINGS		= $(SRC_STRINGS:.c=.o)
