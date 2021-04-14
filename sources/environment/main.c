@@ -11,62 +11,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
-# include "environment.h"
+# include "../../includes/libft.h"
+# include "../../includes/environment.h"
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-void	ft_list_sort(t_list *elem)
-{
-	t_list *temp_data;
-	t_list *temp_elem;
-	t_list *elem_cmp;
-	t_pair *elem_cmp_data_pair;
-	t_pair *temp_elem_pair;
-
-	while (elem->next != NULL)
-	{
-		temp_data = elem->data;
-		temp_elem = elem;
-		elem_cmp = elem->next;
-		while (elem_cmp != NULL)
-		{
-			elem_cmp_data_pair = (t_pair*)elem_cmp->data;
-			temp_elem_pair = (t_pair*)temp_elem->data;
-			if (ft_strncmp(elem_cmp_data_pair->key, temp_elem_pair->key, 30) < 0)
-			{
-				temp_data = elem_cmp->data;
-				temp_elem = elem_cmp;
-			}
-			elem_cmp = elem_cmp->next;
-		}
-		temp_elem->data = elem->data;
-		elem->data = temp_data;
-		elem = elem->next;
-	}
-}
-
-void print_list(t_list *lst)
-{
-	t_pair *pair;
-
-	while (lst != NULL)
-	{
-		pair = (t_pair*)lst->data;
-		printf("%s\n", pair->key);
-		lst = lst->next;
-	}
-}
-
-int main(int ac, char **av, const char **env)
+int main(int ac, char **av, char const **env)
 {
 	t_env *environment;
 	
-
 	printf("%d\n", ac);
 	printf("%s\n", av[0]);
 	environment = env_create(env);
-	printf("________________\n");
-	ft_list_sort(environment->collection);
+	env_set(environment, "A", NULL);
+	env_set(environment, "AA", "");
+	env_set(environment, "HOME2", "test1321321321321321321321321321");
+	env_set(environment, "REAL_USER", "meow");
+	env_unset(environment, "A");
+	env_unset(environment, "MYSTIC_SHIT");
+	env_unset(environment, "__CF_USER_TEXT_ENCODING");
+	printf("________REPRESENT________\n");
+	print_represent(environment->represent);
+	printf("________LISTS________\n");
 	print_list(environment->collection);
+	env_destroy(environment);
+	// t_pair *pair = create_pair_from_str("test");
+	// printf("key %s\n", pair->key);
+	// printf("value %s\n\n", pair->value);
+
+	// pair = create_pair_from_str("test=");
+	// printf("key %s\n", pair->key);
+	// printf("value %s\n\n", pair->value);
+
+	// pair = create_pair_from_str("test=test");
+	// printf("key %s\n", pair->key);
+	// printf("value %s\n\n", pair->value);
+
 	return (1);
 }
