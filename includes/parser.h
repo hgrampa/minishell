@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/14 14:41:57 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/14 19:36:46 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ typedef int (*t_state_body)(char**, t_list**, struct s_pcontext*);
 
 typedef struct s_pcontext
 {
-	t_state_body		previous_state;
+	// t_state_body		previous_state;
 	t_state_body		current_state;
+	t_stack				*state_stack;
 	char				*buffer;
-	t_list				**words;
+	t_list				*words;
 	char				process:1;
 
 };
