@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/13 18:58:35 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/15 13:47:04 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,17 +30,22 @@ CC_LIBS			+= -ltermcap
 INCL_DIR		=	includes/ \
 					libft/includes/
 
-SRC_DIR			=	sources/
+SRC_DIR			=	sources/ \
+					sources/parser
 
 OBJ_DIR			=	objects/
 
 # ---------------------------------------------------------------------------- #
 INCL			=	minishell.h \
 					libft.h \
-					input.h
+					input.h \
+					parser.h
 
 SRC				=	main.c \
-					input.c
+					input.c \
+					parser.c \
+					pbuffer.c \
+					pword.c
 
 OBJ				= $(SRC:.c=.o)
 OBJ_PATH		= $(addprefix $(OBJ_DIR), $(OBJ))
