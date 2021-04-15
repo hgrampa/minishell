@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:46:56 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/13 19:01:00 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/15 13:40:14 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ void input_set_mode(t_input *input)
 	// 	exit(1);
 	// }
 
-	tcgetattr(0, &input->tsave);
-	memcpy(&input->tattr, &input->tsave, sizeof(struct termios));
+	// tcgetattr(0, &input->tsave);
+	// memcpy(&input->tattr, &input->tsave, sizeof(struct termios));
 	
 	/* включаем неканонический режим без эха */
 	// tattr.c_lflag &= ~(ICANON|ECHO);
@@ -111,6 +111,6 @@ void input_set_mode(t_input *input)
 	// tattr.c_cc[VMIN] = 1;
 	// tattr.c_cc[VTIME] = 0;
 
-	tcsetattr(0, TCSAFLUSH, &input->tattr);
+	// tcsetattr(0, TCSAFLUSH, &input->tattr);
 }
 
