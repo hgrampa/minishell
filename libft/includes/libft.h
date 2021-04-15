@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:17:58 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/13 18:53:26 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/15 12:15:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void			*ft_memmove(void *dest, const void *src, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			*ft_calloc(size_t count, size_t size);
+void			*ft_realloc(void *ptr, size_t old_size, ssize_t new_size);
 
 size_t			ft_strlen(const char *s);
 size_t			ft_sstrlen(const char *s);
