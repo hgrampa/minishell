@@ -20,7 +20,7 @@ void	print_represent(char **array)
 
 	i = 0;
 	while (array[i] != NULL)
-		printf("---- %s\n", array[i++]);
+		printf("%s\n", array[i++]);
 }
 
 void	print_list(t_list *lst)
@@ -64,13 +64,21 @@ void	free_array(char **array)
 	}
 }
 
+int	compare_pairs(t_list *elem_cmp, t_list *temp_elem)
+{
+	t_pair	*data_pair;
+	t_pair	*elem_pair;
+
+	data_pair = (t_pair *)elem_cmp->data;
+	elem_pair = (t_pair *)temp_elem->data;
+	return (ft_strncmp(data_pair->key, elem_pair->key, 30) < 0);
+}
+
 void	ft_list_sort(t_list *elem)
 {
 	t_list	*temp_data;
 	t_list	*temp_elem;
 	t_list	*elem_cmp;
-	t_pair	*data_pair;
-	t_pair	*elem_pair;
 
 	while (elem->next != NULL)
 	{
@@ -79,9 +87,7 @@ void	ft_list_sort(t_list *elem)
 		elem_cmp = elem->next;
 		while (elem_cmp != NULL)
 		{
-			data_pair = (t_pair *)elem_cmp->data;
-			elem_pair = (t_pair *)temp_elem->data;
-			if (ft_strncmp(data_pair->key, elem_pair->key, 30) < 0)
+			if (compare_pairs(elem_cmp, temp_elem))
 			{
 				temp_data = elem_cmp->data;
 				temp_elem = elem_cmp;
