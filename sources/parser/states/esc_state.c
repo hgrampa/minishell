@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:17:02 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 14:17:15 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/16 16:01:45 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		esc_state(char **line, t_list **words, struct s_pcontext *context)
 	// 	if (**line == '\0')
 	// 	{
 	// 		pcontext_end_process(context);
-	// 		return (1); // TODO или сразу тут ошибку сделать
+	// 		return (0);
 	// 	}
 	// }
 	return (1);

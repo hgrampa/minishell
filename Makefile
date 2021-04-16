@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/16 14:11:29 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/16 14:41:07 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ INCL_DIR		=	includes/ \
 
 SRC_DIR			=	sources/ \
 					sources/parser \
-					sources/parser/states
+					sources/parser/states \
+					sources/environment
 
 OBJ_DIR			=	objects/
 
@@ -52,7 +53,11 @@ SRC				=	main.c \
 					squotes_state.c \
 					wquotes_state.c	\
 					env_state.c \
-					cntr_state.c 
+					cntr_state.c \
+					environment_1.c \
+					environment_2.c \
+					environment_3.c \
+					environment_4.c
 
 OBJ				= $(SRC:.c=.o)
 OBJ_PATH		= $(addprefix $(OBJ_DIR), $(OBJ))

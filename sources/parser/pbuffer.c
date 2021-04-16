@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:35:44 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 13:58:51 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/16 16:01:34 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	pbuffer_add_char(struct s_pcontext *context, char c)
 		if (!pbuffer_open(context, EWT_WORD))
 			return (0);
 	}
-	// TODO когда будет всремя поменять на что-то адекватное
 	len = ft_strlen(context->buffer);
 	size = (len + 1) * sizeof(char);
 	tmp = (char *)ft_realloc(context->buffer, size, size + (1 * sizeof(char)));

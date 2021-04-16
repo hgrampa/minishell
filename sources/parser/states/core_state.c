@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:03:49 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 14:05:24 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/16 16:01:54 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	core_state(char **line, t_list **words, struct s_pcontext *context)
 		{
 			pbuffer_close(context);
 			pcontext_end_process(context);
-			return (1); // TODO вероятно можно что-то лучше придумать
+			return (1);
 		}
 		else if (**line == '$')
 		{
@@ -30,11 +30,13 @@ int	core_state(char **line, t_list **words, struct s_pcontext *context)
 		}
 		else if (**line == '\"')
 		{
+			(*line)++;
 			pcontext_set_state(context, wquotes_state);
 			return (1);
 		}
 		else if (**line == '\'')
 		{
+			(*line)++;
 			pcontext_set_state(context, squotes_state);
 			return (1);
 		}

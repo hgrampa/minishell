@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 13:59:35 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:42:27 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	print_pword(void *data)
 
 int main(int argc, char const *argv[], char const *envp[])
 {
-	// t_env env;
-	// ? env = env_create(envp);
 	char	*line;
 	t_input	*input;
 	t_list	*words;

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:05 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 13:25:06 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/16 15:39:01 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			env_state(char **line, t_list **words, struct s_pcontext *context)
 {
 	char *anchor;
 	anchor = *line;
-	(*anchor)++;
+	anchor++;
 	//	проверка следуещего за $ символа - УС ли он
 	if (ft_strchr(_PRS_CONTROLERS, *anchor) != NULL)
 	{
@@ -35,7 +35,7 @@ int			env_state(char **line, t_list **words, struct s_pcontext *context)
 		pcontext_return_state(context);
 		return (1);
 	}
-	else if (ft_strchr(_PRS_QUOTES, *anchor) != NULL)
+	else if (ft_strchr(_PRS_QUOTES, *anchor) != NULL) // TODO можно только на ' проверять
 	{
 		if (pcontext_previous_state(context) == wquotes_state)
 		{
@@ -78,6 +78,7 @@ int			env_state(char **line, t_list **words, struct s_pcontext *context)
 				name = ft_strndup(anchor, len);
 				// получение значения по имени (строка, пустая строка, NULL)
 				value = env_get_value(context->env, name);
+				// value = ft_strdup("A B  C   D");
 				if (value != NULL)
 				{
 					// формирование слов/а на месте в зависимости от прошлой стадии

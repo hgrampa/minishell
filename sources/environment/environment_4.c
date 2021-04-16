@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   environment_4.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssentine <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:03 by ssentine          #+#    #+#             */
-/*   Updated: 2021/04/11 12:04:05 by ssentine         ###   ########.fr       */
+/*   Updated: 2021/04/16 14:48:43 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
-#include "../../includes/environment.h"
+#include "libft.h"
+#include "environment.h"
 #include <stdio.h>
 
 void	print_represent(char **array)
