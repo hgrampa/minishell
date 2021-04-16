@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:17:58 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/02/08 10:20:34 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/15 12:15:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void			*ft_memmove(void *dest, const void *src, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			*ft_calloc(size_t count, size_t size);
+void			*ft_realloc(void *ptr, size_t old_size, ssize_t new_size);
 
 size_t			ft_strlen(const char *s);
 size_t			ft_sstrlen(const char *s);
@@ -93,6 +94,7 @@ int				ft_tolower(int c);
 int				ft_toupper(int c);
 char			*ft_strdup(const char *s1);
 char			*ft_strcdup(const char *str, char ch);
+char			*ft_strndup(const char *s1, int len);
 char			*ft_gnwrd(char **str);
 char			*ft_nwrd(char **str);
 int				ft_isnwrd(char *str, char *substr);
@@ -112,7 +114,9 @@ char			ft_digit_char_lw(int digit);
 char			ft_digit_char_up(int digit);
 
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-char			*ft_strjoin(char *s1, char *s2);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_concat2(char *str1, char *str2);
+char			*ft_concat3(char *str1, char *str2, char *str3);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 

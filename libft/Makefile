@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/31 11:39:03 by hgrampa           #+#    #+#              #
-#    Updated: 2021/02/08 10:20:53 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/15 12:16:14 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,9 @@ SRC_MEMORY		= 	ft_bzero.c \
 					ft_memmove.c \
 					ft_memset.c \
 					ft_calloc.c \
+					ft_realloc.c \
 					ft_memchr.c \
-					ft_memcpy.c \
+					ft_memcpy.c
 
 SRC				+= $(SRC_MEMORY)
 OBJ_MEMORY		= $(SRC_MEMORY:.c=.o)
@@ -97,6 +98,8 @@ SRC_STRINGS		= 	ft_atoi.c \
 					ft_ultoa_base.c \
 					ft_utoa_base.c \
 					ft_nwrd.c \
+					ft_concat.c \
+					ft_strndup.c
 
 SRC				+= $(SRC_STRINGS)
 OBJ_STRINGS		= $(SRC_STRINGS:.c=.o)
