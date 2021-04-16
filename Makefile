@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/15 13:47:04 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/16 14:11:29 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ INCL_DIR		=	includes/ \
 					libft/includes/
 
 SRC_DIR			=	sources/ \
-					sources/parser
+					sources/parser \
+					sources/parser/states
 
 OBJ_DIR			=	objects/
 
@@ -45,7 +46,13 @@ SRC				=	main.c \
 					input.c \
 					parser.c \
 					pbuffer.c \
-					pword.c
+					pword.c \
+					pstate.c \
+					core_state.c \
+					squotes_state.c \
+					wquotes_state.c	\
+					env_state.c \
+					cntr_state.c 
 
 OBJ				= $(SRC:.c=.o)
 OBJ_PATH		= $(addprefix $(OBJ_DIR), $(OBJ))

@@ -6,14 +6,14 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 13:46:54 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:09:14 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
 
-enum e_pword_type	cntrl_get_type(char **line)
+static enum e_pword_type	cntrl_get_type(char **line)
 {
 	if (ft_strncmp(*line, "|", 1))
 		return (EWT_PIPE);
@@ -29,7 +29,8 @@ enum e_pword_type	cntrl_get_type(char **line)
 		return (EWT_UNKNOWN);
 }
 
-int		cntrl_state(char **line, t_list **words, struct s_pcontext *context)
+int							cntrl_state(char **line, t_list **words,
+	struct s_pcontext *context)
 {
 	enum e_pword_type	type;
 	type = cntrl_get_type(*line);
@@ -41,10 +42,15 @@ int		cntrl_state(char **line, t_list **words, struct s_pcontext *context)
 	// закрываю буфер и записываю слово
 	pbuffer_close(context);
 	// открываю буфер
-	pbuffer_open(context, type); // Вот этой функции можно как аругумент давать тип слова
+	pbuffer_open(context, type);
 	// добавляю строку(может NULL) и тип симол к новому слову
 	// закрываю буфер и записываю слово
 	pbuffer_close(context);
+	// проматываю line
+	if (type == EWT_REDIRECT3) // TODO так себе но пох
+		(*line) += 2;
+	else
+		(*line)++;
 	pcontext_return_state(context);
 	return(1);
 }
