@@ -30,10 +30,10 @@ typedef struct s_pair
 **		- Collection contains type t_pair
 **		- represent - null terminating array of strings
 */
-typedef struct s_envs
+typedef struct s_env
 {
 	t_list	*collection;
-	char	*represent[];
+	void	*represent;
 }				t_env;
 
 /*
@@ -85,5 +85,17 @@ int		env_set(t_env *env, char const *key, char const *value);
 **		- In case of an error, returns 0, otherwise 1 
 */
 int		env_unset(t_env *env, char const *key);
+
+int get_value_from_key(t_pair *pair, char const *key);
+int create_represent(t_env *environment, int ln);
+t_pair	*env_get_pair(t_env *env, char const *key);
+t_pair	*create_pair_from_str(char const *str);
+t_pair	*create_new_pair(char const *key, char const *value);
+void	print_represent(char **array);
+void	print_list(t_list *lst);
+void	free_pair(void *ptr);
+void	free_array(char **array);
+void	ft_list_sort(t_list *elem);
+
 
 #endif
