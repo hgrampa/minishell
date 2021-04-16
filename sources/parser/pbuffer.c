@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:35:44 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/15 14:44:56 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/16 13:58:51 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	pbuffer_add_char(struct s_pcontext *context, char c)
 
 	if (context->buffer == NULL)
 	{
-		if (!pbuffer_open(context))
+		if (!pbuffer_open(context, EWT_WORD))
 			return (0);
 	}
 	// TODO когда будет всремя поменять на что-то адекватное
@@ -43,7 +43,7 @@ int	pbuffer_add_str(struct s_pcontext *context, char *str)
 	
 	if (context->buffer == NULL)
 	{
-		if (!pbuffer_open(context))
+		if (!pbuffer_open(context, EWT_WORD))
 			return (0);
 	}
 	tmp = ft_concat2(context->buffer, str);
@@ -54,7 +54,7 @@ int	pbuffer_add_str(struct s_pcontext *context, char *str)
 	return (1);
 }
 
-int	pbuffer_open(struct s_pcontext *context)
+int	pbuffer_open(struct s_pcontext *context, enum e_pword_type type)
 {
 	char *tmp;
 
@@ -65,16 +65,21 @@ int	pbuffer_open(struct s_pcontext *context)
 		if (tmp == NULL)
 			return (0);
 		context->buffer = tmp;
+		context->buffer_type = type;
 	}
 	return (1);
 }
 
-// TODO при закрытии я должен отправить тип конструкции (слово или УС)
 int	pbuffer_close(struct s_pcontext *context)
 {
+	t_pword	*word;
+
 	if (context->buffer != NULL)
 	{
-		if (!ft_list_add(&context->words, ft_strdup(context->buffer)))
+		word = (t_pword *)ft_calloc(1, sizeof(t_pword));
+		word->type = context->buffer_type;
+		word->value = ft_strdup(context->buffer);
+		if (!ft_list_add(&context->words, word))
 			return (0);
 		free(context->buffer);
 		context->buffer = NULL;

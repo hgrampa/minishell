@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/15 23:23:02 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/16 13:50:45 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@
 
 enum e_pword_type
 {
+	EWT_UNKNOWN = -1,
 	EWT_WORD,
 	EWT_PIPE,
 	EWT_SEMICOLON,
-	EWT_REDIRECT1,
-	EWT_REDIRECT2,
-	EWT_REDIRECT3,
+	EWT_REDIRECT1, // <
+	EWT_REDIRECT2, // >
+	EWT_REDIRECT3, // >>
 };
 
 struct	s_buffer
@@ -47,7 +48,9 @@ struct s_pcontext
 	t_state_body		current_state;
 	t_stack				*state_stack;
 	char				*buffer;
+	enum e_pword_type	buffer_type;
 	t_list				*words;
+	t_env				*env;
 	char				process:1;
 };
 
@@ -58,7 +61,12 @@ typedef struct	s_pword
 }				t_pword;
 
 
-int		parse_line(char *line, t_list **words);
+int		parse_line(t_env *env, char *line, t_list **words);
+
+void			pcontext_set_state(struct s_pcontext *context, t_state_body next_state);
+void			pcontext_return_state(struct s_pcontext *context);
+t_state_body	*pcontext_previous_state(struct s_pcontext *context); // сделать полем
+void			pcontext_end_process(struct s_pcontext *context);
 
 int		core_state(char **line, t_list **words, struct s_pcontext *context);
 int		squotes_state(char **line, t_list **words, struct s_pcontext *context);
@@ -69,7 +77,7 @@ int		cntrl_state(char **line, t_list **words, struct s_pcontext *context);
 
 int		pbuffer_add_char(struct s_pcontext *context, char c); // если null то открывает
 int		pbuffer_add_str(struct s_pcontext *context, char *str); // если null то открывает
-int		pbuffer_open(struct s_pcontext *context);
-int		pbuffer_close(struct s_pcontext *context);
+int		pbuffer_open(struct s_pcontext *context, enum e_pword_type type);
+int		pbuffer_close(struct s_pcontext *context); 
 
 #endif

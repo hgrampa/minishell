@@ -6,38 +6,13 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:04:19 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/15 23:18:17 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/16 13:48:36 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
-
-void			pcontext_set_state(struct s_pcontext *context, t_state_body next_state)
-{
-	ft_stack_push(&context->state_stack, context->current_state);
-	context->current_state = next_state;
-}
-
-void			pcontext_return_state(struct s_pcontext *context)
-{
-	context->current_state = (t_state_body)ft_stack_pop(&context->state_stack);
-}
-
-t_state_body	*pcontext_previous_state(struct s_pcontext *context)
-{
-	return ((t_state_body *)ft_stack_peek(context->state_stack));
-}
-
-void			pcontext_end_process(struct s_pcontext *context)
-{
-	context->process = 0;
-}
-
-int		env_isname_char(char c)
-{
-	return (ft_isalnum(c) || c == '_');
-}
+#include "environment.h"
 
 // Эта стаддия пока замороженна
 int		esc_state(char **line, t_list **words, struct s_pcontext *context)
@@ -55,85 +30,10 @@ int		esc_state(char **line, t_list **words, struct s_pcontext *context)
 	return (1);
 }
 
-int		env_wq_state(char **line, t_list **words, struct s_pcontext *context)
-{
-
-}
-
-int		env_cr_state(char **line, t_list **words, struct s_pcontext *context)
-{
-
-}
-
-int		env_state(char **line, t_list **words, struct s_pcontext *context)
-{
-	// (*line)++; промотка этого символа очень вариативна
-	// 
-	// открываю буфер (локальный)
-
-	char *anchor;
-	anchor = *line;
-	(*anchor)++;
-	//	проверка следуещего за $ символа - УС ли он
-	if (ft_strchr(_PRS_CONTROLERS, *anchor) != NULL)
-	{
-		// $ добавляется к слову 
-		// линия проматывается
-		// стадия закрывается
-	}
-	else if (ft_strchr(_PRS_QUOTES, *anchor) != NULL)
-	{
-		if (pcontext_previous_state == wquotes_state)
-		{
-			// $ добавляется к слову 
-			// линия проматывается
-			// стадия закрывается
-		}
-		else
-		{
-			// линия проматывается до anchor
-			// стадия закрывается
-		}
-	}
-	//	проверка следуещего за $ символа - может ли он начинать имя (главное чтоб не цифра)
-	if (env_isname_char(*anchor) && !ft_isdigit(*anchor))
-	{
-		*line = anchor;
-		// работаем
-		while (21)
-		{
-			if (**line == '\0')
-			{
-				// имкенно возвращаемя на предыдущую стадию
-				// 	эта не знает что делать с концом строки
-				pcontext_return_state(context);
-				// но не ошибка
-				return (1); 
-			}
-			else if (env_isname_char(**line))
-			{
-				// добавление имени в локальный буфер
-				// (*line)++;
-			}
-			else
-			{
-				// получение значения по имени (строка, пустая строка, NULL)
-				// ? формирование слов/а на месте в зависимости от прошлой стадии
-			}
-		}
-	}
-	else
-	{
-		// anchor++;
-		// линия проматывается до anchor
-		// стадия закрывается
-	}
-}
-
 int		squotes_state(char **line, t_list **words, struct s_pcontext *context)
 {
 	(*line)++;
-	pbuffer_open(context); // открываю буфер (так что бы ему было пофиг если уже открыт)
+	pbuffer_open(context, EWT_WORD); // открываю буфер (так что бы ему было пофиг если уже открыт)
 	while (21)
 	{
 		if (**line == '\0')
@@ -159,7 +59,7 @@ int		squotes_state(char **line, t_list **words, struct s_pcontext *context)
 int		wquotes_state(char **line, t_list **words, struct s_pcontext *context)
 {
 	(*line)++;
-	pbuffer_open(context);
+	pbuffer_open(context, EWT_WORD);
 	while (21)
 	{
 		if (**line == '\0')
@@ -173,11 +73,11 @@ int		wquotes_state(char **line, t_list **words, struct s_pcontext *context)
 			(*line)++;
 			return (1);
 		}
-		// else if (**line == '$')
-		// {
-		// 	pcontext_set_state(context, env_state);
-		// 	return (1);
-		// }
+		else if (**line == '$')
+		{
+			pcontext_set_state(context, env_state);
+			return (1);
+		}
 		// else if (**line == '\\')
 		// {
 		// 	pcontext_set_state(context, squotes_state);
@@ -202,11 +102,11 @@ int		core_state(char **line, t_list **words, struct s_pcontext *context)
 			pcontext_end_process(context);
 			return (1); // TODO вероятно можно что-то лучше придумать
 		}
-		// else if (**line == '$')
-		// {
-		// 	pcontext_set_state(context, env_state);
-		// 	return (1);
-		// }
+		else if (**line == '$')
+		{
+			pcontext_set_state(context, env_state);
+			return (1);
+		}
 		else if (**line == '\"')
 		{
 			pcontext_set_state(context, wquotes_state);
@@ -222,15 +122,15 @@ int		core_state(char **line, t_list **words, struct s_pcontext *context)
 		// 	pcontext_set_state(context, esc_state);
 		// 	return (1);
 		// }
-		// else if (ft_strchr(_PRS_CONTROLERS, **line) != NULL)
-		// {
-		// 	pcontext_set_state(context, cntrl_state);
-		// 	return(1);
-		// 	// закрываю буфер и записываю слово
-		// 	// добавляю симол к новому слову
-		// 	// ! если это что то вроде >> - должно остаться одним словом
-		// 	// Вероятно я добавлю еще одну state
-		// }
+		else if (ft_strchr(_PRS_CONTROLERS, **line) != NULL)
+		{
+			pcontext_set_state(context, cntrl_state);
+			return(1);
+			// закрываю буфер и записываю слово
+			// добавляю симол к новому слову
+			// ! если это что то вроде >> - должно остаться одним словом
+			// Вероятно я добавлю еще одну state
+		}
 		else if (ft_strchr(_PRS_DELIMITERS, **line) != NULL)
 		{
 			pbuffer_close(context);
@@ -246,7 +146,7 @@ int		core_state(char **line, t_list **words, struct s_pcontext *context)
 	return (1);
 }
 
-int		parse_line(char *line, t_list **words)
+int		parse_line(t_env *env, char *line, t_list **words)
 {
 	int					result;
 	struct s_pcontext	context;
@@ -255,6 +155,7 @@ int		parse_line(char *line, t_list **words)
 	context.buffer = NULL;
 	context.words = NULL;
 	context.process = 1;
+	context.env = env;
 	while (context.process)
 	{
 		result = context.current_state(&line, words, &context);
@@ -269,7 +170,3 @@ int		parse_line(char *line, t_list **words)
 	*words = context.words;
 	return (result);
 }
-
-
-
-
