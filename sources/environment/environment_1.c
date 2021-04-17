@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
-#include "../../includes/environment.h"
+#include "libft.h"
+#include "environment.h"
 
 char	*create_key_value_str(t_pair *pair)
 {

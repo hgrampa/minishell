@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
-#include "../../includes/environment.h"
+#include "libft.h"
+#include "environment.h"
 
 t_pair	*create_new_pair(char const *key, char const *value)
 {
