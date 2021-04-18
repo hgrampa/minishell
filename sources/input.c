@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:46:56 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 16:00:27 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/17 14:11:13 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,30 +87,5 @@ int	input_get_next_line(t_input *input, char **line)
 	free(input->buffer);
 	input->buffer = NULL;
 	return (1);
-}
-
-void input_reset_mode(t_input *input)
-{
-	tcsetattr(0, TCSANOW, &input->tsave);
-}
-
-void input_set_mode(t_input *input)
-{
-	// if (!isatty(0))
-	// {
-	// 	fprintf(stderr, "Not a terminal.\n");
-	// 	exit(1);
-	// }
-
-	// tcgetattr(0, &input->tsave);
-	// memcpy(&input->tattr, &input->tsave, sizeof(struct termios));
-	
-	/* включаем неканонический режим без эха */
-	// tattr.c_lflag &= ~(ICANON|ECHO);
-	/* считываем минимум по одному символу */
-	// tattr.c_cc[VMIN] = 1;
-	// tattr.c_cc[VTIME] = 0;
-
-	// tcsetattr(0, TCSAFLUSH, &input->tattr);
 }
 

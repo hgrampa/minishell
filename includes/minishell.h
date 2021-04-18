@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:04:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/13 18:48:39 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/17 13:31:06 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,18 @@
 # include <sys/errno.h>
 
 # include "libft.h"
+# include "environment.h"
+# include "input.h"
+# include "libft.h"
 
 # define SHELL_TITLE "\e[32mminishell\e[39m: "
 # define SHELL_TITLE_LEN 22
+
+typedef struct	s_minishell
+{
+	t_env	*env;
+	t_input	*input;
+}				t_minishell;
 
 #endif
 
