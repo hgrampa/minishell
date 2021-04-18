@@ -1,26 +1,36 @@
 #include <stdio.h>
 #include "../../includes/libft.h"
 
+static void	print_n(char *str)
+{
+	if (ft_strncmp(str, "-n", 3) != 0)
+		printf("\n");
+}
+
 int	main(int ac, char **av)
 {
 	int	arg_n;
+	int	temp;
 	int	i;
 
-	i = 1;
-	if (ac == 1)
+	i = 0;
+	arg_n = 1;
+	if (ac > 1)
 	{
-		printf("\n");
-		return (0);
+		while (++i != ac)
+		{
+			temp = (ft_strncmp(av[i], "-n", 3) == 0);
+			if (temp == 0 || (temp && arg_n == 0))
+			{
+				arg_n = 0;
+				printf("%s", av[i]);
+				if (i + 1 != ac)
+					printf(" ");
+			}
+		}
+		print_n(av[1]);
 	}
-	arg_n = (ft_strncmp(av[i], "-n", 3) == 0);
-	i += arg_n;
-	while (i != ac)
-	{
-		printf("%s", av[i++]);
-		if (i != ac)
-			printf(" ");
-	}	
-	if (!arg_n)
+	else
 		printf("\n");
 	return (0);
 }
