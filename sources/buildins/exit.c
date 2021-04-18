@@ -1,17 +1,43 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "libft.h"
+#include "errno.h"
 
-void ft_exit()
+static int	check_digit(char *str)
 {
-	//free all fd
-	//all child process go to fd=1
-	//SIGCHLD to parent process
-	exit(1);
+	while (*str)
+	{
+		if (!ft_isdigit(*str++))
+			return (0);
+	}
+	return (1);
 }
 
-int main()
+int	main(int ac, char **av)
 {
-	ft_exit();
+	if (ac == 1)
+	{
+		printf("exit\n");
+		exit(0);
+	}
+	else
+	{
+		if (!check_digit(av[1]))
+		{
+			printf("bash: exit: %s: numeric argument required\n", av[1]);
+			errno = 255;
+			exit(255);
+		}
+		if (ac == 2)
+		{
+			printf("exit\n");
+			errno = ft_atoi(av[1]) % 255;
+			exit(errno);
+		}			
+		else
+			printf("bash: exit: too many arguments\n");
+	}	
+	//printf("did'n't exit\n");
 	return (0);
 }

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
-#include "../../includes/environment.h"
+#include "libft.h"
+#include "environment.h"
 #include <stdio.h>
 
 int	env_update(t_env *env)

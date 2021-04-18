@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
-#include "../../includes/environment.h"
+#include "libft.h"
+#include "environment.h"
 #include <stdio.h>
 
 void	print_represent(char **array)
@@ -33,7 +33,7 @@ void	print_list(t_list *lst)
 	{
 		pair = tmp->data;
 		printf("%s=", pair->key);
-		printf("%s\n", pair->value);
+		printf("\"%s\"\n", pair->value);
 		tmp = tmp->next;
 	}
 }
