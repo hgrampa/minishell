@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_state.c                                        :+:      :+:    :+:   */
+/*   pstate_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:05 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 15:39:01 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 17:14:20 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	env_isname_char(char c)
 	return (ft_isalnum(c) || c == '_');
 }
 
-int			env_state(char **line, t_list **words, struct s_pcontext *context)
+int			pstate_env(char **line, t_list **words, struct s_pcontext *context)
 {
 	char *anchor;
 	anchor = *line;
@@ -37,7 +37,7 @@ int			env_state(char **line, t_list **words, struct s_pcontext *context)
 	}
 	else if (ft_strchr(_PRS_QUOTES, *anchor) != NULL) // TODO можно только на ' проверять
 	{
-		if (pcontext_previous_state(context) == wquotes_state)
+		if (pcontext_previous_state(context) == pstate_wquotes)
 		{
 			// $ добавляется к слову 
 			pbuffer_add_char(context, **line);
@@ -82,7 +82,7 @@ int			env_state(char **line, t_list **words, struct s_pcontext *context)
 				if (value != NULL)
 				{
 					// формирование слов/а на месте в зависимости от прошлой стадии
-					if (pcontext_previous_state(context) == wquotes_state)
+					if (pcontext_previous_state(context) == pstate_wquotes)
 						pbuffer_add_str(context, value);
 					else
 					{

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 16:03:03 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 17:14:58 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ struct s_pcontext
 	char				process:1;
 };
 
-
-
 int				parse_line(t_env *env, char *line, t_list **words);
 
 void			pcontext_set_state(struct s_pcontext *context, t_state_body next_state);
@@ -74,12 +72,12 @@ void			pcontext_return_state(struct s_pcontext *context);
 t_state_body	pcontext_previous_state(struct s_pcontext *context);
 void			pcontext_end_process(struct s_pcontext *context);
 
-int				core_state(char **line, t_list **words, struct s_pcontext *context);
-int				squotes_state(char **line, t_list **words, struct s_pcontext *context);
-int				wquotes_state(char **line, t_list **words, struct s_pcontext *context);
-int				env_state(char **line, t_list **words, struct s_pcontext *context);
-int				esc_state(char **line, t_list **words, struct s_pcontext *context);
-int				cntrl_state(char **line, t_list **words, struct s_pcontext *context);
+int				pstate_core(char **line, t_list **words, struct s_pcontext *context);
+int				pstate_squotes(char **line, t_list **words, struct s_pcontext *context);
+int				pstate_wquotes(char **line, t_list **words, struct s_pcontext *context);
+int				pstate_env(char **line, t_list **words, struct s_pcontext *context);
+int				pstate_esc(char **line, t_list **words, struct s_pcontext *context);
+int				pstate_cntrl(char **line, t_list **words, struct s_pcontext *context);
 
 int				pbuffer_add_char(struct s_pcontext *context, char c);
 int				pbuffer_add_str(struct s_pcontext *context, char *str);

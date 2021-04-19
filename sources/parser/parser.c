@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:04:19 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 15:53:07 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 17:15:00 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	parse_context_init(struct s_pcontext *context, t_env *env)
 {
-	context->current_state = core_state;
+	context->current_state = pstate_core;
 	context->state_stack = NULL;
 	context->buffer = NULL;
 	context->words = NULL;
