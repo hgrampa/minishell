@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:17:58 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 18:51:15 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 20:33:16 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ typedef struct	s_stack
 	void			*data;
 	struct s_stack	*next;
 }				t_stack;
+
+typedef struct		s_dlist
+{
+	void			*data;
+	struct s_dlist	*next;
+	struct s_dlist	*previous;
+}					t_dlist;
 
 typedef char	t_bool;
 
@@ -156,5 +163,11 @@ int				ft_list_count(t_list *root);
 void			ft_list_foreach(t_list *root, void (*f)(void *));
 void			ft_list_free(t_list **root, void (*del)(void*));
 t_list			*ft_list_at(t_list *root, int index);
+
+t_dlist			*ft_dlist_new(void *data);
+void			ft_dlist_free(t_dlist **root, void (*del)(void*));
+int				ft_dlist_pull(t_dlist **root, t_dlist *new_dlist);
+void			ft_dlist_foreach(t_dlist *root, void (*f)(void *));
+int				ft_dlist_add(t_dlist **root, void *data);
 
 #endif
