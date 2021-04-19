@@ -6,36 +6,11 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 11:11:47 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 19:08:36 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <termios.h>
-#include <unistd.h>
-#include <term.h>
-// #include <curses.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include "libft.h"
-
-# define _KEY_SET_LENGTH 12
-
-typedef struct	s_key_setting
-{
-	char	*key;
-	int		(*call)(void);
-}				t_key_setting;
-
-typedef struct	s_term
-{
-	struct termios	termios;
-	struct termios	save_termios;
-	t_key_setting	keys_settings[_KEY_SET_LENGTH];		
-
-}				t_term;
+#include "terminal.h"
 
 int		ft_putchar(int	c)
 {
@@ -79,7 +54,7 @@ void	key_call_backspace()
 // t_key_setting	*key_setting_create(const char *key, int (*call)(void))
 // {
 // 	t_key_setting	*new;
-
+// //
 // 	new = (t_key_setting *)ft_calloc(1, sizeof(t_key_setting));
 // 	if (new == NULL)
 // 		return (NULL);
@@ -92,11 +67,11 @@ void	key_call_backspace()
 // 	new->call = call;
 // 	return (new);
 // }
-
-// int		keys_settings_init(t_term *term)
+//
+// int		keys_settings_init(t_terminal *term)
 // {
 // 	t_key_setting *setting;
-	
+// //
 // 	setting = key_setting_create("\177", term_backspace);
 // 	if (setting == NULL)
 // 		return (0);
@@ -104,8 +79,7 @@ void	key_call_backspace()
 // 	return (1);
 // }
 
-
-int		term_reset_mode(t_term *term)
+int		term_reset_mode(t_terminal *term)
 {
 	if (tcsetattr(0, TCSANOW, &term->save_termios) == -1)
 		return (0);
@@ -114,7 +88,7 @@ int		term_reset_mode(t_term *term)
 	tputs(keypad_local, 1, ft_putchar);
 }
 
-int		term_set_mode(t_term *term)
+int		term_set_mode(t_terminal *term)
 {
 	if (tcgetattr(0, &term->save_termios) == -1)
 	{
@@ -134,23 +108,24 @@ int		term_set_mode(t_term *term)
 	return (1);
 }
 
-t_term	*term_create(void)
+t_terminal	*term_create(void)
 {
-	t_term	*term;
+	t_terminal	*term;
 
-	term = (t_term *)ft_calloc(1, sizeof(t_term));
+	term = (t_terminal *)ft_calloc(1, sizeof(t_terminal));
 	if (term == NULL)
 		return (NULL);
 	return (term);
 }
 
-int		term_init(t_term *term)
+int		term_init(t_terminal *term)
 {
 	int		success;
 	char	*term_type;
 
 	// term_type = getenv("TERM");
-	term_type = "xterm-256color"; // !!! TODO вернуть реальный тип терминала
+	// !!! TODO Убрать
+	term_type = "xterm-256color";
 	if (!isatty(STDIN_FILENO))
 	{
 		printf("Not a terminal\n");
@@ -174,7 +149,7 @@ int		term_init(t_term *term)
 	return(1);
 }
 
-int		term_destroy(t_term *term)
+int		term_destroy(t_terminal *term)
 {
 	free(term);
 	return (1);
@@ -183,10 +158,16 @@ int		term_destroy(t_term *term)
 int		term_is_key_muted(char *buff, ssize_t len)
 {
 	// || ft_strncmp(buff, key_exit, len) == 0
+	// TODO Хоум и энд
 	return (ft_strncmp(buff, key_right, len) == 0
 		|| ft_strncmp(buff, key_left, len) == 0
-		|| ft_strncmp(buff, key_ppage, len) == 0 // TODO эти не работают eny way
-		|| ft_strncmp(buff, key_npage, len) == 0); // TODO эти не работают eny way
+		|| ft_strncmp(buff, key_ppage, len) == 0 
+		|| ft_strncmp(buff, key_npage, len) == 0);
+}
+
+int		term_on_new_line(void)
+{
+	tputs(save_cursor, 1, ft_putchar);
 }
 
 int		term_take_input(char *buff, ssize_t len)
@@ -208,27 +189,29 @@ int		term_take_input(char *buff, ssize_t len)
 		key_call_dw_arrow();
 	}
 	else
-		write(STDOUT_FILENO, buff, len);
+	{
+		return (0);
+	}
 	return (1);
 }
 
-int main(int argc, char const *argv[])
-{
-	t_term	*term;
-	char	buff[256];
-	ssize_t read_len;
-
-	term = term_create();
-	// printf("t_term = %lu\n", sizeof(t_term));
-	if (!term_init(term))
-		exit(1);
-	// в начале ввода команды
-	tputs(save_cursor, 1, ft_putchar);
-	while (21)
-	{
-		ft_bzero(buff, 256 * sizeof(char));
-		read_len = read(0, buff, 255);
-		term_take_input(buff, read_len);
-	}
-	return 0;
-}
+// int main(int argc, char const *argv[])
+// {
+// 	t_terminal	*term;
+// 	char	buff[256];
+// 	ssize_t read_len;
+// 	// 
+// 	term = term_create();
+// 	// printf("t_terminal = %lu\n", sizeof(t_terminal));
+// 	if (!term_init(term))
+// 		exit(1);
+// 	// в начале ввода команды
+// 	tputs(save_cursor, 1, ft_putchar);
+// 	while (21)
+// 	{
+// 		ft_bzero(buff, 256 * sizeof(char));
+// 		read_len = read(0, buff, 255);
+// 		term_take_input(buff, read_len);
+// 	}
+// 	return 0;
+// }

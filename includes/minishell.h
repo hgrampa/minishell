@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:04:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/17 13:31:06 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 20:20:32 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <sys/errno.h>
-
 # include <termios.h>
 # include <sys/errno.h>
 # include <sys/errno.h>
@@ -32,14 +31,25 @@
 # include "input.h"
 # include "libft.h"
 
-# define SHELL_TITLE "\e[32mminishell\e[39m: "
-# define SHELL_TITLE_LEN 22
+# define _MINISHELL_TITLE "minishell"
 
 typedef struct	s_minishell
 {
-	t_env	*env;
-	t_input	*input;
+	char			*title; 
+	t_env			*env;
+	t_input			*input;
+	unsigned long	rand_next;
+	// история
+	// мб билдыны
 }				t_minishell;
+
+// TODO пристроить куда-нибудь
+int	ft_putchar(int c);
+
+t_minishell	*minishell_create(const char *title, const char **envp);
+int			minishell_init(t_minishell *shell);
+int			minishell_destroy(t_minishell *shell);
+int			minishell_write_title(t_minishell *shell);
 
 #endif
 

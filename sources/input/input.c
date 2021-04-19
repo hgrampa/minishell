@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:46:56 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/17 14:11:13 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 19:24:36 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,46 +18,56 @@ t_input *input_create(void)
 
 	input = (t_input *)ft_calloc(1, sizeof(t_input));
 	if (input == NULL)
-		return (NULL);
+		return (NULL); // TODO код ошибки
+	input->buffer = sbuffer_create(INP_STR_BUFFSIZE);
+	if (input->buffer == NULL)
+	{
+		free(input);
+		return (NULL); // TODO код ошибки
+	}
+	input->term = term_create();
+	if (input->term == NULL)
+	{
+		sbuffer_destroy(input->buffer);
+		free(input);
+		return (NULL); // TODO код ошибки
+	}
 	return (input);
 }
 
 int	input_destroy(t_input *input)
 {
-	if (input->buffer != NULL)
-		free(input->buffer);
+	sbuffer_destroy(input->buffer);
+	term_destroy(input->term);
+	free(input);
 	return (1);
 }
 
 int input_read(t_input *input)
 {
 	int		read_len;
-	char	buffer[INP_READ_BUFFSIZE + 1];
-	char	*new_buffer;
+	char	read_buffer[INP_READ_BUFFSIZE + 1];
 
-	ft_bzero(buffer, INP_READ_BUFFSIZE + 1);
-	read_len = read(0, buffer, INP_READ_BUFFSIZE);
+	ft_bzero(read_buffer, INP_READ_BUFFSIZE + 1);
+	read_len = read(0, read_buffer, INP_READ_BUFFSIZE);
 	if (read_len == -1)
-		return (0);
-	if (input->buffer == NULL)
-		input->buffer = ft_strdup(buffer);
+		return (0); // TODO код ошибки
+	if (term_take_input(read_buffer, read_len))
+		return (1);
 	else
 	{
-		new_buffer = ft_concat2(input->buffer, buffer);
-		free(input->buffer);
-		input->buffer = new_buffer;
+		write(STDOUT_FILENO, read_buffer, read_len);
+		sbuffer_add_str(input->buffer, read_buffer);
 	}
 	return (1);
 }
 
 int	input_has_next_line(t_input *input, int *index)
 {
-	int i;
-	char *buffer;
+	int		i;
+	char	*buffer;
 	
-	buffer = input->buffer;
-	if (buffer == NULL)
-		return (0);
+	buffer = input->buffer->str;
 	i = -1;
 	while (buffer[++i] != '\0')
 	{
@@ -66,26 +76,25 @@ int	input_has_next_line(t_input *input, int *index)
 			*index = i;
 			return (1);
 		}
+		// TODO Суда EOF (или не суда так как если EOF то шел должен закрытся)
 	}
 	return (0);
 }
 
-// TODO наверно луче убрать перенос строки из результата
-// TODO читает только 1024 символа (вроде как это кап количества символов в буфере ввода)
-// ! если произошел перенос из-за рамок окна не дает удалить строки выше backспейсом
+// ! TODO история не добавляется к буферу
+// TODO проверить cntl+v нескольких строк (не будет работать)
 // TODO добавить EOF как конец команды (или всего процесса)
 int	input_get_next_line(t_input *input, char **line)
 {
 	int	next_i;
-	
+
+	term_on_new_line();
 	while (!input_has_next_line(input, &next_i))
 	{
 		if (!input_read(input))
-			return (-1);
+			return (-1); // TODO код ошибки
 	}
-	*line = ft_strndup(input->buffer, next_i);
-	free(input->buffer);
-	input->buffer = NULL;
+	*line = ft_strndup(input->buffer->str, next_i);
+	sbuffer_clear(input->buffer);
 	return (1);
 }
-

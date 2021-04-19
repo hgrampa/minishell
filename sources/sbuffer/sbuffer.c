@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 11:16:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 13:59:43 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 16:32:34 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,12 @@ int			sbuffer_add_char(t_sbuffer *buffer, char c)
 	return (1);
 }
 
-
+int			sbuffer_clear(t_sbuffer *buffer)
+{
+	ft_bzero(buffer->str, buffer->size);
+	buffer->len = 0;
+	return (1);
+}
 
 // void	sbuffer_print(t_sbuffer *buffer)
 // {
