@@ -62,6 +62,7 @@ void	free_array(char **array)
 			array[i++] = NULL;
 		}
 	}
+	free(array);
 }
 
 int	compare_pairs(t_list *elem_cmp, t_list *temp_elem)

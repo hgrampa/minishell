@@ -31,7 +31,6 @@ int	env_destroy(t_env *env)
 	ft_lstclear(&env->collection, ft_free);
 	free_array(env->represent);
 	free(env->collection);
-	free(env->represent);
 	free(env);
 	return (1);
 }
