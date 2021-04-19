@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssentine <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 15:54:03 by ssentine          #+#    #+#             */
-/*   Updated: 2021/04/18 15:54:07 by ssentine         ###   ########.fr       */
+/*   Updated: 2021/04/19 20:41:40 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,50 +15,12 @@
 
 int	serialize_history(t_dlist *root)
 {
-	int		fd;
-
-	fd = open("history.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd)
-	{
-		while (root != NULL)
-		{
-			write(fd, root->data, ft_strlen(root->data));
-			write(fd, "\n", 1);
-			root = root->next;
-		}
-	}
-	else
-		return (0);
-	close(fd);
-	return (1);
+	
 }
 
 t_dlist	*deserialize_history(void)
 {
-	int		fd;
-	int		result;
-	char	*line;
-	t_dlist	*history;
-
-	history = NULL;
-	fd = open("history.txt", O_RDONLY);
-	if (fd < 0)
-	{
-		printf("Fail to open the history file\n");
-		return (NULL);
-	}
-	line = NULL;
-	result = ft_gnl(fd, &line, 32);
-	while (result > 0)
-	{
-		ft_dlist_add(&history, ft_strdup(line));
-		free(line);
-		result = ft_gnl(fd, &line, 32);
-	}
-	ft_dlist_add(&history, ft_strdup(line));
-	free(line);
-	close(fd);
-	return (history);
+	
 }
 
 // int main()

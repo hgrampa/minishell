@@ -6,19 +6,13 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/15 19:59:47 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 21:09:33 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "history.h"
 
-typedef struct	s_history
-{
-	t_list	*root;
-	t_list	*carriage;
-}				t_history;
-
-t_history		*history_create()
+t_history	*history_create()
 {
 	t_history *history;
 
@@ -30,37 +24,85 @@ t_history		*history_create()
 	return (history);
 }
 
-
-int				history_serealize(t_history *history)
+int			history_init(t_history *history)
 {
-	
+	if (!history_deserealize(history))
+		return (0);
+	if (history->root = NULL)
+		return (0);
+	return (1);
 }
 
-int				history_deserealize(t_history *history)
+int			history_serealize(t_history *history)
 {
-	
+	int		fd;
+	t_dlist	*root;
+
+	root = history->root;
+	fd = open("history.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (fd)
+	{
+		while (root != NULL)
+		{
+			write(fd, root->data, ft_strlen(root->data));
+			write(fd, "\n", 1);
+			root = root->next;
+		}
+	}
+	else
+		return (0);
+	close(fd);
+	return (1);
 }
 
-int				history_destroy(t_history *history)
+int			*history_deserealize(t_history *history)
+{
+	int		fd;
+	int		result;
+	char	*line;
+
+	fd = open(_HISTORY_FILE_NAME, O_RDONLY);
+	if (fd < 0)
+	{
+		printf("Fail to open the history file\n"); // TODO возврат ошибки
+		return (0);
+	}
+	line = NULL;
+	result = ft_gnl(fd, &line, _HISTORY_READ_BUFF_SIZE);
+	while (result > 0)
+	{
+		// TODO подумать над тем что бы убрать лишнее дублирование
+		ft_dlist_add(&history->root, ft_strdup(line));
+		free(line);
+		result = ft_gnl(fd, &line, _HISTORY_READ_BUFF_SIZE);
+	}
+	// TODO эта строка тип последняя?
+	ft_dlist_add(&history->root, ft_strdup(line));
+	free(line);
+	close(fd);
+	return (1);
+}
+
+int			history_destroy(t_history *history)
 {
 	if (history == NULL)
 	{
-		ft_list_free(&history->root, free);
+		// TODO можно тут сохранять
+		ft_dlist_free(&history->root, free);
 		history->carriage = NULL;
 		free(history);
 	}
 	return (1);
 }
  
-int		history_add(t_history *history, char *str)
+int			history_add(t_history *history, char *str)
 {
-	if (!ft_list_add_font(&history->root, str))
+	if (!ft_dlist_pull(&history->root, str))
 		return (0);
-	// carriage - newest
 	history->carriage = history->root;
 }
 
-char *history_up(t_history *history)
+char		*history_up(t_history *history)
 {
 	char	*result;
 
@@ -74,7 +116,7 @@ char *history_up(t_history *history)
 	return(result);
 }
 
-char *history_down(t_history *history)
+char		*history_down(t_history *history)
 {
 	char	*result;
 
@@ -87,4 +129,3 @@ char *history_down(t_history *history)
 	}
 	return (result);
 }
-
