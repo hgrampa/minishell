@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:28:16 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 20:29:04 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 21:21:18 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,19 @@ t_minishell	*minishell_create(const char *title, const char **envp)
 	shell->title = ft_strdup(title);
 	shell->env = env_create(envp);
 	shell->input = input_create();
-	if (shell->title == NULL || shell->env == NULL || shell->input == NULL)
+	shell->history = history_create();
+	if (shell->title == NULL || shell->env == NULL || shell->input == NULL
+		|| shell->history == NULL)
 	{
 		minishell_destroy(shell);
 		return (NULL);
 	}
 	return (shell);
+}
+
+int			minishell_on_exit(t_minishell *shell)
+{
+	history_serealize(shell->history);
 }
 
 int			minishell_destroy(t_minishell *shell)
@@ -38,13 +45,17 @@ int			minishell_destroy(t_minishell *shell)
 		env_destroy(shell->env);
 	if (shell->input != NULL)
 		input_destroy(shell->input);
+	if (shell->history != NULL)
+		history_destroy(shell->history);
 	free(shell);
 	return (1);
 }
 
 int			minishell_init(t_minishell *shell)
 {
-	if (!term_init(shell->input->term)) // TODO пусть инпут сам занымается инициацияей
+	if (!term_init(shell->input->term)) // TODO пусть инпут сам занимается инициацияей
+		return (0);
+	if (!history_init(shell->history))
 		return (0);
 	shell->rand_next = 20;
 	return (1);

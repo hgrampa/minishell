@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/19 18:42:40 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/19 21:23:08 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC_DIR			=	sources/ \
 					sources/sbuffer \
 					sources/input \
 					sources/termcap \
+					sources/history \
 					sources/minishell
 
 OBJ_DIR			=	objects/
@@ -54,6 +55,7 @@ SRC				=	main.c \
 					minishell.c \
 					input.c \
 					termcap.c \
+					history.c \
 					parser.c \
 					pbuffer.c \
 					pword.c \

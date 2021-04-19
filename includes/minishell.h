@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:04:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 20:20:32 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 21:11:54 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "environment.h"
 # include "input.h"
 # include "libft.h"
+# include "history.h"
 
 # define _MINISHELL_TITLE "minishell"
 
@@ -38,6 +39,7 @@ typedef struct	s_minishell
 	char			*title; 
 	t_env			*env;
 	t_input			*input;
+	t_history		*history;
 	unsigned long	rand_next;
 	// история
 	// мб билдыны

@@ -6,13 +6,13 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 21:09:33 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/19 23:11:03 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
 
-t_history	*history_create()
+t_history	*history_create(void)
 {
 	t_history *history;
 
@@ -26,8 +26,7 @@ t_history	*history_create()
 
 int			history_init(t_history *history)
 {
-	if (!history_deserealize(history))
-		return (0);
+	history_deserealize(history); // пофигу на результат
 	if (history->root = NULL)
 		return (0);
 	return (1);
@@ -96,7 +95,7 @@ int			history_destroy(t_history *history)
 }
  
 int			history_add(t_history *history, char *str)
-{
+{	
 	if (!ft_dlist_pull(&history->root, str))
 		return (0);
 	history->carriage = history->root;
