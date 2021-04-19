@@ -60,9 +60,43 @@ void ft_dlist_free(t_dlist **root, void (*del)(void*))
 		{
 			node = *root;
 			*root = node->next;
+			free(node->data);
 			free(node);
 		}
 	}
+}
+
+void	ft_dlist_foreach(t_dlist *root, void (*f)(void *))
+{
+	while (root != NULL)
+	{
+		f(root->data);
+		root = root->next;
+	}
+}
+
+int		ft_dlist_add(t_dlist **root, void *data)
+{
+	t_dlist	*node;
+	t_dlist	*new_node;
+
+	if (*root != NULL)
+	{
+		node = *root;
+		while (node->next != NULL)
+			node = node->next;
+		node->next = ft_dlist_new(data);
+		new_node = node->next;
+		new_node->previous = node;
+		if (node->next == NULL)
+			return (0);
+	}
+	else
+	{
+		if ((*root = ft_dlist_new(data)) == NULL)
+			return (0);
+	}
+	return (1);
 }
 
 // int main()
