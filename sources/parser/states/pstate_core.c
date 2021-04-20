@@ -6,14 +6,14 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:03:49 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 17:14:26 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 12:08:38 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
 
-int	pstate_core(char **line, t_list **words, struct s_pcontext *context)
+int	pstate_core(char **line, struct s_pcontext *context)
 {
 	while (21)
 	{

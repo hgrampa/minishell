@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 17:14:37 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 12:08:32 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ static enum e_pword_type	cntrl_get_type(char *line)
 		return (EWT_UNKNOWN);
 }
 
-int							pstate_cntrl(char **line, t_list **words,
-	struct s_pcontext *context)
+int							pstate_cntrl(char **line, struct s_pcontext *context)
 {
 	enum e_pword_type	type;
 	

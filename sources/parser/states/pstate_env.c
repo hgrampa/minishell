@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:05 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 17:14:20 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 12:08:43 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	env_isname_char(char c)
 	return (ft_isalnum(c) || c == '_');
 }
 
-int			pstate_env(char **line, t_list **words, struct s_pcontext *context)
+int			pstate_env(char **line, struct s_pcontext *context)
 {
 	char *anchor;
 	anchor = *line;

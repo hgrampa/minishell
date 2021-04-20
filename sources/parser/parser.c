@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:04:19 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 11:22:05 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 12:50:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			parse_line(t_env *env, char *line, t_list **words)
 	parse_context_init(&context, env);
 	while (context.process)
 	{
-		result = context.current_state(&line, words, &context);
+		result = context.current_state(&line, &context);
 		if (result == 0)
 			break ;
 	}

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 10:51:49 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 12:49:03 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ typedef struct s_pword
 }				t_pword;
 
 struct s_pcontext;
-typedef int		(*t_state_body)(char**, t_list**, struct s_pcontext*);
+
+typedef int		(*t_state_body)(char**, struct s_pcontext*);
 
 struct s_pcontext
 {
@@ -73,12 +74,12 @@ void			pcontext_return_state(struct s_pcontext *context);
 t_state_body	pcontext_previous_state(struct s_pcontext *context);
 void			pcontext_end_process(struct s_pcontext *context);
 
-int				pstate_core(char **line, t_list **words, struct s_pcontext *context);
-int				pstate_squotes(char **line, t_list **words, struct s_pcontext *context);
-int				pstate_wquotes(char **line, t_list **words, struct s_pcontext *context);
-int				pstate_env(char **line, t_list **words, struct s_pcontext *context);
-int				pstate_esc(char **line, t_list **words, struct s_pcontext *context);
-int				pstate_cntrl(char **line, t_list **words, struct s_pcontext *context);
+int				pstate_core(char **line, struct s_pcontext *context);
+int				pstate_squotes(char **line, struct s_pcontext *context);
+int				pstate_wquotes(char **line, struct s_pcontext *context);
+int				pstate_env(char **line, struct s_pcontext *context);
+int				pstate_esc(char **line, struct s_pcontext *context);
+int				pstate_cntrl(char **line, struct s_pcontext *context);
 
 int				pbuffer_add_char(struct s_pcontext *context, char c);
 int				pbuffer_add_str(struct s_pcontext *context, char *str);
