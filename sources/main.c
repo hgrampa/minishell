@@ -6,34 +6,15 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 13:41:03 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 14:03:54 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <term.h>
 #include "minishell.h"
 #include "input.h"
 #include "parser.h"
 #include "environment.h"
-#include <sys/ioctl.h>
-
-
-void	pword_print(void *data)
-{
-	t_pword	*word;
-
-	word = (t_pword  *)data;
-	printf(">> type: %d, val: \"%s\"\n", word->type, word->value);
-}
-
-void	pword_destroy(void	*data)
-{
-	t_pword	*word;
-
-	word = (t_pword  *)data;
-	free(word->value);
-	free(word);
-}
+#include "pword.h"
 
 void	emul_exit(t_minishell *shell)
 {

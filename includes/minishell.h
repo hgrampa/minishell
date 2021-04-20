@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:04:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 13:29:11 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 14:03:31 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include "libft.h"
 # include "environment.h"
 # include "input.h"
-# include "libft.h"
 # include "history.h"
 
 # define _MINISHELL_TITLE "minishell"

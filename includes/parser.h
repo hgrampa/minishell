@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 12:49:03 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 14:09:08 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft.h"
 # include "environment.h"
 # include "sbuffer.h"
+# include "pword.h"
 
 # define _PRS_DELIMITERS " \t"
 # define _PRS_CONTROLERS ";|<>"
@@ -27,29 +28,6 @@
 // TODO буфер-почеловечески
 // TODO \ символ
 
-enum e_pword_type
-{
-	EWT_UNKNOWN = -1,
-	EWT_WORD,
-	EWT_PIPE,
-	EWT_SEMICOLON,
-	EWT_REDIRECT1, // <
-	EWT_REDIRECT2, // >
-	EWT_REDIRECT3, // >>
-};
-
-struct	s_buffer
-{
-	char	*str;
-	int		last;
-};
-
-typedef struct s_pword
-{
-	char				*value;
-	enum e_pword_type	type;
-}				t_pword;
-
 struct s_pcontext;
 
 typedef int		(*t_state_body)(char**, struct s_pcontext*);
@@ -59,7 +37,6 @@ struct s_pcontext
 	t_state_body		previous_state;
 	t_state_body		current_state;
 	t_stack				*state_stack;
-	// char				*buffer;
 	t_sbuffer			*buffer;
 	enum e_pword_type	buffer_type;
 	t_list				*words;
