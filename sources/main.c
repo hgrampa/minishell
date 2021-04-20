@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 23:14:34 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 11:44:33 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		process(t_minishell *shell)
 		printf(">\"%s\"\n", line);
 
 		// Добавляю instance в историю
-		if (!history_add(shell->history, line));
+		if (!history_add(shell->history, line))
 		{
 			free (line);
 			return (0); // TODO возврат ошибки
@@ -52,6 +52,7 @@ int		process(t_minishell *shell)
 		// Не чищу а отдаю истории чтоб не перевыделять
 		line = NULL;
 		ft_list_free(&words, free);
+		history_serealize(shell->history);
 	}
 	input_destroy(shell->input);
 	return (1);

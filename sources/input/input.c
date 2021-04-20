@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:46:56 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 23:05:53 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 11:11:41 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_input *input_create(void)
 	input = (t_input *)ft_calloc(1, sizeof(t_input));
 	if (input == NULL)
 		return (NULL); // TODO код ошибки
-	input->buffer = sbuffer_create(INP_STR_BUFFSIZE);
+	input->buffer = sbuffer_create(_INP_STR_BUFFSIZE);
 	if (input->buffer == NULL)
 	{
 		free(input);
@@ -46,10 +46,10 @@ int	input_destroy(t_input *input)
 int input_read(t_input *input)
 {
 	int		read_len;
-	char	read_buffer[INP_READ_BUFFSIZE + 1];
+	char	read_buffer[_INP_READ_BUFFSIZE + 1];
 
-	ft_bzero(read_buffer, INP_READ_BUFFSIZE + 1);
-	read_len = read(0, read_buffer, INP_READ_BUFFSIZE);
+	ft_bzero(read_buffer, _INP_READ_BUFFSIZE + 1);
+	read_len = read(0, read_buffer, _INP_READ_BUFFSIZE);
 	if (read_len == -1)
 		return (0); // TODO код ошибки
 	if (term_take_input(read_buffer, read_len))

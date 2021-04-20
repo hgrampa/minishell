@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:52:46 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 21:17:15 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 10:57:30 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
 # include "libft.h"
 
 # define _HISTORY_FILE_NAME ".mini_history"
@@ -29,7 +30,7 @@ t_history	*history_create(void);
 int			history_init(t_history *history);
 int			history_destroy(t_history *history);
 int			history_serealize(t_history *history);
-int			*history_deserealize(t_history *history);
+int			history_deserealize(t_history *history);
 int			history_add(t_history *history, char *str);
 char		*history_up(t_history *history);
 char		*history_down(t_history *history);

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 23:11:03 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 11:40:51 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_history	*history_create(void)
 int			history_init(t_history *history)
 {
 	history_deserealize(history); // пофигу на результат
-	if (history->root = NULL)
-		return (0);
+	// if (history->root == NULL)
+	// 	return (0);
 	return (1);
 }
 
@@ -38,7 +38,7 @@ int			history_serealize(t_history *history)
 	t_dlist	*root;
 
 	root = history->root;
-	fd = open("history.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	fd = open(_HISTORY_FILE_NAME, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd)
 	{
 		while (root != NULL)
@@ -54,7 +54,7 @@ int			history_serealize(t_history *history)
 	return (1);
 }
 
-int			*history_deserealize(t_history *history)
+int			history_deserealize(t_history *history)
 {
 	int		fd;
 	int		result;
@@ -63,7 +63,7 @@ int			*history_deserealize(t_history *history)
 	fd = open(_HISTORY_FILE_NAME, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Fail to open the history file\n"); // TODO возврат ошибки
+		printf("Fail to open the history file\n"); // TODO возврат ошибки (или тотальный игнор)
 		return (0);
 	}
 	line = NULL;
@@ -96,9 +96,10 @@ int			history_destroy(t_history *history)
  
 int			history_add(t_history *history, char *str)
 {	
-	if (!ft_dlist_pull(&history->root, str))
+	if (!ft_dlist_pull(&history->root, str)) // TODO переписать функцию по нормальному
 		return (0);
 	history->carriage = history->root;
+	return(1);
 }
 
 char		*history_up(t_history *history)
@@ -124,7 +125,7 @@ char		*history_down(t_history *history)
 	if (history->carriage->previous != NULL)
 	{
 		history->carriage = history->carriage->previous;
-		result = history->carriage->data; 
+		result = (char *)history->carriage->data; 
 	}
 	return (result);
 }

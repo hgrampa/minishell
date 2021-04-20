@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 17:14:58 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 10:51:49 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 # include <unistd.h>
 # include "libft.h"
 # include "environment.h"
+# include "sbuffer.h"
 
 # define _PRS_DELIMITERS " \t"
 # define _PRS_CONTROLERS ";|<>"
 # define _PRS_QUOTES "\"\'"
-# define _PRS_BUFFSIZE 32
+# define _PRS_BUFFSIZE 40
 
 // TODO текущая стадия - полем
 // TODO буфер-почеловечески
@@ -49,16 +50,16 @@ typedef struct s_pword
 	enum e_pword_type	type;
 }				t_pword;
 
-
 struct s_pcontext;
-typedef int (*t_state_body)(char**, t_list**, struct s_pcontext*);
+typedef int		(*t_state_body)(char**, t_list**, struct s_pcontext*);
 
 struct s_pcontext
 {
 	t_state_body		previous_state;
 	t_state_body		current_state;
 	t_stack				*state_stack;
-	char				*buffer;
+	// char				*buffer;
+	t_sbuffer			*buffer;
 	enum e_pword_type	buffer_type;
 	t_list				*words;
 	t_env				*env;

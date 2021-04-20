@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:04:19 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 18:11:35 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 11:22:05 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			parse_line(t_env *env, char *line, t_list **words)
 		// можно отдельную функцию по анализу ошибки
 	ft_stack_free(&(context.state_stack), NULL); // ? по идее тут не должно что=то быть (разве что при ошибке)
 	if (context.buffer != NULL)
-		free(context.buffer);
+		sbuffer_destroy(context.buffer);
 	*words = context.words;
 	return (result);
 }
