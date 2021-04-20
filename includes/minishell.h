@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:04:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 14:03:31 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 14:53:10 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ typedef struct	s_minishell
 	t_input			*input;
 	t_history		*history;
 	unsigned long	rand_next;
-	// история
-	// мб билдыны
 }				t_minishell;
 
 // TODO пристроить куда-нибудь

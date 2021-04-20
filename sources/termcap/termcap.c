@@ -6,78 +6,11 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 13:01:39 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 18:09:55 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "terminal.h"
-
-int		ft_putchar(int	c)
-{
-	return (write(1, &c, 1));
-}
-
-void	key_call_up_arrow()
-{
-	//	Получаем пред строку из истории
-	//	Если она == NULL
-	// 		Печатаем bell
-	// 	Иначе
-	//		Возвращаем каретку в начало ввода
-	tputs(restore_cursor, 1, ft_putchar);
-	//		Очистка всего что поле курсора
-	tputs(clr_eos, 1, ft_putchar);
-	//		Вставляем след строку истории
-	ft_putstr_fd("up", 1);
-}
-
-void	key_call_dw_arrow()
-{
-	//	Получаем пред строку из истории
-	//	Если она == NULL
-	// 		Печатаем bell
-	// 	Иначе
-	//		Возвращаем каретку в начало ввода
-	tputs(restore_cursor, 1, ft_putchar);
-	//		Очистка всего что поле курсора
-	tputs(clr_eos, 1, ft_putchar);
-	//		Вставляем пред строку истории
-	ft_putstr_fd("down", 1);
-}
-
-void	key_call_backspace()
-{
-	tputs(cursor_left, 1, ft_putchar);
-	tputs(clr_eos, 1, ft_putchar);
-}
-
-// t_key_setting	*key_setting_create(const char *key, int (*call)(void))
-// {
-// 	t_key_setting	*new;
-// //
-// 	new = (t_key_setting *)ft_calloc(1, sizeof(t_key_setting));
-// 	if (new == NULL)
-// 		return (NULL);
-// 	new->key = ft_strdup(key);
-// 	if (new->key == NULL)
-// 	{
-// 		free(new);
-// 		return (NULL);
-// 	}
-// 	new->call = call;
-// 	return (new);
-// }
-//
-// int		keys_settings_init(t_terminal *term)
-// {
-// 	t_key_setting *setting;
-// //
-// 	setting = key_setting_create("\177", term_backspace);
-// 	if (setting == NULL)
-// 		return (0);
-// 	term->keys_settings[0] = setting;
-// 	return (1);
-// }
 
 int		term_reset_mode(t_terminal *term)
 {
@@ -155,6 +88,37 @@ int		term_destroy(t_terminal *term)
 	return (1);
 }
 
+int		term_on_new_line(void)
+{
+	tputs(save_cursor, 1, ft_putchar);
+	return (1);
+}
+
+int		term_keycall(char *buff, ssize_t len)
+{
+	if (ft_strncmp(buff, "\177", len) == 0)
+	{
+		// keycall_backspace(shell);
+	}
+	else if (term_is_key_muted(buff, len))
+	{
+		// tputs(bell, 1, ft_putchar);
+	}
+	else if (ft_strncmp(buff, key_up, len) == 0)
+	{
+		// keycall_up_arrow(shell);
+	}
+	else if (ft_strncmp(buff, key_down, len) == 0)
+	{
+		// keycall_dw_arrow(shell);
+	}
+	else
+	{
+		return (0);
+	}
+	return (1);
+}
+
 int		term_is_key_muted(char *buff, ssize_t len)
 {
 	// || ft_strncmp(buff, key_exit, len) == 0
@@ -165,37 +129,6 @@ int		term_is_key_muted(char *buff, ssize_t len)
 		|| ft_strncmp(buff, key_npage, len) == 0
 		|| ft_strncmp(buff, key_home, len) == 0 
 		|| ft_strncmp(buff, key_end, len) == 0);
-}
-
-int		term_on_new_line(void)
-{
-	tputs(save_cursor, 1, ft_putchar);
-	return (1);
-}
-
-int		term_take_input(char *buff, ssize_t len)
-{
-	if (ft_strncmp(buff, "\177", len) == 0)
-	{
-		key_call_backspace();
-	}
-	else if (term_is_key_muted(buff, len))
-	{
-		tputs(bell, 1, ft_putchar);
-	}
-	else if (ft_strncmp(buff, key_up, len) == 0)
-	{
-		key_call_up_arrow();
-	}
-	else if (ft_strncmp(buff, key_down, len) == 0)
-	{
-		key_call_dw_arrow();
-	}
-	else
-	{
-		return (0);
-	}
-	return (1);
 }
 
 // int main(int argc, char const *argv[])
