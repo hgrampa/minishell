@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 13:16:15 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 16:32:33 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 00:29:25 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,13 @@ int			sbuffer_add_char(t_sbuffer *buffer, char c);
 **		- In case of an error, returns 0, otherwise 1
 */
 int			sbuffer_clear(t_sbuffer *buffer);
+
+/*
+**	Cleare last one char in buffered string
+**
+**		- reduces buffer.len by 1
+**		- does not affect size of allocated memory
+*/
+int			sbuffer_backspace(t_sbuffer *buffer);
 
 #endif

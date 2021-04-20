@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:04:04 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 18:55:56 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 22:02:17 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <sys/ioctl.h>
 # include "libft.h"
+# include "keymap.h"
 
 typedef struct	s_terminal
 {
@@ -30,12 +31,12 @@ typedef struct	s_terminal
 	struct termios	save_termios;
 }				t_terminal;
 
-t_terminal	*term_create(void);
-int			term_init(t_terminal *term);
-int			term_destroy(t_terminal *term);
-int			term_reset_mode(t_terminal *term);
-int			term_set_mode(t_terminal *term);
-int			term_on_new_line(void);
-int			term_take_input(char *buff, ssize_t len);
+t_terminal		*term_create(void);
+int				term_init(t_terminal *term);
+int				term_destroy(t_terminal *term);
+int				term_reset_mode(t_terminal *term);
+int				term_set_mode(t_terminal *term);
+int				term_on_new_line(void);
+enum e_key_type	term_key_type(char *buff, ssize_t len);
 
 #endif

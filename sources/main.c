@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 14:03:54 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 22:00:02 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		process(t_minishell *shell)
 	{
 		minishell_write_title(shell);
 		// TODO работаться уже с возвращаем значении
-		if (input_get_next_line(shell->input, &line) == -1)
+		if (input_get_next_line(shell->input, &line, shell) == -1)
 			return (0);
 		
 		if (ft_strnstr(line, "exit", ft_strlen(line)))
@@ -56,6 +56,8 @@ int		process(t_minishell *shell)
 			return (1); // TODO возврат ошибки
 		// TODO вход для фабрики
 		ft_list_foreach(words, pword_print);
+		
+		
 		// Не чищу а отдаю истории чтоб не перевыделять
 		line = NULL;
 		ft_list_free(&words, pword_destroy);

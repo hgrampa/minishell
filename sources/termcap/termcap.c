@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 18:09:55 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 23:53:14 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,41 +94,40 @@ int		term_on_new_line(void)
 	return (1);
 }
 
-int		term_keycall(char *buff, ssize_t len)
-{
-	if (ft_strncmp(buff, "\177", len) == 0)
-	{
-		// keycall_backspace(shell);
-	}
-	else if (term_is_key_muted(buff, len))
-	{
-		// tputs(bell, 1, ft_putchar);
-	}
-	else if (ft_strncmp(buff, key_up, len) == 0)
-	{
-		// keycall_up_arrow(shell);
-	}
-	else if (ft_strncmp(buff, key_down, len) == 0)
-	{
-		// keycall_dw_arrow(shell);
-	}
-	else
-	{
-		return (0);
-	}
-	return (1);
-}
 
 int		term_is_key_muted(char *buff, ssize_t len)
 {
 	// || ft_strncmp(buff, key_exit, len) == 0
-	// TODO Хоум и энд
 	return (ft_strncmp(buff, key_right, len) == 0
 		|| ft_strncmp(buff, key_left, len) == 0
 		|| ft_strncmp(buff, key_ppage, len) == 0 
 		|| ft_strncmp(buff, key_npage, len) == 0
 		|| ft_strncmp(buff, key_home, len) == 0 
 		|| ft_strncmp(buff, key_end, len) == 0);
+}
+
+enum e_key_type	term_key_type(char *buff, ssize_t len)
+{
+	if (ft_strncmp(buff, "\177", len) == 0)
+	{
+		return (EKT_BACKSPACE);
+	}
+	else if (term_is_key_muted(buff, len))
+	{
+		return (EKT_MUTED);
+	}
+	else if (ft_strncmp(buff, key_up, len) == 0)
+	{
+		return (EKT_UPARR);
+	}
+	else if (ft_strncmp(buff, key_down, len) == 0)
+	{
+		return (EKT_DWARR);
+	}
+	else
+	{
+		return (EKT_NOTKEY);
+	}
 }
 
 // int main(int argc, char const *argv[])

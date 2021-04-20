@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 13:42:33 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 01:00:59 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,11 @@ int			history_destroy(t_history *history)
  
 int			history_add(t_history *history, char *str)
 {	
-	if (!ft_dlist_pull(&history->root, str)) // TODO переписать функцию по нормальному
+	if (ft_strlen(str) == 0)
+		return (1);
+	if (!ft_dlist_pull(&history->root, str))
 		return (0);
-	history->carriage = history->root;
+	history->carriage = NULL;
 	return(1);
 }
 
@@ -104,13 +106,18 @@ char		*history_up(t_history *history)
 	char	*result;
 
 	if (history->carriage == NULL)
-		return (NULL);
-	result = (char *)history->carriage->data;
-	if (history->carriage->next == NULL)
-		write(0, "\a", 1);
-	else
+	{
+		history->carriage = history->root;
+		result = (char *)history->carriage->data;
+		return(result);
+	}
+	else if (history->carriage->next != NULL)
+	{
 		history->carriage = history->carriage->next;
-	return(result);
+		result = (char *)history->carriage->data;
+		return(result);
+	}
+	return(NULL);
 }
 
 char		*history_down(t_history *history)
@@ -122,7 +129,8 @@ char		*history_down(t_history *history)
 	if (history->carriage->previous != NULL)
 	{
 		history->carriage = history->carriage->previous;
-		result = (char *)history->carriage->data; 
+		result = (char *)history->carriage->data;
+		return(result);
 	}
-	return (result);
+	return (NULL);
 }

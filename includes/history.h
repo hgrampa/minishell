@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:52:46 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 10:57:30 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 00:56:40 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define _HISTORY_FILE_NAME ".mini_history"
 # define _HISTORY_READ_BUFF_SIZE 80
+
 typedef struct	s_history
 {
 	t_dlist	*root;
