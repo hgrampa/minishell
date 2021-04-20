@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:28:16 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 11:16:26 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 12:03:55 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,12 @@ int						minishell_write_title(t_minishell *shell)
 		if (num == 16 || num == 0)
 			num = 17;
 		mini_ctoa(color, num);
-		ft_putstr_fd("\e[38;5;", 1);
-		ft_putstr_fd(color, 1);
-		ft_putchar_fd('m', 1);
-		ft_putchar_fd(*title, 1);
+		ft_putstr_fd("\e[38;5;", STDOUT_FILENO);
+		ft_putstr_fd(color, STDOUT_FILENO);
+		ft_putchar_fd('m', STDOUT_FILENO);
+		ft_putchar_fd(*title, STDOUT_FILENO);
 		title++;
 	}
-	ft_putstr_fd("\e[39m: ", 1);
+	ft_putstr_fd("\e[39m: ", STDOUT_FILENO);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 19:08:36 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 13:01:39 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,23 +162,26 @@ int		term_is_key_muted(char *buff, ssize_t len)
 	return (ft_strncmp(buff, key_right, len) == 0
 		|| ft_strncmp(buff, key_left, len) == 0
 		|| ft_strncmp(buff, key_ppage, len) == 0 
-		|| ft_strncmp(buff, key_npage, len) == 0);
+		|| ft_strncmp(buff, key_npage, len) == 0
+		|| ft_strncmp(buff, key_home, len) == 0 
+		|| ft_strncmp(buff, key_end, len) == 0);
 }
 
 int		term_on_new_line(void)
 {
 	tputs(save_cursor, 1, ft_putchar);
+	return (1);
 }
 
 int		term_take_input(char *buff, ssize_t len)
 {
-	if (term_is_key_muted(buff, len))
-	{
-		tputs(bell, 1, ft_putchar);
-	}
-	else if (ft_strncmp(buff, "\177", len) == 0)
+	if (ft_strncmp(buff, "\177", len) == 0)
 	{
 		key_call_backspace();
+	}
+	else if (term_is_key_muted(buff, len))
+	{
+		tputs(bell, 1, ft_putchar);
 	}
 	else if (ft_strncmp(buff, key_up, len) == 0)
 	{

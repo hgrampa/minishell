@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 11:40:51 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 13:42:33 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_history	*history_create(void)
 {
 	t_history *history;
 
-	history =  (t_history *)ft_calloc(1, sizeof(t_history));
+	history = (t_history *)ft_calloc(1, sizeof(t_history));
 	if (history == NULL)
 		return (NULL);
 	history->root = NULL;
@@ -84,13 +84,10 @@ int			history_deserealize(t_history *history)
 
 int			history_destroy(t_history *history)
 {
-	if (history == NULL)
-	{
-		// TODO можно тут сохранять
-		ft_dlist_free(&history->root, free);
-		history->carriage = NULL;
-		free(history);
-	}
+	// TODO можно тут сохранять
+	ft_dlist_free(&history->root, free);
+	history->carriage = NULL;
+	free(history);
 	return (1);
 }
  

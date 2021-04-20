@@ -6,13 +6,13 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:46:56 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 11:11:41 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 12:53:46 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-t_input *input_create(void)
+t_input	*input_create(void)
 {
 	t_input *input;
 
@@ -35,7 +35,7 @@ t_input *input_create(void)
 	return (input);
 }
 
-int	input_destroy(t_input *input)
+int		input_destroy(t_input *input)
 {
 	sbuffer_destroy(input->buffer);
 	term_destroy(input->term);
@@ -43,26 +43,15 @@ int	input_destroy(t_input *input)
 	return (1);
 }
 
-int input_read(t_input *input)
+int		input_init(t_input *input)
 {
-	int		read_len;
-	char	read_buffer[_INP_READ_BUFFSIZE + 1];
-
-	ft_bzero(read_buffer, _INP_READ_BUFFSIZE + 1);
-	read_len = read(0, read_buffer, _INP_READ_BUFFSIZE);
-	if (read_len == -1)
-		return (0); // TODO код ошибки
-	if (term_take_input(read_buffer, read_len))
-		return (1);
-	else
-	{
-		write(STDOUT_FILENO, read_buffer, read_len);
-		sbuffer_add_str(input->buffer, read_buffer);
-	}
+	if (!term_init(input->term))
+		return (0);
+	// TODO кеймап тут
 	return (1);
 }
 
-int	input_has_next_line(t_input *input, int *index)
+static int	input_has_next_line(t_input *input, int *index)
 {
 	int		i;
 	char	*buffer;
@@ -81,13 +70,34 @@ int	input_has_next_line(t_input *input, int *index)
 	return (0);
 }
 
-// ! TODO история не добавляется к буферу
+int input_read(t_input *input)
+{
+	int		read_len;
+	char	read_buffer[_INP_READ_BUFFSIZE + 1];
+
+	ft_bzero(read_buffer, _INP_READ_BUFFSIZE + 1);
+	read_len = read(0, read_buffer, _INP_READ_BUFFSIZE);
+	if (read_len == -1)
+		return (0); // TODO код ошибки
+	input->line_len += read_len;
+	if (term_take_input(read_buffer, read_len))
+		return (1);
+	else
+	{
+		write(STDOUT_FILENO, read_buffer, read_len);
+		sbuffer_add_str(input->buffer, read_buffer);
+	}
+	return (1);
+}
+
+// TODO история не добавляется к буферу
 // TODO проверить cntl+v нескольких строк (не будет работать)
 // TODO добавить EOF как конец команды (или всего процесса)
 int	input_get_next_line(t_input *input, char **line)
 {
 	int	next_i;
 
+	input->line_len = 0;
 	term_on_new_line();
 	while (!input_has_next_line(input, &next_i))
 	{

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:04:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/19 21:11:54 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 13:29:11 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	ft_putchar(int c);
 
 t_minishell	*minishell_create(const char *title, const char **envp);
 int			minishell_init(t_minishell *shell);
+int			minishell_on_exit(t_minishell *shell);
 int			minishell_destroy(t_minishell *shell);
 int			minishell_write_title(t_minishell *shell);
 

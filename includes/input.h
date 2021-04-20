@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:43:36 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 11:11:41 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 13:01:38 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,22 @@ typedef struct s_input
 {
 	t_sbuffer		*buffer;
 	t_terminal		*term;
+	int				line_len;
+	t_list			*keymap;
 }				t_input;
 
-int		input_read(t_input *input);
-int		input_has_next_line(t_input *input, int *index);
+typedef int (*t_keycall)(void);
+
+typedef struct	s_keyset
+{
+	char		*key;
+	t_keycall	*call;
+}				t_keyset;
+
 t_input	*input_create(void);
-int		input_get_next_line(t_input *input, char **line);
 int		input_destroy(t_input *input);
+int		input_init(t_input *input);
+int		input_read(t_input *input);
+int		input_get_next_line(t_input *input, char **line);
 
 #endif
