@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:46:56 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 15:14:58 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 17:37:59 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int			input_read(t_input *input, t_minishell *shell)
 	if (read_len == -1)
 		return (0); // TODO код ошибки
 	if (input_take_key(term_key_type(read_buffer, read_len), shell))
-		return (1);
+		return (1); // TODO По хорошему проброс ошибки если в функциях клавиш ошибка
 	else
 	{
 		input->line_len += read_len;
@@ -100,6 +100,7 @@ int	input_get_next_line(t_input *input, char **line, t_minishell *shell)
 
 	input->line_len = 0;
 	term_on_new_line();
+	// term_set_mode();
 	while (!input_has_next_line(input, &next_i))
 	{
 		if (!input_read(input, shell))
@@ -107,5 +108,6 @@ int	input_get_next_line(t_input *input, char **line, t_minishell *shell)
 	}
 	*line = ft_strndup(input->buffer->str, next_i);
 	sbuffer_clear(input->buffer);
+	// term_reset_mode();
 	return (1);
 }

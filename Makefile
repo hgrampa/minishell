@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/20 23:21:11 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/21 18:00:50 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,4 +116,7 @@ norm:
 	norminette includes
 	norminette sources
 
-.PHONY: all clean fclean re norm
+val:
+	valgrind --leak-check=full --log-file=vallog ./minishell
+
+.PHONY: all clean fclean re norm val

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 15:42:23 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 17:31:07 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,26 @@ int		process(t_minishell *shell)
 		minishell_write_title(shell);
 		// TODO работаться уже с возвращаем значении
 		if (input_get_next_line(shell->input, &line, shell) == -1)
-			return (0);
-		
+			return (0); // TODO возврат ошибки
+
 		if (ft_strnstr(line, "exit", ft_strlen(line)))
 		{
-			line = NULL;
+			free(line);
 			ft_list_free(&words, pword_destroy);	
 			emul_exit(shell);	
 		}
 
 		printf(">\"%s\"\n", line);
-		// Если strlen(line) == 0 то ниче не делаю
+		
 		// Добавляю instance в историю
 		if (!history_add(shell->history, line))
 		{
 			free (line);
 			return (0); // TODO возврат ошибки
 		}
+
+
+
 		if (!parse_line(shell->env, line, &words))
 			return (1); // TODO возврат ошибки
 		// TODO вход для фабрики
@@ -60,9 +63,10 @@ int		process(t_minishell *shell)
 		// Не чищу а отдаю истории чтоб не перевыделять
 		line = NULL;
 		ft_list_free(&words, pword_destroy);
+		words = NULL;
 		// history_serealize(shell->history);
 	}
-	input_destroy(shell->input);
+	// input_destroy(shell->input);
 	return (1);
 }
 
