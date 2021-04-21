@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bi_lists.c                                         :+:      :+:    :+:   */
+/*   ft_dlist.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssentine <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:39:14 by ssentine          #+#    #+#             */
-/*   Updated: 2021/04/17 18:39:16 by ssentine         ###   ########.fr       */
+/*   Updated: 2021/04/20 11:37:12 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dlists.h"
+#include "libft.h"
 #include <stdio.h>
 
 t_dlist	*ft_dlist_new(void *data)
@@ -26,21 +26,23 @@ t_dlist	*ft_dlist_new(void *data)
 	return (new_node);
 }
 
-int	ft_dlist_pull(t_dlist **root, t_dlist *new_dlist)
+int		ft_dlist_pull(t_dlist **root, void *data)
 {
-	t_dlist *old_dlist;
+	t_dlist *new_node;
 
-	old_dlist = *root;
-	if (root && new_dlist)
+	new_node = ft_dlist_new(data);
+	if (new_node == NULL)
+		return (0);
+	if (*root != NULL)
 	{
-		if (*root)
-			new_dlist->next = *root;
-		old_dlist->previous = new_dlist;
+		new_node->next = *root;
+		(*root)->previous = new_node;
 	}
+	*root = new_node;
 	return (1);
 }
 
-void ft_dlist_free(t_dlist **root, void (*del)(void*))
+void	ft_dlist_free(t_dlist **root, void (*del)(void*))
 {
 	t_dlist *node;
 
@@ -98,22 +100,3 @@ int		ft_dlist_add(t_dlist **root, void *data)
 	}
 	return (1);
 }
-
-// int main()
-// {
-// 	t_dlist *test0;
-// 	t_dlist *test1;
-// 	t_dlist *test2;
-
-// 	test2 = ft_dlist_new("789");
-// 	test1 = ft_dlist_new("456");
-// 	test0 = ft_dlist_new("123");
-// 	ft_dlist_pull(&test1, test0);
-// 	ft_dlist_pull(&test2, test1);
-// 	// printf("%s\n", test0->next->data);
-// 	// printf("%s\n", test2->previous->data);
-// 	// printf("%s\n", test1->previous->data);
-// 	// printf("%s\n", test0->data);
-// 	ft_dlist_free(&test0, NULL);
-// 	return(0);
-// }

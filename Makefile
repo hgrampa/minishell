@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/16 14:11:29 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/20 23:21:11 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			= minishell
 
 CC				= gcc
 
-# TODO убрать перед eval
+# TODO убрать -g перед eval
 # TODO добавить -Wall -Wextra -Werror
 CC_FLAGS		:= -g 
 CC_LIBS			:=
@@ -32,27 +32,47 @@ INCL_DIR		=	includes/ \
 
 SRC_DIR			=	sources/ \
 					sources/parser \
-					sources/parser/states
+					sources/parser/states \
+					sources/environment \
+					sources/sbuffer \
+					sources/input \
+					sources/termcap \
+					sources/history \
+					sources/minishell
 
 OBJ_DIR			=	objects/
 
 # ---------------------------------------------------------------------------- #
 INCL			=	minishell.h \
 					libft.h \
+					sbuffer.h \
+					environment.h \
 					input.h \
-					parser.h
+					terminal.h \
+					parser.h \
+					keymap.h \
+					pword.h
 
 SRC				=	main.c \
+					minishell.c \
 					input.c \
+					keycall.c \
+					termcap.c \
+					history.c \
 					parser.c \
 					pbuffer.c \
 					pword.c \
 					pstate.c \
-					core_state.c \
-					squotes_state.c \
-					wquotes_state.c	\
-					env_state.c \
-					cntr_state.c 
+					pstate_core.c \
+					pstate_squotes.c \
+					pstate_wquotes.c \
+					pstate_env.c \
+					pstate_cntr.c \
+					environment_1.c \
+					environment_2.c \
+					environment_3.c \
+					environment_4.c \
+					sbuffer.c
 
 OBJ				= $(SRC:.c=.o)
 OBJ_PATH		= $(addprefix $(OBJ_DIR), $(OBJ))

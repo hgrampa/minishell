@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/31 11:39:03 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/15 12:16:14 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/19 20:36:06 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,16 @@ OBJ_STACK		= $(SRC_STACK:.c=.o)
 
 # ---------------------------------------------------------------------------- #
 
+DLIST_DIR		= ft_dlist
+SUBDIRS			+= $(DLIST_DIR)
+
+SRC_DLIST		= ft_dlist.c
+
+SRC				+= $(SRC_DLIST)
+OBJ_DLIST		= $(SRC_DLIST:.c=.o)
+
+# ---------------------------------------------------------------------------- #
+
 STRINGS_DIR		= ft_strings
 SUBDIRS			+= $(STRINGS_DIR)
 
@@ -115,6 +125,7 @@ SRC_PUTFD		= 	ft_putchar_fd.c \
 					ft_putstr_fd.c \
 					ft_gnl_cash.c \
 					ft_gnl.c \
+					ft_putchar.c
 
 SRC				+= $(SRC_PUTFD)
 OBJ_PUTFD		= $(SRC_PUTFD:.c=.o)

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_state.c                                       :+:      :+:    :+:   */
+/*   pstate_core.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:03:49 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 14:05:24 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 12:08:38 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
 
-int	core_state(char **line, t_list **words, struct s_pcontext *context)
+int	pstate_core(char **line, struct s_pcontext *context)
 {
 	while (21)
 	{
@@ -21,21 +21,23 @@ int	core_state(char **line, t_list **words, struct s_pcontext *context)
 		{
 			pbuffer_close(context);
 			pcontext_end_process(context);
-			return (1); // TODO вероятно можно что-то лучше придумать
+			return (1);
 		}
 		else if (**line == '$')
 		{
-			pcontext_set_state(context, env_state);
+			pcontext_set_state(context, pstate_env);
 			return (1);
 		}
 		else if (**line == '\"')
 		{
-			pcontext_set_state(context, wquotes_state);
+			(*line)++;
+			pcontext_set_state(context, pstate_wquotes);
 			return (1);
 		}
 		else if (**line == '\'')
 		{
-			pcontext_set_state(context, squotes_state);
+			(*line)++;
+			pcontext_set_state(context, pstate_squotes);
 			return (1);
 		}
 		// else if (**line == '\\')
@@ -45,7 +47,7 @@ int	core_state(char **line, t_list **words, struct s_pcontext *context)
 		// }
 		else if (ft_strchr(_PRS_CONTROLERS, **line) != NULL)
 		{
-			pcontext_set_state(context, cntrl_state);
+			pcontext_set_state(context, pstate_cntrl);
 			return(1);
 		}
 		else if (ft_strchr(_PRS_DELIMITERS, **line) != NULL)

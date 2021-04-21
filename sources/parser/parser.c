@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:04:19 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 14:23:47 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 12:50:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 static void	parse_context_init(struct s_pcontext *context, t_env *env)
 {
-	pcontext_set_state(context, core_state);
+	context->current_state = pstate_core;
+	context->state_stack = NULL;
 	context->buffer = NULL;
 	context->words = NULL;
 	context->process = 1;
@@ -31,16 +32,16 @@ int			parse_line(t_env *env, char *line, t_list **words)
 	parse_context_init(&context, env);
 	while (context.process)
 	{
-		result = context.current_state(&line, words, &context);
+		result = context.current_state(&line, &context);
 		if (result == 0)
 			break ;
 	}
-	// if (context.current_state != core_state)
+	// if (context.current_state != core_state) // TODO обработка ошибки
 		// ошибка либо кавычки не закрыты или еще че
 		// можно отдельную функцию по анализу ошибки
-	ft_stack_free(&context.state_stack, NULL); // ? по идее тут не должно что=то быть (разве что при ошибке)
+	ft_stack_free(&(context.state_stack), NULL); // ? по идее тут не должно что=то быть (разве что при ошибке)
 	if (context.buffer != NULL)
-		free(context.buffer);
+		sbuffer_destroy(context.buffer);
 	*words = context.words;
 	return (result);
 }
