@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 01:00:59 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 15:15:03 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ t_history	*history_create(void)
 int			history_init(t_history *history)
 {
 	history_deserealize(history); // пофигу на результат
-	// if (history->root == NULL)
-	// 	return (0);
 	return (1);
 }
 
@@ -90,14 +88,14 @@ int			history_destroy(t_history *history)
 	free(history);
 	return (1);
 }
- 
+
 int			history_add(t_history *history, char *str)
 {	
+	history->carriage = NULL;
 	if (ft_strlen(str) == 0)
 		return (1);
 	if (!ft_dlist_pull(&history->root, str))
 		return (0);
-	history->carriage = NULL;
 	return(1);
 }
 
@@ -107,9 +105,13 @@ char		*history_up(t_history *history)
 
 	if (history->carriage == NULL)
 	{
-		history->carriage = history->root;
-		result = (char *)history->carriage->data;
-		return(result);
+		if (history->root != NULL)
+		{
+			history->carriage = history->root;
+			result = (char *)history->carriage->data;
+			return(result);
+		}
+		return(NULL);
 	}
 	else if (history->carriage->next != NULL)
 	{
@@ -132,5 +134,7 @@ char		*history_down(t_history *history)
 		result = (char *)history->carriage->data;
 		return(result);
 	}
+	else
+		history->carriage = NULL;
 	return (NULL);
 }

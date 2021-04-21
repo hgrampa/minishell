@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 23:53:14 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 13:25:26 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,26 +109,23 @@ int		term_is_key_muted(char *buff, ssize_t len)
 enum e_key_type	term_key_type(char *buff, ssize_t len)
 {
 	if (ft_strncmp(buff, "\177", len) == 0)
-	{
 		return (EKT_BACKSPACE);
-	}
 	else if (term_is_key_muted(buff, len))
-	{
 		return (EKT_MUTED);
-	}
-	else if (ft_strncmp(buff, key_up, len) == 0)
-	{
+	else if (ft_strncmp(buff, key_up, len) == 0 || ft_strncmp(buff, cursor_up, len) == 0 || ft_strncmp(buff, "\e[A", len) == 0)
 		return (EKT_UPARR);
-	}
-	else if (ft_strncmp(buff, key_down, len) == 0)
-	{
+	else if (ft_strncmp(buff, key_down, len) == 0 || ft_strncmp(buff, column_address, len) == 0 || ft_strncmp(buff, "\e[B", len) == 0)
 		return (EKT_DWARR);
-	}
 	else
-	{
 		return (EKT_NOTKEY);
-	}
 }
+
+int	term_clear_line(void)
+{
+	tputs(restore_cursor, 1, ft_putchar);
+	tputs(clr_eos, 1, ft_putchar);
+	return (1);
+}		
 
 // int main(int argc, char const *argv[])
 // {

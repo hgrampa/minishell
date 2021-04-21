@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:46:56 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 01:04:11 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 15:14:58 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		input_init(t_input *input)
 {
 	if (!term_init(input->term))
 		return (0);
-	// TODO кеймап тут
 	return (1);
 }
 
@@ -72,7 +71,7 @@ static int	input_has_next_line(t_input *input, int *index)
 	return (0);
 }
 
-int input_read(t_input *input, t_minishell *shell)
+int			input_read(t_input *input, t_minishell *shell)
 {
 	int		read_len;
 	char	read_buffer[_INP_READ_BUFFSIZE + 1];
