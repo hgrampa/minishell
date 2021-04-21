@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 15:15:03 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 16:50:44 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,9 @@ int			history_deserealize(t_history *history)
 	result = ft_gnl(fd, &line, _HISTORY_READ_BUFF_SIZE);
 	while (result > 0)
 	{
-		// TODO подумать над тем что бы убрать лишнее дублирование
-		ft_dlist_add(&history->root, ft_strdup(line));
-		free(line);
+		ft_dlist_add(&history->root, line);
 		result = ft_gnl(fd, &line, _HISTORY_READ_BUFF_SIZE);
 	}
-	// TODO эта строка тип последняя?
 	ft_dlist_add(&history->root, ft_strdup(line));
 	free(line);
 	close(fd);

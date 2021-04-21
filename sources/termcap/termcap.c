@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 13:25:26 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 16:51:30 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		term_set_mode(t_terminal *term)
 {
 	if (tcgetattr(0, &term->save_termios) == -1)
 	{
-		// perror("fdfg");
 		return (0); // TODO код возврата
 	}
 	ft_memcpy(&term->termios, &term->save_termios, sizeof(struct termios));
