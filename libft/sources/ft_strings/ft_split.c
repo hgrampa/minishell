@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static size_t		get_tablen(char const *s, char c)
+static size_t	get_tablen(char const *s, char c)
 {
 	size_t			tablen;
 	unsigned char	dirty;
@@ -33,9 +33,9 @@ static size_t		get_tablen(char const *s, char c)
 	return (tablen);
 }
 
-static size_t		get_strlen(char const *s, char c)
+static size_t	get_strlen(char const *s, char c)
 {
-	size_t size;
+	size_t	size;
 
 	size = 0;
 	while (*s != '\0' && *s++ != c)
@@ -43,7 +43,7 @@ static size_t		get_strlen(char const *s, char c)
 	return (size);
 }
 
-static void			*clean_all(char **table, unsigned int topidex)
+static void	*clean_all(char **table, unsigned int topidex)
 {
 	while (topidex != 0)
 	{
@@ -55,7 +55,7 @@ static void			*clean_all(char **table, unsigned int topidex)
 	return (NULL);
 }
 
-char				**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	unsigned int	i;
 	char			**result;
@@ -65,7 +65,7 @@ char				**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	table_size = get_tablen(s, c) + 1;
-	result = (char **)malloc(sizeof(char*) * table_size);
+	result = (char **)malloc(sizeof(char *) * table_size);
 	if (!result)
 		return (NULL);
 	i = 0;
