@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 13:16:15 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 00:29:25 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 12:12:33 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int			sbuffer_add_str(t_sbuffer *buffer, char *str);
 **		- In case of malloc error - return 0 (old buffer.str not freed)
 */
 int			sbuffer_add_char(t_sbuffer *buffer, char c);
-
 
 /*
 **	Reset all char in buffered string at '\0', keeping the current size
