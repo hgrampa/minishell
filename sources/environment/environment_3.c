@@ -43,7 +43,10 @@ int	env_set(t_env *env, char const *key, char const *value)
 	{
 		pair = env_get_pair(env, key);
 		free(pair->value);
-		pair->value = ft_strdup(value);
+		if (value != NULL)
+			pair->value = ft_strdup(value);
+		else
+			pair->value = NULL;
 	}
 	if (!env_update(env))
 		return (0);
