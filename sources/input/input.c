@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:46:56 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 17:37:59 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/21 18:21:10 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,23 @@ static int	input_has_next_line(t_input *input, int *index)
 
 int			input_read(t_input *input, t_minishell *shell)
 {
-	int		read_len;
-	char	read_buffer[_INP_READ_BUFFSIZE + 1];
+	int				read_len;
+	char			read_buffer[_INP_READ_BUFFSIZE + 1];
+	enum e_key_type	key;
 
 	ft_bzero(read_buffer, _INP_READ_BUFFSIZE + 1);
 	read_len = read(0, read_buffer, _INP_READ_BUFFSIZE);
 	if (read_len == -1)
 		return (0); // TODO код ошибки
-	if (input_take_key(term_key_type(read_buffer, read_len), shell))
-		return (1); // TODO По хорошему проброс ошибки если в функциях клавиш ошибка
-	else
+	key = term_key_type(read_buffer, read_len);
+	if (key == EKT_NOTKEY)
 	{
 		input->line_len += read_len;
 		write(STDOUT_FILENO, read_buffer, read_len);
 		sbuffer_add_str(input->buffer, read_buffer);
 	}
+	else
+		return (input_take_key(key, shell)); // TODO код ошибки
 	return (1);
 }
 
