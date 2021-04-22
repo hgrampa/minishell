@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 11:16:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 15:21:34 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 21:14:01 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,4 +222,3 @@ int			sbuffer_backspace(t_sbuffer *buffer)
 // 	// }
 // 	return 0;
 // }
-

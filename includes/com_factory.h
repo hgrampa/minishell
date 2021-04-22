@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:24:23 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 14:29:16 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 21:17:01 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "libft.h"
 # include "pword.h"
+# include "minishell.h"
 
-int	com_factory_take_words(t_list *words);
-char **com_factory_to_chars()
+int	com_factory_run_line(t_list *words, t_minishell *shell);
 
 #endif

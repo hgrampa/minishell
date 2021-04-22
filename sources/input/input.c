@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:46:56 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 18:21:10 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 22:03:34 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ int	input_get_next_line(t_input *input, char **line, t_minishell *shell)
 
 	input->line_len = 0;
 	term_on_new_line();
-	// term_set_mode();
+	if(!term_set_mode(input->term))
+		return (-1); // TODO код ошибки
 	while (!input_has_next_line(input, &next_i))
 	{
 		if (!input_read(input, shell))
@@ -110,6 +111,7 @@ int	input_get_next_line(t_input *input, char **line, t_minishell *shell)
 	}
 	*line = ft_strndup(input->buffer->str, next_i);
 	sbuffer_clear(input->buffer);
-	// term_reset_mode();
+	if(term_reset_mode(input->term))
+		return (-1); // TODO код ошибки
 	return (1);
 }

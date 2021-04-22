@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:05 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 21:03:46 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 21:11:43 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "parser.h"
 #include "environment.h"
 
+// TODO Эту функцию к env перенести
 static int	env_isname_char(char c)
 {
 	return (ft_isalnum(c) || c == '_');
@@ -83,8 +84,6 @@ static int	pstate_rename_var(char **line, struct s_pcontext *context) // TODO П
 	return (pcontext_return_state(context)); // стадия закрывается
 }
 
-// !!! TODO $ без имени
-// TODO "$ foo"
 int			pstate_env(char **line, struct s_pcontext *context)
 {
 	char *anchor;
@@ -97,7 +96,7 @@ int			pstate_env(char **line, struct s_pcontext *context)
 		*line = anchor; // линия проматывается до anchor (символ после $)
 		return (pcontext_return_state(context));
 	}
-	else if (ft_strchr(_PRS_QUOTES, *anchor) != NULL) // TODO можно только на ' проверять
+	else if (ft_strchr(_PRS_QUOTES, *anchor) != NULL)
 	{
 		if (pcontext_previous_state(context) == pstate_wquotes)
 		{

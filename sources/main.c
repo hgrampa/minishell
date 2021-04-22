@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 19:12:48 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 21:59:37 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ int		process(t_minishell *shell)
 		if (!parse_line(shell->env, line, &words))
 			return (1); // TODO возврат ошибки
 		// TODO вход для фабрики
+		if (!com_factory_run_line(words, shell))
+		{
+			ft_list_free(&words, pword_destroy);
+			return (0);
+		}
+		
 		ft_list_foreach(words, pword_print);
 
 

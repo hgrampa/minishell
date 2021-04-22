@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 16:51:30 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 22:02:13 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,13 @@ int		term_init(t_terminal *term)
    		printf("Could not access the termcap data base or terminal type is not defined.\n"); // TODO код возврата
 		return (0);
 	}
-	if (!term_set_mode(term))
-	{
-		return (0); // TODO код возврата
-	}
+	// TODO необходимо добавить признак того что растройки восстановленны
+	// 	если при чтении возникнет ошибка и в обработке исключения восстановить режим
+	// Теперь устанавливаю режим каждый раз как читаю новую строку
+	// if (!term_set_mode(term))
+	// {
+	// 	return (0);
+	// }
 	return(1);
 }
 
@@ -93,7 +96,7 @@ int		term_on_new_line(void)
 	return (1);
 }
 
-
+// TODO добавить \t
 int		term_is_key_muted(char *buff, ssize_t len)
 {
 	// || ft_strncmp(buff, key_exit, len) == 0

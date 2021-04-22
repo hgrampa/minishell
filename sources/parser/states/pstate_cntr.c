@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 19:38:06 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 21:11:25 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,10 @@ int							pstate_cntrl(char **line, struct s_pcontext *context)
 	type = cntrl_get_type(*line);
 	if (type == EWT_UNKNOWN)
 		return (pcontext_end_process(context, 0));
-	// закрываю буфер и записываю слово
-	pbuffer_close(context);
-	// открываю буфер
-	pbuffer_open(context, type);
-	// добавляю строку(может NULL) и тип симол к новому слову
-	// закрываю буфер и записываю слово
-	pbuffer_close(context);
-	// проматываю line
-	if (type == EWT_REDIRECT3) // TODO так себе но пох
+	pbuffer_close(context); // закрываю буфер и записываю слово
+	pbuffer_open(context, type);  	// открываю буфер добавляю строку(может NULL) и тип симол к новому слову
+	pbuffer_close(context); // закрываю буфер и записываю слово
+	if (type == EWT_REDIRECT3) 	// проматываю line
 		(*line) += 2;
 	else
 		(*line)++;

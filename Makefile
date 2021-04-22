@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/22 18:54:03 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/22 21:18:53 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ INCL_DIR		=	includes/ \
 SRC_DIR			=	sources/ \
 					sources/parser \
 					sources/parser/states \
+					sources/com_factory \
 					sources/environment \
 					sources/sbuffer \
 					sources/input \
@@ -51,6 +52,7 @@ INCL			=	minishell.h \
 					terminal.h \
 					parser.h \
 					keymap.h \
+					com_factory.h \
 					pword.h
 
 SRC				=	main.c \
@@ -61,6 +63,7 @@ SRC				=	main.c \
 					history.c \
 					parser.c \
 					pbuffer.c \
+					com_factory.c \
 					pword.c \
 					pstate.c \
 					pstate_core.c \
