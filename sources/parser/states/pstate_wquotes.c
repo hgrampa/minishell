@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:02:13 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 18:52:34 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 19:40:09 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,16 @@ int	pstate_wquotes(char **line, struct s_pcontext *context)
 	while (21)
 	{
 		if (**line == '\0')
-		{
-			pcontext_end_process(context);
-			return (0);
-		}
+			return (pcontext_end_process(context, 0));
 		else if (**line == '\"')
 		{
-			pcontext_return_state(context);
 			(*line)++;
-			return (1);
+			return (pcontext_return_state(context));
 		}
 		else if (**line == '$')
-		{
-			pcontext_set_state(context, pstate_env);
-			return (1);
-		}
+			return (pcontext_set_state(context, pstate_env));
 		else if (**line == '\\')
-		{
-			pcontext_set_state(context, pstate_esc);
-			return (1);
-		}
+			return (pcontext_set_state(context, pstate_esc));
 		else
 		{
 			pbuffer_add_char(context, **line);

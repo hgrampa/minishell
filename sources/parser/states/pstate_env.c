@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:05 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 12:08:43 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 19:38:35 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int			pstate_env(char **line, struct s_pcontext *context)
 		// линия проматывается до anchor (символ после $)
 		*line = anchor;
 		// стадия закрывается
-		pcontext_return_state(context);
-		return (1);
+		return (pcontext_return_state(context));
 	}
 	else if (ft_strchr(_PRS_QUOTES, *anchor) != NULL) // TODO можно только на ' проверять
 	{
@@ -44,15 +43,13 @@ int			pstate_env(char **line, struct s_pcontext *context)
 			// линия проматывается до anchor (символ после $)
 			*line = anchor;
 			// стадия закрывается
-			pcontext_return_state(context);
-			return (1);
+			return (pcontext_return_state(context));
 		}
 		else
 		{
 			*line = anchor;
 			// стадия закрывается
-			pcontext_return_state(context);
-			return (1);
+			return (pcontext_return_state(context));
 		}
 	}
 	//	проверка следуещего за $ символа - может ли он начинать имя (главное чтоб не цифра)
@@ -102,8 +99,7 @@ int			pstate_env(char **line, struct s_pcontext *context)
 					}
 				}
 				free(name);
-				pcontext_return_state(context);
-				return (1);
+				return (pcontext_return_state(context));
 			}
 		}
 	}
@@ -113,7 +109,6 @@ int			pstate_env(char **line, struct s_pcontext *context)
 		// линия проматывается до anchor (символ после после $)
 		*line = anchor;
 		// стадия закрывается
-		pcontext_return_state(context);
-		return (1);
+		return (pcontext_return_state(context));
 	}
 }

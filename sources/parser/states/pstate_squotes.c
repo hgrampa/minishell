@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:02:44 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 12:08:52 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 19:39:24 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,11 @@ int	pstate_squotes(char **line, struct s_pcontext *context)
 	while (21)
 	{
 		if (**line == '\0')
-		{
-			pcontext_end_process(context);
-			return (0);
-		}
+			return (pcontext_end_process(context, 0)); // TODO возврат ошибки
 		else if (**line == '\'')
 		{
-			pcontext_return_state(context);
 			(*line)++;
-			return (1);
+			return (pcontext_return_state(context));
 		}
 		else
 		{

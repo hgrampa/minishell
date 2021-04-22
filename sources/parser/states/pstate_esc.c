@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:17:02 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 19:04:14 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 19:39:00 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,11 @@ int		pstate_esc(char **line, struct s_pcontext *context)
 	pbuffer_open(context, EWT_WORD);
 	(*line)++;
 	if (**line == '\0')
-	{
-		pcontext_end_process(context);
-		return (0); // TODO возврат ошибки (что мультистрочный ввод не поддерживается)
-	}
+		return (pcontext_end_process(context, 0)); // TODO возврат ошибки (что мультистрочный ввод не поддерживается)
 	if (pcontext_previous_state(context) == pstate_wquotes
 		&& ft_strchr(_PRS_ESC_WQUOTES_CAHRS, **line) == NULL)
 			pbuffer_add_char(context, '\\');
 	pbuffer_add_char(context, **line);
 	(*line)++;
-	pcontext_return_state(context);
-	return (1);
+	return (pcontext_return_state(context));
 }

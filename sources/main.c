@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 17:31:07 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 19:12:48 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		process(t_minishell *shell)
 			return (1); // TODO возврат ошибки
 		// TODO вход для фабрики
 		ft_list_foreach(words, pword_print);
+
 
 		// Не чищу а отдаю истории чтоб не перевыделять
 		line = NULL;

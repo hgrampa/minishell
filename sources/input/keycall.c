@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:07:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 18:19:27 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 19:40:59 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		input_set_line(t_input *input, char *line)
 	sbuffer_clear(input->buffer);
 	sbuffer_add_str(input->buffer, line);
 	input->line_len = ft_strlen(line);
+	return (1);
 }
 
 int		input_save_line(t_input *input)

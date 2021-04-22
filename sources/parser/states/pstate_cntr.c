@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 12:08:32 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 19:38:06 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ int							pstate_cntrl(char **line, struct s_pcontext *context)
 	
 	type = cntrl_get_type(*line);
 	if (type == EWT_UNKNOWN)
-	{
-		pcontext_end_process(context); // ошибка маловероятна но все же
-		return (0);
-	}
+		return (pcontext_end_process(context, 0));
 	// закрываю буфер и записываю слово
 	pbuffer_close(context);
 	// открываю буфер
@@ -51,6 +48,5 @@ int							pstate_cntrl(char **line, struct s_pcontext *context)
 		(*line) += 2;
 	else
 		(*line)++;
-	pcontext_return_state(context);
-	return(1);
+	return(pcontext_return_state(context));
 }
