@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/31 11:39:03 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/19 20:36:06 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/22 14:27:43 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,6 +136,7 @@ LISTS_DIR		= ft_lists
 SUBDIRS			+= $(LISTS_DIR)
 
 SRC_LISTS		= 	ft_lists.c \
+					ft_list_tosa.c \
 					ft_lstadd_back.c \
 					ft_lstadd_front.c \
 					ft_lstclear.c \
