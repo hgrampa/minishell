@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/21 18:00:50 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/22 18:54:03 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SRC				=	main.c \
 					pstate_squotes.c \
 					pstate_wquotes.c \
 					pstate_env.c \
+					pstate_esc.c \
 					pstate_cntr.c \
 					environment_1.c \
 					environment_2.c \

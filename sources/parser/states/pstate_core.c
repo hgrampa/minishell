@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:03:49 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 12:08:38 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 18:52:20 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	pstate_core(char **line, struct s_pcontext *context)
 			pcontext_set_state(context, pstate_squotes);
 			return (1);
 		}
-		// else if (**line == '\\')
-		// {
-		// 	pcontext_set_state(context, esc_state);
-		// 	return (1);
-		// }
+		else if (**line == '\\')
+		{
+			pcontext_set_state(context, pstate_esc);
+			return (1);
+		}
 		else if (ft_strchr(_PRS_CONTROLERS, **line) != NULL)
 		{
 			pcontext_set_state(context, pstate_cntrl);

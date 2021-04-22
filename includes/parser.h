@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 14:09:08 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 19:06:15 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 
 # define _PRS_DELIMITERS " \t"
 # define _PRS_CONTROLERS ";|<>"
+// # define _PRS_ESC_CORE_CAHRS "\"\';|><$ \t"
+# define _PRS_ESC_WQUOTES_CAHRS "\"$"
 # define _PRS_QUOTES "\"\'"
 # define _PRS_BUFFSIZE 40
 
 // TODO текущая стадия - полем
-// TODO буфер-почеловечески
-// TODO \ символ
 
 struct s_pcontext;
 
