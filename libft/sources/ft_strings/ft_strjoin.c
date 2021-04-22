@@ -6,13 +6,13 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 10:44:35 by hgrampa           #+#    #+#             */
-/*   Updated: 2020/11/27 15:18:30 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:43:26 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	char	*result;
 	size_t	len;

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/31 10:44:33 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/15 14:24:12 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/15 12:02:29 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/15 12:15:20 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	*ft_realloc(void *ptr, size_t old_size, ssize_t new_size)
 {
-	size_t	len;
-	char	*result;
+	void	*result;
 
-	len = ft_strlen(s1);
-	result = (char *)ft_calloc(len + 1, sizeof(char));
-	if (!result)
-		return (NULL);
-	ft_strlcpy(result, s1, ++len);
+	if (ptr == NULL)
+		return (malloc(new_size));
+	result = malloc(new_size);
+	ft_memcpy(result, ptr, old_size);
+	free(ptr);
 	return (result);
 }

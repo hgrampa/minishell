@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:17:58 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/02/08 10:20:34 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/20 11:39:11 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,13 @@ typedef struct	s_stack
 	struct s_stack	*next;
 }				t_stack;
 
+typedef struct		s_dlist
+{
+	void			*data;
+	struct s_dlist	*next;
+	struct s_dlist	*previous;
+}					t_dlist;
+
 typedef char	t_bool;
 
 void			*ft_memset(void *s, int c, size_t n);
@@ -73,6 +80,7 @@ void			*ft_memmove(void *dest, const void *src, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			*ft_calloc(size_t count, size_t size);
+void			*ft_realloc(void *ptr, size_t old_size, ssize_t new_size);
 
 size_t			ft_strlen(const char *s);
 size_t			ft_sstrlen(const char *s);
@@ -93,6 +101,7 @@ int				ft_tolower(int c);
 int				ft_toupper(int c);
 char			*ft_strdup(const char *s1);
 char			*ft_strcdup(const char *str, char ch);
+char			*ft_strndup(const char *s1, int len);
 char			*ft_gnwrd(char **str);
 char			*ft_nwrd(char **str);
 int				ft_isnwrd(char *str, char *substr);
@@ -112,12 +121,15 @@ char			ft_digit_char_lw(int digit);
 char			ft_digit_char_up(int digit);
 
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-char			*ft_strjoin(char *s1, char *s2);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_concat2(char *str1, char *str2);
+char			*ft_concat3(char *str1, char *str2, char *str3);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_putchar_fd(char c, int fd);
+int				ft_putchar(int c);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
@@ -151,5 +163,12 @@ int				ft_list_count(t_list *root);
 void			ft_list_foreach(t_list *root, void (*f)(void *));
 void			ft_list_free(t_list **root, void (*del)(void*));
 t_list			*ft_list_at(t_list *root, int index);
+
+t_dlist			*ft_dlist_new(void *data);
+void			ft_dlist_free(t_dlist **root, void (*del)(void*));
+// int				ft_dlist_pull(t_dlist **root, t_dlist *new_dlist);
+int				ft_dlist_pull(t_dlist **root, void *data);
+void			ft_dlist_foreach(t_dlist *root, void (*f)(void *));
+int				ft_dlist_add(t_dlist **root, void *data);
 
 #endif
