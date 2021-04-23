@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-static void		write_num_rank(long num, int fd)
+static void	write_num_rank(long num, int fd)
 {
-	char number;
+	char	number;
 
 	if (num > 0)
 	{
@@ -24,9 +24,9 @@ static void		write_num_rank(long num, int fd)
 	}
 }
 
-void			ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	long number;
+	long	number;
 
 	number = (long)n;
 	if (n < 0)
