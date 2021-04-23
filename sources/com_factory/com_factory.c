@@ -6,13 +6,11 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 21:14:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 21:58:56 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 13:34:39 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "com_factory.h"
-
-
 
 // typedef struct	s_state_machne
 // {

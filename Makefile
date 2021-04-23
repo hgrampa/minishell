@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/23 12:06:32 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/23 15:15:24 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ INCL			=	minishell.h \
 
 SRC				=	main.c \
 					minishell.c \
+					minishell_title.c \
 					errors.c \
 					input.c \
 					input_gnl.c \

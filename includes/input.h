@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:43:36 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 11:25:15 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 13:32:27 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "keymap.h"
 
 # define _INP_STR_BUFFSIZE 80
-# define _INP_READ_BUFFSIZE 1024
+# define _INP_READ_BUFFSIZE 1
 
 typedef struct s_input
 {

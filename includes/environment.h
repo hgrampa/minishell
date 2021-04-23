@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 12:24:53 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 14:13:55 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 15:26:31 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_env
 {
 	t_list	*collection;
 	void	*represent;
+	int		exit_status;
 }				t_env;
 
 /*

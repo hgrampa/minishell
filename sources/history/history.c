@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 11:53:22 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 15:41:02 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ t_history	*history_create(void)
 
 int			history_init(t_history *history)
 {
-	history_deserealize(history); // пофигу на результат
-	return (1);
+	return (history_deserealize(history));
 }
 
 int			history_serealize(t_history *history)
@@ -60,18 +59,21 @@ int			history_deserealize(t_history *history)
 
 	fd = open(_HISTORY_FILE_NAME, O_RDONLY);
 	if (fd < 0)
-	{
-		printf("Fail to open the history file\n"); // TODO возврат ошибки (или тотальный игнор)
-		return (0);
-	}
+		return (1);
 	line = NULL;
 	result = ft_gnl(fd, &line, _HISTORY_READ_BUFF_SIZE);
 	while (result > 0)
 	{
 		ft_dlist_add(&history->root, line);
 		result = ft_gnl(fd, &line, _HISTORY_READ_BUFF_SIZE);
+		if (result == -1)
+		{
+			free(line);
+			close(fd);
+			return (0);
+		}
 	}
-	ft_dlist_add(&history->root, ft_strdup(line));
+	ft_dlist_add(&history->root, ft_strdup(line)); // TODO суда бы защиту от ошибки
 	free(line);
 	close(fd);
 	return (1);

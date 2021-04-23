@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 11:30:20 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 15:34:54 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@
 #include "environment.h"
 #include "pword.h"
 #include "com_factory.h"
-
-void	emul_exit(t_minishell *shell)
-{
-	minishell_on_exit(shell);
-	minishell_destroy(shell);
-	exit(0);
-}
 
 int		process(t_minishell *shell)
 {

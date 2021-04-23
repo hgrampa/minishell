@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:03 by ssentine          #+#    #+#             */
-/*   Updated: 2021/04/16 14:48:56 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 15:27:15 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ char	*env_get_value(t_env *env, char const *key)
 	t_list	*lst;
 	t_pair	*pair;
 
+	// TODO Получше сделать
+	// if (ft_strncmp(key, "?", 2))
+		// return (ft_itoa(env->exit_status));
 	lst = env->collection;
 	while (lst != NULL)
 	{	

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:03 by ssentine          #+#    #+#             */
-/*   Updated: 2021/04/16 14:50:51 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:52:25 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ t_env	*env_create(char const *represent[])
 			return (NULL);
 	}
 	ft_list_sort(environment->collection);
-	create_represent(environment, ft_list_count(environment->collection) + 1);
+	create_represent(environment, ft_list_count(environment->collection) + 1); // TODO защитить
 	return (environment);
 }
