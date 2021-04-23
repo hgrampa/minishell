@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:43:36 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 13:32:27 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 18:19:01 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_input
 	char			*save_line;
 	t_terminal		*term;
 	int				line_len;
+	int				abort:1;
 }				t_input;
 
 typedef struct s_minishell	t_minishell;

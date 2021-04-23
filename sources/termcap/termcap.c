@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 13:25:32 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 19:45:46 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@ int		term_set_mode(t_terminal *term)
 		return (0); // TODO код возврата
 	}
 	ft_memcpy(&term->termios, &term->save_termios, sizeof(struct termios));
-	term->termios.c_lflag &= ~(ECHO|ICANON);
+	term->termios.c_lflag &= ~(ECHO|ICANON|ISIG);
 	term->termios.c_cc[VMIN] = 1;
 	term->termios.c_cc[VTIME] = 0;
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &term->termios) == -1)
-	{
-		// printf("2\n");
 		return (0); // TODO код возврата
-	}
 	tputs(keypad_xmit, 1, ft_putchar);
+	// tputs(tgetstr("ks", NULL), 1, ft_putchar);
 	return (1);
 }
 
@@ -105,6 +103,10 @@ enum e_key_type	term_key_type(char *buff, ssize_t len)
 		return (EKT_UPARR);
 	else if (ft_strncmp(buff, key_down, len) == 0 || ft_strncmp(buff, column_address, len) == 0 || ft_strncmp(buff, "\e[B", len) == 0)
 		return (EKT_DWARR);
+	else if (ft_strncmp(buff, "\4", len) == 0)
+		return (EKT_CNTRLD);
+	else if (ft_strncmp(buff, "\3", len) == 0)
+		return (EKT_CNTRLC);
 	else
 		return (EKT_NOTKEY);
 }

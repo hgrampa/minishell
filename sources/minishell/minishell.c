@@ -6,11 +6,12 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:28:16 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 15:37:43 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 19:38:17 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
+#include "errors.h"
 
 t_minishell	*minishell_create(const char *title, const char **envp)
 {

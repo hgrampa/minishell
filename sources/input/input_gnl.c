@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 11:19:09 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 13:25:40 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 19:36:18 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static int	input_read(t_input *input, t_minishell *shell)
 	return (1);
 }
 
-// TODO история не добавляется к буферу
 // TODO проверить cntl+v нескольких строк (не будет работать)
 // TODO добавить EOF как конец команды (или всего процесса)
 int			input_get_next_line(t_input *input, char **line, t_minishell *shell)
@@ -69,10 +68,12 @@ int			input_get_next_line(t_input *input, char **line, t_minishell *shell)
 	int	read_res;
 
 	input->line_len = 0;
-	term_on_new_line();
+	input->abort = 0;
 	if(!term_set_mode(input->term))
 		return (-1); // TODO код ошибки
-	while (!input_has_next_line(input, &next_i))
+	term_on_new_line();
+
+	while (!input->abort && !input_has_next_line(input, &next_i))
 	{
 		read_res = input_read(input, shell);
 		if (read_res == -1)
@@ -80,7 +81,10 @@ int			input_get_next_line(t_input *input, char **line, t_minishell *shell)
 		else if (read_res == 0)
 			break ;
 	}
-	*line = ft_strndup(input->buffer->str, next_i);
+	if (input->abort)
+		*line = NULL;
+	else
+		*line = ft_strndup(input->buffer->str, next_i);
 	sbuffer_clear(input->buffer);
 	if(!term_reset_mode(input->term))
 		return (-1); // TODO код ошибки

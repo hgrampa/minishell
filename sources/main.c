@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 15:34:54 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 18:38:40 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ int		process(t_minishell *shell)
 		gnl = input_get_next_line(shell->input, &line, shell);
 		if (gnl == -1)
 			return (0); // TODO возврат ошибки
-
+		if (line == NULL)
+			continue ;
 		if (ft_strnstr(line, "exit", ft_strlen(line)))
 		{
 			free(line);
 			ft_list_free(&words, pword_destroy);	
-			emul_exit(shell);	
+			minishell_exit(shell);	
 		}
 
 		printf(">\"%s\"\n", line);
@@ -68,7 +69,7 @@ int		process(t_minishell *shell)
 		words = NULL;
 		// 
 		if (gnl == 0)
-			emul_exit(shell);
+			minishell_exit(shell);
 	}
 	return (1);
 }
