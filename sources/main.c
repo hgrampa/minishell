@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 21:59:37 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 11:30:20 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "parser.h"
 #include "environment.h"
 #include "pword.h"
+#include "com_factory.h"
 
 void	emul_exit(t_minishell *shell)
 {
@@ -27,6 +28,7 @@ int		process(t_minishell *shell)
 {
 	t_list		*words;
 	char		*line;
+	int			gnl;
 
 	words = NULL;
 	line = NULL;
@@ -34,7 +36,8 @@ int		process(t_minishell *shell)
 	{
 		minishell_write_title(shell);
 		// TODO работаться уже с возвращаем значении
-		if (input_get_next_line(shell->input, &line, shell) == -1)
+		gnl = input_get_next_line(shell->input, &line, shell);
+		if (gnl == -1)
 			return (0); // TODO возврат ошибки
 
 		if (ft_strnstr(line, "exit", ft_strlen(line)))
@@ -53,11 +56,10 @@ int		process(t_minishell *shell)
 			return (0); // TODO возврат ошибки
 		}
 
-
-
+		// Получаю слова от парсера
 		if (!parse_line(shell->env, line, &words))
 			return (1); // TODO возврат ошибки
-		// TODO вход для фабрики
+		// отдаю слова фабрике
 		if (!com_factory_run_line(words, shell))
 		{
 			ft_list_free(&words, pword_destroy);
@@ -71,9 +73,10 @@ int		process(t_minishell *shell)
 		line = NULL;
 		ft_list_free(&words, pword_destroy);
 		words = NULL;
-		// history_serealize(shell->history);
+		// 
+		if (gnl == 0)
+			emul_exit(shell);
 	}
-	// input_destroy(shell->input);
 	return (1);
 }
 

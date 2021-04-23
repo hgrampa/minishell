@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/22 21:18:53 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/23 11:22:22 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ INCL			=	minishell.h \
 SRC				=	main.c \
 					minishell.c \
 					input.c \
+					input_gnl.c \
 					keycall.c \
 					termcap.c \
 					history.c \
