@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 11:19:09 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 11:22:06 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:13:49 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	input_read(t_input *input, t_minishell *shell)
 	read_len = read(0, read_buffer, _INP_READ_BUFFSIZE);
 	if (read_len == -1)
 		return (-1); // TODO код ошибки
-	if (read_len == 0)
-		return (0);
+	// if (read_len == 0)
+	// 	return (0);
 	key = term_key_type(read_buffer, read_len);
 	if (key == EKT_NOTKEY)
 	{
@@ -81,7 +81,7 @@ int			input_get_next_line(t_input *input, char **line, t_minishell *shell)
 	}
 	*line = ft_strndup(input->buffer->str, next_i);
 	sbuffer_clear(input->buffer);
-	if(term_reset_mode(input->term))
+	if(!term_reset_mode(input->term))
 		return (-1); // TODO код ошибки
 	return (1);
 }

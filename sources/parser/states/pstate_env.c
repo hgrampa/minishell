@@ -6,13 +6,14 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:05 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 21:11:43 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:48:44 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
 #include "environment.h"
+#include "errors.h"
 
 // TODO Эту функцию к env перенести
 static int	env_isname_char(char c)
@@ -39,32 +40,33 @@ static char	*get_var_name(char **line)
 	return (name);
 }
 
-static void	pstate_set_value(struct s_pcontext *context, char *name)
+static int	pstate_set_value(struct s_pcontext *context, char *name)
 {
 	char *value;
 
 	value = env_get_value(context->env, name); // получение значения по имени (строка, пустая строка, NULL)
-	if (value != NULL)
+	if (value == NULL)
+		return (1);
+	if (pcontext_previous_state(context) == pstate_wquotes) // формирование слов/а на месте в зависимости от прошлой стадии
+		pbuffer_add_str(context, value);
+	else
 	{
-		if (pcontext_previous_state(context) == pstate_wquotes) // формирование слов/а на месте в зависимости от прошлой стадии
-			pbuffer_add_str(context, value);
-		else
+		while (*value != '\0')
 		{
-			while (*value != '\0')
+			if (ft_strchr(_PRS_DELIMITERS, *value) != NULL)
 			{
-				if (ft_strchr(_PRS_DELIMITERS, *value) != NULL)
-				{
-					pbuffer_close(context);
-					value++;
-				}
-				else
-				{
-					pbuffer_add_char(context, *value);
-					value++;
-				}
+				if (!pbuffer_close(context))
+					return (0);
 			}
+			else
+			{
+				if (!pbuffer_add_char(context, *value))
+					return (0);
+			}
+			value++;
 		}
 	}
+	return (1);
 }
 
 static int	pstate_rename_var(char **line, struct s_pcontext *context) // TODO Придумать понятное имя функции
@@ -75,8 +77,12 @@ static int	pstate_rename_var(char **line, struct s_pcontext *context) // TODO П
 	{
 		name = get_var_name(line);
 		if (name == NULL)
-			return (pcontext_end_process(context, 0)); // TODO Возврат ошибки
-		pstate_set_value(context, name);
+			return (pcontext_end_process(context, err_print(NULL, 0)));
+		if (!pstate_set_value(context, name))
+		{
+			free(name);
+			return (0);
+		}
 		free(name); // TODO можно переделать get_var_name чтоб без малока было
 		return (pcontext_return_state(context));
 	}
@@ -92,7 +98,8 @@ int			pstate_env(char **line, struct s_pcontext *context)
 	if (*anchor == '\0' || ft_strchr(_PRS_DELIMITERS, *anchor) != NULL 
 		|| ft_strchr(_PRS_CONTROLERS, *anchor) != NULL)
 	{
-		pbuffer_add_char(context, **line); // $ добавляется к слову 
+		if (!pbuffer_add_char(context, **line)) // $ добавляется к слову 
+			return (0);
 		*line = anchor; // линия проматывается до anchor (символ после $)
 		return (pcontext_return_state(context));
 	}
@@ -100,7 +107,8 @@ int			pstate_env(char **line, struct s_pcontext *context)
 	{
 		if (pcontext_previous_state(context) == pstate_wquotes)
 		{
-			pbuffer_add_char(context, **line); // $ добавляется к слову 
+			if (!pbuffer_add_char(context, **line)) // $ добавляется к слову 
+				return (0);
 			*line = anchor; // линия проматывается до anchor (символ после $)
 			return (pcontext_return_state(context)); // стадия закрывается
 		}

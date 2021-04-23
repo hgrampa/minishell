@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/20 21:32:22 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 21:34:00 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/23 12:03:00 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/23 12:48:45 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	err_fatal()
-{
+#ifndef ERRORS_H
+# define ERRORS_H
 
-}
+# include <errno.h>
+# include <stdio.h>
+# include <unistd.h>
+# include "libft.h"
 
-int	err_nonfatal()
-{
+# define _ERR_TITLE "minishell: "
+# define _ERR_MULTL "multiline is not supported"
+# define _ERR_UNKNOWN "something wrong..."
 
-}
+int	err_fatal(char *messege, int status);
+int	err_print(char *messege, int status);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:03:49 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 19:36:09 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:45:01 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	pstate_core(char **line, struct s_pcontext *context)
 	{
 		if (**line == '\0')
 		{
-			pbuffer_close(context);
+			if (!pbuffer_close(context))
+				return (0);
 			return (pcontext_end_process(context, 1));
 		}
 		else if (**line == '$')
@@ -40,12 +41,14 @@ int	pstate_core(char **line, struct s_pcontext *context)
 			return(pcontext_set_state(context, pstate_cntrl));
 		else if (ft_strchr(_PRS_DELIMITERS, **line) != NULL)
 		{
-			pbuffer_close(context);
+			if (!pbuffer_close(context))
+				return (0);
 			(*line)++;
 		}
 		else
 		{
-			pbuffer_add_char(context, **line);
+			if (!pbuffer_add_char(context, **line))
+				return (0);
 			(*line)++;
 		}
 	}

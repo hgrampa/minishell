@@ -6,16 +6,19 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:35:48 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 19:37:45 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:49:11 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
+#include "errors.h"
 
-int				pcontext_set_state(struct s_pcontext *context, t_state_body next_state)
+int				pcontext_set_state(struct s_pcontext *context,
+	t_state_body next_state)
 {
-	ft_stack_push(&context->state_stack, context->current_state);
+	if (!ft_stack_push(&context->state_stack, context->current_state))
+		return (err_print(NULL, 0));
 	context->current_state = next_state;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 16:50:44 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 11:53:22 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int			history_deserealize(t_history *history)
 
 int			history_destroy(t_history *history)
 {
-	// TODO можно тут сохранять
 	ft_dlist_free(&history->root, free);
 	history->carriage = NULL;
 	free(history);

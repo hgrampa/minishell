@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/23 11:22:22 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/23 12:06:32 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC_DIR			=	sources/ \
 					sources/input \
 					sources/termcap \
 					sources/history \
+					sources/errors \
 					sources/minishell
 
 OBJ_DIR			=	objects/
@@ -46,6 +47,7 @@ OBJ_DIR			=	objects/
 # ---------------------------------------------------------------------------- #
 INCL			=	minishell.h \
 					libft.h \
+					errors.h \
 					sbuffer.h \
 					environment.h \
 					input.h \
@@ -57,6 +59,7 @@ INCL			=	minishell.h \
 
 SRC				=	main.c \
 					minishell.c \
+					errors.c \
 					input.c \
 					input_gnl.c \
 					keycall.c \
