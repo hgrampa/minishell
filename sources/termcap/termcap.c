@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 11:07:41 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 11:10:18 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int		term_is_key_muted(char *buff, ssize_t len)
 		|| ft_strncmp(buff, key_ppage, len) == 0 
 		|| ft_strncmp(buff, key_npage, len) == 0
 		|| ft_strncmp(buff, key_home, len) == 0 
+		|| ft_strncmp(buff, "\t", len) == 0 
 		|| ft_strncmp(buff, key_end, len) == 0);
 }
 
