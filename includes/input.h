@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:43:36 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 11:08:04 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 11:26:37 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,12 @@ int		input_take_key(enum e_key_type type, t_minishell *shell);
 int		input_set_line(t_input *input, char *line);
 int		input_save_line(t_input *input);
 int		input_restore_save_line(t_input *input);
+
+int		keycall_bell(void);
+int		keycall_up_arrow(t_minishell *shell);
+int		keycall_dw_arrow(t_minishell *shell);
+int		keycall_backspace(t_minishell *shell);
+int		keycall_cntrl_c(t_minishell *shell);
+int		keycall_cntrl_d(t_minishell *shell);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/23 15:15:24 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/24 11:26:06 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,8 +63,11 @@ SRC				=	main.c \
 					errors.c \
 					input.c \
 					input_gnl.c \
+					input_line.c \
+					input_keycall.c \
 					keycall.c \
 					termcap.c \
+					termcap_keys.c \
 					history.c \
 					parser.c \
 					pbuffer.c \
