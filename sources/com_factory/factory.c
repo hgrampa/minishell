@@ -6,14 +6,16 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 21:14:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 21:25:56 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 23:27:03 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "factory.h"
 
 
-int	build_command_argv(t_factory *factory, t_list **words, struct s_build_context *context)
+// TODO переименовать
+int	factory_build_command_param(t_factory *factory, t_list **words,
+	struct s_build_context *context)
 {
 	t_pword		*word;
 
@@ -21,72 +23,72 @@ int	build_command_argv(t_factory *factory, t_list **words, struct s_build_contex
 	{
 		word = (t_pword *)(*words)->data;
 		if (word->type == EWT_PIPE)
-		{
-			*words = (*words)->next;
-			context->command->is_pipe = 1;
-			return (1);
-		}
+			return (factory_command_set_pipe(words, context));
 		else if (word->type == EWT_SEMICOLON)
-		{
-			*words = (*words)->next;
-			return (1);
-		}
+			return (factory_command_set_semicolon(words, context));
 		else if (word->type == EWT_REDIRECT1)
 		{
-			int fd;
-			// t_pword *next_word;
-
-			// next_word = (t_pword *)words->next->data;
-			// if (next_word == NULL)
-			// 	return (0); // TODO syntax error near unexpected token `newline'
-			// fd = open(next_word->value, 1)
-			if (context->command->in_fd != -1)
-				close(context->command->in_fd);
-			if (fd == -1)
-				return (0); // word->value: No such file or directory
-			context->command->in_fd = fd;
-			return (1);
+			if (!factory_command_set_input(words, context))
+				return (0);
 		}
 		else if (word->type == EWT_REDIRECT2)
 		{
-			int fd;
-
+			if (!factory_command_set_output(words, context, 0))
+				return (0);
 		}
 		else if (word->type == EWT_REDIRECT3)
 		{
+			if (!factory_command_set_output(words, context, 1))
+				return (0);
 		}
 		else
-			ft_list_add(context->command->argv, word->value); // TODO проверку на ошибку
-		
+		{
+			if (!factory_command_set_argv(word, context)) // 
+				return (0);
+		}	
 		*words = (*words)->next;
 	}
 	return (0);
 }
 
-int	biuld_command(t_factory *factory, t_list **words, struct s_build_context *context)
+t_command	*factory_command_create(t_factory *factory, char *name)
 {
 	t_command	*command;
+	t_buildin	buildin;
+
+	command = command_create(name);
+	if (command == NULL)
+		return (0);									
+	buildin = buildin_find(name);
+	if (buildin != NULL)
+		command_set_buildin(command, buildin);
+	else
+	{
+		command->name = factory_find_path(factory, name);
+		if (command->name == NULL)
+		{
+			command_destroy(command);
+			return (NULL); // TODO word->value: No such file or directory
+		}
+	}
+	return (command);
+}
+
+int	factory_biuld_command(t_factory *factory, t_list **words,
+	struct s_build_context *context)
+{
 	t_pword		*word;
 
-	command = (t_command *)ft_calloc(1, sizeof(t_command));
-	if (command == NULL)
-		return (0);
-	command->in_fd = -1;
-	command->out_fd = -1;
 	word = (t_pword *)(*words)->data;
-	// TODO может начинаться с ридеректов
-	if (word->type != EWT_WORD)
+	if (word->type == EWT_WORD)
+		context->command = factory_command_create(factory, word->value);
+	// TODO Тут отработку ридеректа как первого слова
+	else
 		return (0); // TODO syntax error near unexpected token `word->value'
-	// TODO сначала проверить что это не buildin
-	command->path = factory_find_path(factory, word->value);
-	if (context->command->path == NULL)
-	{
-		free(command);
-		return (0); // TODO word->value: No such file or directory
-	}
-	context->command = command;
+	if (context->command == NULL)
+		return (0);
 	*words = (*words)->next;
-	return (biuld_command_argv(factory, words, context));
+	return (factory_build_command_param(factory, words, context));
 }
 
 int factory_build_commands(t_factory *factory, t_list *words, t_minishell *shell)
@@ -98,7 +100,7 @@ int factory_build_commands(t_factory *factory, t_list *words, t_minishell *shell
 	context.process = 1;
 	while (context.process)
 	{
-		result = biuld_command(factory, &words, &context);
+		result = factory_biuld_command(factory, &words, &context);
 		if (result == 0)
 			return (0);
 		// if (context.command != NULL)

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:24:23 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 20:32:15 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 23:25:52 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,8 @@
 # include "libft.h"
 # include "pword.h"
 # include "minishell.h"
-
-typedef struct	s_command
-{
-	char			*path;
-	t_list			*argv;
-	char			is_pipe:1;
-	int				pipe[2];
-	int				in_fd;
-	int				out_fd;
-}				t_command;
+# include "command.h"
+# include "buildin.h"
 
 // TODO bash: syntax error near unexpected token `|'
 // TODO bash: syntax error near unexpected token `;'
@@ -50,5 +42,13 @@ int	factory_run_line(t_list *words, t_minishell *shell);
 int factory_build_commands(t_factory *factory, t_list *words, t_minishell *shell);
 int factory_exec_commands(t_factory *factory, t_minishell *shell);
 char *factory_find_path(t_factory *factory, char *bin);
+
+int	factory_command_set_pipe(t_list **words, struct s_build_context *context);
+int	factory_command_set_semicolon(t_list **words,
+	struct s_build_context *context);
+int	factory_command_set_input(t_list **words, struct s_build_context *context);
+int	factory_command_set_output(t_list **words, struct s_build_context *context,
+	int to_end);
+int	factory_command_set_argv(t_pword *word, struct s_build_context *context);
 
 #endif
