@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keymap.h                                           :+:      :+:    :+:   */
+/*   com_factory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/20 21:46:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 17:26:09 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/22 21:14:31 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/24 12:56:35 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYMAP_H
-# define KEYMAP_H
+#include "com_factory.h"
 
-enum e_key_type
+int	com_factory_run_line(t_list *words, t_minishell *shell)
 {
-	EKT_NOTKEY = -1,	
-	EKT_MUTED,
-	EKT_UPARR,
-	EKT_DWARR,
-	EKT_BACKSPACE,
-	EKT_CNTRLD,
-	EKT_CNTRLC,
-	// EKT_CNTRL\,
-};
+	t_pword *word;
 
-#endif
+	return (1);
+}

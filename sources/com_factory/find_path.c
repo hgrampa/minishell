@@ -99,7 +99,7 @@ int	main(int ac, char **av, char const **env)
 		else
 		{
 			path = env_get_value(environment, "PATH");
-			path_array = ft_split(path, ':');
+			path_array = ft_split(path, ':'); // TODO проверка ошибки
 			required_path = find_required_rel_path(path_array, av[1]);
 			free_array(path_array);
 		}

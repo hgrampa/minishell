@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:04:04 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 13:24:16 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 11:17:43 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <termios.h>
 # include <unistd.h>
 # include <term.h>
-// #include <curses.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
 # include "libft.h"

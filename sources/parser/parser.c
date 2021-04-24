@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:04:19 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 12:50:29 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:22:38 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,10 @@ int			parse_line(t_env *env, char *line, t_list **words)
 		if (result == 0)
 			break ;
 	}
-	// if (context.current_state != core_state) // TODO обработка ошибки
-		// ошибка либо кавычки не закрыты или еще че
-		// можно отдельную функцию по анализу ошибки
-	ft_stack_free(&(context.state_stack), NULL); // ? по идее тут не должно что=то быть (разве что при ошибке)
+	ft_stack_free(&(context.state_stack), NULL);
 	if (context.buffer != NULL)
 		sbuffer_destroy(context.buffer);
-	*words = context.words;
+	if (result == 1)
+		*words = context.words;
 	return (result);
 }

@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   exit_code.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/20 21:32:22 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 21:34:00 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/24 12:00:07 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/24 13:28:18 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	err_fatal()
-{
+static int	g_exit_code;
 
+void	exit_code_set(int code)
+{
+	g_exit_code = code;
 }
 
-int	err_nonfatal()
+int exit_code_get(void)
 {
-
+	return (g_exit_code);
 }

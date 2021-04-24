@@ -6,11 +6,12 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:28:16 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 12:03:55 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 19:38:17 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
+#include "errors.h"
 
 t_minishell	*minishell_create(const char *title, const char **envp)
 {
@@ -26,16 +27,18 @@ t_minishell	*minishell_create(const char *title, const char **envp)
 	if (shell->title == NULL || shell->env == NULL || shell->input == NULL
 		|| shell->history == NULL)
 	{
+		err_print(NULL, 0); // сомнительно конеч
 		minishell_destroy(shell);
 		return (NULL);
 	}
 	return (shell);
 }
 
-int			minishell_on_exit(t_minishell *shell)
+void	minishell_exit(t_minishell *shell, int status)
 {
 	history_serealize(shell->history);
-	return (1);
+	minishell_destroy(shell);
+	exit(0);
 }
 
 int			minishell_destroy(t_minishell *shell)
@@ -54,55 +57,10 @@ int			minishell_destroy(t_minishell *shell)
 
 int			minishell_init(t_minishell *shell)
 {
-	if (!term_init(shell->input->term)) // TODO пусть инпут сам занимается инициацияей
+	if (!input_init(shell->input))
 		return (0);
 	if (!history_init(shell->history))
 		return (0);
 	shell->rand_next = 20;
-	return (1);
-}
-
-static unsigned char	ft_rand(t_minishell *shell)
-{
-	shell->rand_next = shell->rand_next * 1103515245;
-	return((unsigned char)(shell->rand_next / 65536) * 2768);
-}
-
-static void				mini_ctoa(char *str, unsigned char num)
-{
-	int		i;
-
-	i = 3;
-	while (i > 0)
-	{
-		str[--i] = (num % 10) + '0';
-		num /= 10;
-	}
-}
-
-int						minishell_write_title(t_minishell *shell)
-{
-	int				i;
-	char			color[4];
-	char			*title;
-	unsigned char	num;
-
-	i = -1;
-	ft_bzero(color, 4 * sizeof(char));
-	title = shell->title;
-	num = ft_rand(shell) % 230 + 1;
-	while (*title != '\0')
-	{
-		num = (num + 1) % 230;
-		if (num == 16 || num == 0)
-			num = 17;
-		mini_ctoa(color, num);
-		ft_putstr_fd("\e[38;5;", STDOUT_FILENO);
-		ft_putstr_fd(color, STDOUT_FILENO);
-		ft_putchar_fd('m', STDOUT_FILENO);
-		ft_putchar_fd(*title, STDOUT_FILENO);
-		title++;
-	}
-	ft_putstr_fd("\e[39m: ", STDOUT_FILENO);
 	return (1);
 }

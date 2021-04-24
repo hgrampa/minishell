@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keymap.h                                           :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/20 21:46:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 17:26:09 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/24 11:34:59 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/24 12:03:17 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYMAP_H
-# define KEYMAP_H
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include "com_factory.h"
 
-enum e_key_type
+void	signal_handler(int signum)
 {
-	EKT_NOTKEY = -1,	
-	EKT_MUTED,
-	EKT_UPARR,
-	EKT_DWARR,
-	EKT_BACKSPACE,
-	EKT_CNTRLD,
-	EKT_CNTRLC,
-	// EKT_CNTRL\,
-};
+	int status;
 
-#endif
+	wait(&status);
+	if (status == SIGINT)
+	{
+		// exit_code_set(130);
+	}
+	else if (status == SIGQUIT)
+	{
+		// exit_code_set(131);
+	}
+	// else if (signum == )
+	// {
+
+	// }
+
+}

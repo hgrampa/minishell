@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 14:09:08 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/22 21:04:08 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 
 # define _PRS_DELIMITERS " \t"
 # define _PRS_CONTROLERS ";|<>"
+// # define _PRS_ESC_CORE_CAHRS "\"\';|><$ \t"
+# define _PRS_ESC_WQUOTES_CAHRS "\"$"
 # define _PRS_QUOTES "\"\'"
 # define _PRS_BUFFSIZE 40
 
 // TODO текущая стадия - полем
-// TODO буфер-почеловечески
-// TODO \ символ
 
 struct s_pcontext;
 
@@ -46,10 +46,10 @@ struct s_pcontext
 
 int				parse_line(t_env *env, char *line, t_list **words);
 
-void			pcontext_set_state(struct s_pcontext *context, t_state_body next_state);
-void			pcontext_return_state(struct s_pcontext *context);
+int				pcontext_set_state(struct s_pcontext *context, t_state_body next_state);
+int				pcontext_return_state(struct s_pcontext *context);
 t_state_body	pcontext_previous_state(struct s_pcontext *context);
-void			pcontext_end_process(struct s_pcontext *context);
+int				pcontext_end_process(struct s_pcontext *context, int status);
 
 int				pstate_core(char **line, struct s_pcontext *context);
 int				pstate_squotes(char **line, struct s_pcontext *context);

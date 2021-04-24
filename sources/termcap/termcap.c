@@ -6,11 +6,12 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 16:51:30 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 11:18:25 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "terminal.h"
+#include "errors.h"
 
 int		term_reset_mode(t_terminal *term)
 {
@@ -28,14 +29,11 @@ int		term_set_mode(t_terminal *term)
 		return (0); // TODO код возврата
 	}
 	ft_memcpy(&term->termios, &term->save_termios, sizeof(struct termios));
-	term->termios.c_lflag &= ~(ECHO|ICANON);
+	term->termios.c_lflag &= ~(ECHO|ICANON|ISIG);
 	term->termios.c_cc[VMIN] = 1;
 	term->termios.c_cc[VTIME] = 0;
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &term->termios) == -1)
-	{
-		// printf("2\n");
 		return (0); // TODO код возврата
-	}
 	tputs(keypad_xmit, 1, ft_putchar);
 	return (1);
 }
@@ -59,25 +57,14 @@ int		term_init(t_terminal *term)
 	// !!! TODO Убрать
 	term_type = "xterm-256color";
 	if (!isatty(STDIN_FILENO))
-	{
-		printf("Not a terminal\n");
-		return (0);
-	}
+		return (err_print(_ERR_NOTTERM, 0));
 	if (term_type == NULL)
-	{
-		printf("Failed to get the name of the terminal. Set environment variable TERM\n"); // TODO код возврата
-		return (0);
-	}
+		return (err_print(_ERR_NOTTERMENV, 0));
 	success = tgetent(NULL, term_type);
 	if (success < 1)
-	{
-   		printf("Could not access the termcap data base or terminal type is not defined.\n"); // TODO код возврата
-		return (0);
-	}
-	if (!term_set_mode(term))
-	{
-		return (0); // TODO код возврата
-	}
+		return (err_print(_ERR_NOTTERMTYPE, 0));
+	// TODO необходимо добавить признак того что растройки восстановленны
+	// 	если при чтении возникнет ошибка и в обработке исключения восстановить режим
 	return(1);
 }
 
@@ -91,32 +78,6 @@ int		term_on_new_line(void)
 {
 	tputs(save_cursor, 1, ft_putchar);
 	return (1);
-}
-
-
-int		term_is_key_muted(char *buff, ssize_t len)
-{
-	// || ft_strncmp(buff, key_exit, len) == 0
-	return (ft_strncmp(buff, key_right, len) == 0
-		|| ft_strncmp(buff, key_left, len) == 0
-		|| ft_strncmp(buff, key_ppage, len) == 0 
-		|| ft_strncmp(buff, key_npage, len) == 0
-		|| ft_strncmp(buff, key_home, len) == 0 
-		|| ft_strncmp(buff, key_end, len) == 0);
-}
-
-enum e_key_type	term_key_type(char *buff, ssize_t len)
-{
-	if (ft_strncmp(buff, "\177", len) == 0)
-		return (EKT_BACKSPACE);
-	else if (term_is_key_muted(buff, len))
-		return (EKT_MUTED);
-	else if (ft_strncmp(buff, key_up, len) == 0 || ft_strncmp(buff, cursor_up, len) == 0 || ft_strncmp(buff, "\e[A", len) == 0)
-		return (EKT_UPARR);
-	else if (ft_strncmp(buff, key_down, len) == 0 || ft_strncmp(buff, column_address, len) == 0 || ft_strncmp(buff, "\e[B", len) == 0)
-		return (EKT_DWARR);
-	else
-		return (EKT_NOTKEY);
 }
 
 int	term_clear_line(void)

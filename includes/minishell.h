@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:04:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 21:55:26 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 15:30:16 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # include <dirent.h>
 # include <sys/errno.h>
 # include <termios.h>
-# include <sys/errno.h>
-# include <sys/errno.h>
 
 # include "libft.h"
 # include "environment.h"
