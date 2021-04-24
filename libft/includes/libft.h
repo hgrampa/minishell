@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:17:58 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 14:25:27 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 22:25:16 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strnstr(const char *h, const char *n, size_t len);
 int				ft_strncmp(char *s1, char *s2, size_t n);
+int				ft_strcmp(const char *s1, const char *s2);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isdigit(int c);
