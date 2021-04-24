@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:03 by ssentine          #+#    #+#             */
-/*   Updated: 2021/04/16 14:48:43 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 17:19:55 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	free_pair(void *ptr)
 	pair->value = NULL;
 }
 
-void	free_array(char **array)
+void	free_array(char **array) // TODO в утилиты
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/24 12:03:50 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/24 13:54:31 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ INCL_DIR		=	includes/ \
 SRC_DIR			=	sources/ \
 					sources/parser \
 					sources/parser/states \
-					sources/com_factory \
+					sources/factory \
 					sources/environment \
 					sources/sbuffer \
 					sources/input \
@@ -73,7 +73,7 @@ SRC				=	main.c \
 					parser.c \
 					pbuffer.c \
 					exit_code.c \
-					com_factory.c \
+					factory.c \
 					pword.c \
 					pstate.c \
 					pstate_core.c \

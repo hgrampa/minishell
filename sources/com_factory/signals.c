@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 11:34:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 12:03:17 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 13:55:06 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <sys/resource.h>
 #include <sys/wait.h>
 #include <signal.h>
-#include "com_factory.h"
+#include "factory.h"
 
 void	signal_handler(int signum)
 {

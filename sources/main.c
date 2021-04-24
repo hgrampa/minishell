@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 12:57:16 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 13:54:50 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "parser.h"
 #include "environment.h"
 #include "pword.h"
-#include "com_factory.h"
+#include "factory.h"
 
 int		process(t_minishell *shell)
 {
@@ -54,7 +54,7 @@ int		process(t_minishell *shell)
 		if (!parse_line(shell->env, line, &words))
 			return (1); // TODO возврат ошибки
 		// отдаю слова фабрике
-		// if (!com_factory_run_line(words, shell))
+		// if (!factory_run_line(words, shell))
 		// {
 		// 	ft_list_free(&words, pword_destroy);
 		// 	return (0);
