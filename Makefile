@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/24 11:26:06 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/24 12:03:50 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ INCL			=	minishell.h \
 					parser.h \
 					keymap.h \
 					com_factory.h \
+					exit_code.h \
 					pword.h
 
 SRC				=	main.c \
@@ -71,6 +72,7 @@ SRC				=	main.c \
 					history.c \
 					parser.c \
 					pbuffer.c \
+					exit_code.c \
 					com_factory.c \
 					pword.c \
 					pstate.c \

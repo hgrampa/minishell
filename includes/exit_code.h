@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   com_factory.c                                      :+:      :+:    :+:   */
+/*   exit_code.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 21:14:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 12:56:35 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/24 12:02:19 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/24 12:03:55 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "com_factory.h"
+#ifndef EXIT_CODE_H
+# define EXIT_CODE_H
 
-int	com_factory_run_line(t_list *words, t_minishell *shell)
-{
-	t_pword *word;
+void	exit_code_set(int code);
+int		exit_code_get(void);
 
-	return (1);
-}
+#endif

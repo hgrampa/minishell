@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:05 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 12:48:44 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 13:21:20 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,11 @@ static int	pstate_rename_var(char **line, struct s_pcontext *context) // TODO П
 			return (0);
 		}
 		free(name); // TODO можно переделать get_var_name чтоб без малока было
-		return (pcontext_return_state(context));
+	}
+	else if (**line == '?')
+	{
+		if (!pstate_set_value(context, "?"))
+			return (0);
 	}
 	(*line)++; // линия проматывается до anchor (символ после после $)
 	return (pcontext_return_state(context)); // стадия закрывается
@@ -121,4 +125,3 @@ int			pstate_env(char **line, struct s_pcontext *context)
 	(*line)++;
 	return (pstate_rename_var(line, context));
 }
-

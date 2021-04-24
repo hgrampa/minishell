@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   com_factory.c                                      :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 21:14:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 12:56:35 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/24 11:34:59 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/24 12:03:17 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
+#include <signal.h>
 #include "com_factory.h"
 
-int	com_factory_run_line(t_list *words, t_minishell *shell)
+void	signal_handler(int signum)
 {
-	t_pword *word;
+	int status;
 
-	return (1);
+	wait(&status);
+	if (status == SIGINT)
+	{
+		// exit_code_set(130);
+	}
+	else if (status == SIGQUIT)
+	{
+		// exit_code_set(131);
+	}
+	// else if (signum == )
+	// {
+
+	// }
+
 }
