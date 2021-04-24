@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 19:45:46 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 11:07:41 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int		term_set_mode(t_terminal *term)
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &term->termios) == -1)
 		return (0); // TODO код возврата
 	tputs(keypad_xmit, 1, ft_putchar);
-	// tputs(tgetstr("ks", NULL), 1, ft_putchar);
 	return (1);
 }
 
@@ -84,7 +83,6 @@ int		term_on_new_line(void)
 // TODO добавить \t и все не печатные смволы
 int		term_is_key_muted(char *buff, ssize_t len)
 {
-	// || ft_strncmp(buff, key_exit, len) == 0
 	return (ft_strncmp(buff, key_right, len) == 0
 		|| ft_strncmp(buff, key_left, len) == 0
 		|| ft_strncmp(buff, key_ppage, len) == 0 
