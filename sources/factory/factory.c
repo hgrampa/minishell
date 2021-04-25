@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 21:14:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 23:27:03 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 11:46:17 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	factory_build_command_param(t_factory *factory, t_list **words,
 		}	
 		*words = (*words)->next;
 	}
-	return (0);
+	context->process = 0;
+	return (1);
 }
 
 t_command	*factory_command_create(t_factory *factory, char *name)
@@ -104,7 +105,7 @@ int factory_build_commands(t_factory *factory, t_list *words, t_minishell *shell
 		if (result == 0)
 			return (0);
 		// if (context.command != NULL)
-		ft_dlist_add(factory->commands, context.command);
+		ft_dlist_add(&factory->commands, context.command);
 	}
 	
 	return (1);
@@ -119,6 +120,13 @@ int	factory_init(t_factory *factory, t_minishell *shell)
 		factory->paths = NULL;
 	factory->commands = NULL;
 	factory->result = 1;
+	return (1);
+}
+
+int	factory_exec_commands(t_factory *factory, t_minishell *shell)
+{
+	ft_list_foreach((t_list *)factory->commands, command_print);
+	return (1);
 }
 
 int	factory_run_line(t_list *words, t_minishell *shell)
@@ -126,6 +134,7 @@ int	factory_run_line(t_list *words, t_minishell *shell)
 	t_pword		*word;
 	t_factory	factory;
 
+	// factory_init(&factory, shell);
 	if (!factory_init(&factory, shell))
 		return (0);
 	if (factory_build_commands(&factory, words, shell))

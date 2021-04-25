@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:24:23 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 23:25:52 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 11:51:21 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@
 
 struct s_build_context
 {
-	t_command	*command;
-	int			process:1;
+	t_command		*command;
+	unsigned char	process:1;
 };
-
 
 typedef struct	s_factory
 {
@@ -37,6 +36,9 @@ typedef struct	s_factory
 	char		*env_path; // TODO потом убрать
 	char		**paths;
 }				t_factory;
+
+int	factory_destroy(t_factory *factory);
+int	factory_init(t_factory *factory, t_minishell *shell);
 
 int	factory_run_line(t_list *words, t_minishell *shell);
 int factory_build_commands(t_factory *factory, t_list *words, t_minishell *shell);

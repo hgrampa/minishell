@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 22:13:48 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 22:39:43 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 12:17:25 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 # define _BUILDIN_UNSET "unset"
 
 typedef struct s_minishell	t_minishell;
-typedef int					(*t_buildin)(t_list);
+typedef int					(*t_buildin)(char**, t_minishell*);
 
 t_buildin	buildin_find(char *name);
 
-int			buildin_cd (t_list *argv, t_minishell *shell);
-int			buildin_echo(t_list *argv, t_minishell *shell);
-int			buildin_env(t_list *argv, t_minishell *shell);
-int			buildin_exit(t_list *argv, t_minishell *shell);
-int			buildin_export(t_list *argv, t_minishell *shell);
-int			buildin_pwd(t_list *argv, t_minishell *shell);
-int			buildin_unset(t_list *argv, t_minishell *shell);
+int			buildin_cd(char **argv, t_minishell *shell);
+int			buildin_echo(char **argv, t_minishell *shell);
+int			buildin_env(char **argv, t_minishell *shell);
+int			buildin_exit(char **argv, t_minishell *shell);
+int			buildin_export(char **argv, t_minishell *shell);
+int			buildin_pwd(char **argv, t_minishell *shell);
+int			buildin_unset(char **argv, t_minishell *shell);
 
 #endif
