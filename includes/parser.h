@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/22 21:04:08 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 11:52:18 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ struct s_pcontext
 	enum e_pword_type	buffer_type;
 	t_list				*words;
 	t_env				*env;
-	char				process:1;
+	unsigned char		process:1;
 };
 
 int				parse_line(t_env *env, char *line, t_list **words);

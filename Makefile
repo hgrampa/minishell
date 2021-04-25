@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/24 12:03:50 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/25 11:20:35 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,13 +33,14 @@ INCL_DIR		=	includes/ \
 SRC_DIR			=	sources/ \
 					sources/parser \
 					sources/parser/states \
-					sources/com_factory \
+					sources/factory \
 					sources/environment \
 					sources/sbuffer \
 					sources/input \
 					sources/termcap \
 					sources/history \
 					sources/errors \
+					sources/buildins \
 					sources/minishell
 
 OBJ_DIR			=	objects/
@@ -54,7 +55,8 @@ INCL			=	minishell.h \
 					terminal.h \
 					parser.h \
 					keymap.h \
-					com_factory.h \
+					factory.h \
+					command.h \
 					exit_code.h \
 					pword.h
 
@@ -73,7 +75,11 @@ SRC				=	main.c \
 					parser.c \
 					pbuffer.c \
 					exit_code.c \
-					com_factory.c \
+					factory.c \
+					command.c \
+					factory_command_set.c \
+					factory_pathfinder.c \
+					buildin.c \
 					pword.c \
 					pstate.c \
 					pstate_core.c \
