@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 21:35:57 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 12:51:52 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 18:48:35 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 typedef struct	s_command
 {
 	char			*name;
-	t_list			*argv;
+	// t_list			*argl;
+	// TODO массив аргументов
+	char			**argv;
 	unsigned char	is_pipe:1;
 	unsigned char	is_buildin:1;
 	int				pipe[2];

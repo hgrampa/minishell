@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 16:25:08 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 13:13:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int			history_init(t_history *history)
 	return (history_deserealize(history));
 }
 
+// TODO не писать пустую строку в файл
 int			history_serealize(t_history *history)
 {
 	int		fd;

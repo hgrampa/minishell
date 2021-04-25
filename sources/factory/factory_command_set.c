@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 23:24:40 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 12:55:58 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 18:54:46 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	factory_command_set_output(t_list **words, struct s_build_context *context,
 
 int	factory_command_set_argv(t_pword *word, struct s_build_context *context)
 {
-	if (!ft_list_add(&context->command->argv, word->value)) // ссылку а не инстанцию
+	if (!ft_list_add(&context->argl, word->value)) // ссылку а не инстанцию
 		return (0);
 	return (1);
 }

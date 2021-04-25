@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 13:06:55 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 18:55:36 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static int	cntrl_add_value(enum e_pword_type type, struct s_pcontext *context)
 		return (pbuffer_add_str(context, ">"));
 	else if (type == EWT_REDIRECT3)
 		return (pbuffer_add_str(context, ">>"));
+	return (1);
 }
 
 int							pstate_cntrl(char **line, struct s_pcontext *context)
