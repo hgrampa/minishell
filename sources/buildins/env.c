@@ -3,24 +3,33 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "environment.h"
+#include "minishell.h"
 
-int	main(int ac, char **av, char const **env)
+int	buildin_env(char **argv, t_minishell *shell)
 {
-	t_env	*environment;
 	t_pair	*path_pair;
 
-	environment = env_create(env);
-	//env_unset(environment, "PATH");
-	if (ac == 1)
+	if (argv[1] == 0)
 	{
-		path_pair = env_get_pair(environment, "PATH");
+		path_pair = env_get_pair(shell->env, "PATH");
 		if (path_pair == NULL)
 			printf("bash: env: No such file or directory\n");
 		else
-			print_represent(environment->represent);
+			print_represent(shell->env->represent);
 	}	
 	else
-		printf("out of subject : %s\n", av[1]); // TODO return errno
-	env_destroy(environment);
-	return (0);
+		printf("out of subject\n"); // TODO return errno
 }
+
+// int	main(int ac, char **av, char const **env)
+// {
+// 	t_minishell *shell;
+
+// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
+// 	shell->env = env_create(env);
+// 	env_unset(shell->env, "PATH");
+// 	buildin_env(av, shell);
+// 	env_destroy(shell->env);
+// 	free(shell);
+// 	return (0);
+// }

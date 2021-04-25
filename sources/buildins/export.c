@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "environment.h"
+#include "minishell.h"
 
-void	print_export_list(t_list *collection)
+static void	print_export_list(t_list *collection)
 {
 	t_pair	*pair;
 	t_list	*tmp;
@@ -21,7 +22,7 @@ void	print_export_list(t_list *collection)
 	}
 }
 
-int	check_invalid_key(char *key)
+static int	check_invalid_key(char *key)
 {
 	if (ft_isdigit(key[0]))
 		return (1);
@@ -34,7 +35,7 @@ int	check_invalid_key(char *key)
 	return (0);
 }
 
-int	treat_arg(t_env	*env, char const *arg_str)
+static int	treat_arg(t_env	*env, char const *arg_str)
 {
 	t_pair	*new_pair;
 	int		result;
@@ -43,8 +44,9 @@ int	treat_arg(t_env	*env, char const *arg_str)
 	new_pair = pair_from_str(arg_str);
 	if (new_pair->key[0] == '-')
 	{
-		result = printf("bash: export: -%c: invalid option\n", new_pair->key[1]);
+		printf("bash: export: -%c: invalid option\n", new_pair->key[1]);
 		printf("export: usage: export [-nf] [name[=value] ...] or export -p\n");
+		result = -1;
 	}
 	else if (check_invalid_key(new_pair->key))
 		result = printf("bash: export: '%s' : not a valid identifier\n",
@@ -62,23 +64,34 @@ int	treat_arg(t_env	*env, char const *arg_str)
 	return (result);
 }
 
-int	main(int ac, char **av, char const **env)
+int	buildin_export(char **argv, t_minishell *shell)
 {
-	t_env	*environment;
-	int		i;
+	int	i;
+	int	result;
 
 	i = 1;
-	environment = env_create(env);
-	env_set(environment, "A", NULL);
-	if (ac == 1)
-		print_export_list(environment->collection);
+	result = 0;
+	if (argv[1] == 0)
+		print_export_list(shell->env->collection);
 	else
 	{
-		while (i != ac)
-			treat_arg(environment, av[i++]);
+		while (argv[i] != 0 && result != -1)
+			result = treat_arg(shell->env, argv[i++]);
 	}
-	// printf("________LISTS________\n");
-	// print_list(environment->collection);
-	env_destroy(environment);
-	return (0);
+	return (result == -1);
 }
+
+// int	main(int ac, char **av, char const **env)
+// {
+// 	t_minishell *shell;
+
+// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
+// 	shell->env = env_create(env);
+// 	env_set(shell->env, "A", NULL);
+// 	printf("%d\n", buildin_export(av, shell));
+// 	printf("________LISTS________\n");
+// 	print_list(shell->env->collection);
+// 	env_destroy(shell->env);
+// 	free(shell);
+// 	return (0);
+// }
