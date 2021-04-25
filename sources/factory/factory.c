@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 21:14:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 11:46:17 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 12:54:23 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_command	*factory_command_create(t_factory *factory, char *name)
 		if (command->name == NULL)
 		{
 			command_destroy(command);
-			return (NULL); // TODO word->value: No such file or directory
+			err_print_nofile(name, 0);
+			return (NULL);
 		}
 	}
 	return (command);
@@ -85,7 +86,7 @@ int	factory_biuld_command(t_factory *factory, t_list **words,
 		context->command = factory_command_create(factory, word->value);
 	// TODO Тут отработку ридеректа как первого слова
 	else
-		return (0); // TODO syntax error near unexpected token `word->value'
+		return (err_print_untoken(word->value, 0));
 	if (context->command == NULL)
 		return (0);
 	*words = (*words)->next;

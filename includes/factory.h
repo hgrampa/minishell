@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:24:23 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 11:51:21 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 13:07:25 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "minishell.h"
 # include "command.h"
 # include "buildin.h"
+# include "errors.h"
 
 // TODO bash: syntax error near unexpected token `|'
 // TODO bash: syntax error near unexpected token `;'

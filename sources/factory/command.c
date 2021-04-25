@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 21:33:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 11:41:36 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 12:51:33 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	command_destroy(t_command *command)
 	return (0);
 }
 
-void	command_set_buildin(t_command *command, int (*buildin)(t_list))
+void	command_set_buildin(t_command *command, t_buildin buildin)
 {
 	command->is_buildin = 1;
 	command->buildin = buildin;
