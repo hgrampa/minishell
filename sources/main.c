@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 15:42:23 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 11:32:44 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,13 @@
 #include "parser.h"
 #include "environment.h"
 #include "pword.h"
-
-void	emul_exit(t_minishell *shell)
-{
-	minishell_on_exit(shell);
-	minishell_destroy(shell);
-	exit(0);
-}
+#include "factory.h"
 
 int		process(t_minishell *shell)
 {
 	t_list		*words;
 	char		*line;
+	int			gnl;
 
 	words = NULL;
 	line = NULL;
@@ -34,35 +29,48 @@ int		process(t_minishell *shell)
 	{
 		minishell_write_title(shell);
 		// TODO работаться уже с возвращаем значении
-		if (input_get_next_line(shell->input, &line, shell) == -1)
-			return (0);
-		
+		gnl = input_get_next_line(shell->input, &line, shell);
+		if (gnl == -1)
+			return (0); // TODO возврат ошибки
+		if (line == NULL)
+			continue ;
 		if (ft_strnstr(line, "exit", ft_strlen(line)))
 		{
-			line = NULL;
+			free(line);
 			ft_list_free(&words, pword_destroy);	
-			emul_exit(shell);	
+			minishell_exit(shell, 0);	
 		}
 
 		printf(">\"%s\"\n", line);
-		// Если strlen(line) == 0 то ниче не делаю
+		
 		// Добавляю instance в историю
 		if (!history_add(shell->history, line))
 		{
 			free (line);
 			return (0); // TODO возврат ошибки
 		}
+
+		// Получаю слова от парсера
 		if (!parse_line(shell->env, line, &words))
 			return (1); // TODO возврат ошибки
-		// TODO вход для фабрики
-		ft_list_foreach(words, pword_print);
+		// отдаю слова фабрике
+		if (!factory_run_line(words, shell))
+		{
+			ft_list_free(&words, pword_destroy);
+			return (0);
+		}
+		
+		// ft_list_foreach(words, pword_print);
+
 
 		// Не чищу а отдаю истории чтоб не перевыделять
 		line = NULL;
 		ft_list_free(&words, pword_destroy);
-		// history_serealize(shell->history);
+		words = NULL;
+		// 
+		if (gnl == 0)
+			minishell_exit(shell, 0);
 	}
-	input_destroy(shell->input);
 	return (1);
 }
 

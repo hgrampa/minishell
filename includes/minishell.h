@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:04:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 21:55:26 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 11:32:34 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # include <dirent.h>
 # include <sys/errno.h>
 # include <termios.h>
-# include <sys/errno.h>
-# include <sys/errno.h>
 
 # include "libft.h"
 # include "environment.h"
@@ -47,6 +45,7 @@ int			minishell_init(t_minishell *shell);
 int			minishell_on_exit(t_minishell *shell);
 int			minishell_destroy(t_minishell *shell);
 int			minishell_write_title(t_minishell *shell);
+void		minishell_exit(t_minishell *shell, int status);
 
 #endif
 

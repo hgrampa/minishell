@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:17:58 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 11:39:11 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 22:25:16 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strnstr(const char *h, const char *n, size_t len);
 int				ft_strncmp(char *s1, char *s2, size_t n);
+int				ft_strcmp(const char *s1, const char *s2);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isdigit(int c);
@@ -163,6 +164,7 @@ int				ft_list_count(t_list *root);
 void			ft_list_foreach(t_list *root, void (*f)(void *));
 void			ft_list_free(t_list **root, void (*del)(void*));
 t_list			*ft_list_at(t_list *root, int index);
+char			**ft_list_tosa(t_list *list);
 
 t_dlist			*ft_dlist_new(void *data);
 void			ft_dlist_free(t_dlist **root, void (*del)(void*));

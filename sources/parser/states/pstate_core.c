@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:03:49 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 12:08:38 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:45:01 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,46 +19,36 @@ int	pstate_core(char **line, struct s_pcontext *context)
 	{
 		if (**line == '\0')
 		{
-			pbuffer_close(context);
-			pcontext_end_process(context);
-			return (1);
+			if (!pbuffer_close(context))
+				return (0);
+			return (pcontext_end_process(context, 1));
 		}
 		else if (**line == '$')
-		{
-			pcontext_set_state(context, pstate_env);
-			return (1);
-		}
+			return (pcontext_set_state(context, pstate_env));
 		else if (**line == '\"')
 		{
 			(*line)++;
-			pcontext_set_state(context, pstate_wquotes);
-			return (1);
+			return (pcontext_set_state(context, pstate_wquotes));
 		}
 		else if (**line == '\'')
 		{
 			(*line)++;
-			pcontext_set_state(context, pstate_squotes);
-			return (1);
+			return (pcontext_set_state(context, pstate_squotes));
 		}
-		// else if (**line == '\\')
-		// {
-		// 	pcontext_set_state(context, esc_state);
-		// 	return (1);
-		// }
+		else if (**line == '\\')
+			return (pcontext_set_state(context, pstate_esc));
 		else if (ft_strchr(_PRS_CONTROLERS, **line) != NULL)
-		{
-			pcontext_set_state(context, pstate_cntrl);
-			return(1);
-		}
+			return(pcontext_set_state(context, pstate_cntrl));
 		else if (ft_strchr(_PRS_DELIMITERS, **line) != NULL)
 		{
-			pbuffer_close(context);
+			if (!pbuffer_close(context))
+				return (0);
 			(*line)++;
 		}
 		else
 		{
-			// добавляю символ к буферу (открывая его)
-			pbuffer_add_char(context, **line);
+			if (!pbuffer_add_char(context, **line))
+				return (0);
 			(*line)++;
 		}
 	}

@@ -6,25 +6,30 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:17:02 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/20 12:08:48 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/23 12:49:26 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
+#include "errors.h"
 
-// Эта стаддия пока замороженна
 int		pstate_esc(char **line, struct s_pcontext *context)
 {
-	// (*line)++; промотка этого символа очень вариативна 
-	// while (21)
-	// {
+	if (!pbuffer_open(context, EWT_WORD))
+		return (0);
+	(*line)++;
+	if (**line == '\0')
+		return (pcontext_end_process(context, err_print(_ERR_MULTL, 1)));
+	if (pcontext_previous_state(context) == pstate_wquotes
+		&& ft_strchr(_PRS_ESC_WQUOTES_CAHRS, **line) == NULL)
+	{
+		if (!pbuffer_add_char(context, '\\'))
+			return (0);
 		
-	// 	if (**line == '\0')
-	// 	{
-	// 		pcontext_end_process(context);
-	// 		return (0);
-	// 	}
-	// }
-	return (1);
+	}
+	if (!pbuffer_add_char(context, **line))
+		return (0);
+	(*line)++;
+	return (pcontext_return_state(context));
 }

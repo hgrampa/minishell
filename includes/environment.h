@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 12:24:53 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/16 14:13:55 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 13:19:28 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_env
 {
 	t_list	*collection;
 	void	*represent;
+	char	*exit_code;
 }				t_env;
 
 /*
@@ -96,6 +97,6 @@ void	print_list(t_list *lst);
 void	free_pair(void *ptr);
 void	free_array(char **array);
 void	ft_list_sort(t_list *elem);
-
+char	*env_get_exit_code(t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/20 23:21:11 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/25 11:20:35 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,14 @@ INCL_DIR		=	includes/ \
 SRC_DIR			=	sources/ \
 					sources/parser \
 					sources/parser/states \
+					sources/factory \
 					sources/environment \
 					sources/sbuffer \
 					sources/input \
 					sources/termcap \
 					sources/history \
+					sources/errors \
+					sources/buildins \
 					sources/minishell
 
 OBJ_DIR			=	objects/
@@ -45,28 +48,45 @@ OBJ_DIR			=	objects/
 # ---------------------------------------------------------------------------- #
 INCL			=	minishell.h \
 					libft.h \
+					errors.h \
 					sbuffer.h \
 					environment.h \
 					input.h \
 					terminal.h \
 					parser.h \
 					keymap.h \
+					factory.h \
+					command.h \
+					exit_code.h \
 					pword.h
 
 SRC				=	main.c \
 					minishell.c \
+					minishell_title.c \
+					errors.c \
 					input.c \
+					input_gnl.c \
+					input_line.c \
+					input_keycall.c \
 					keycall.c \
 					termcap.c \
+					termcap_keys.c \
 					history.c \
 					parser.c \
 					pbuffer.c \
+					exit_code.c \
+					factory.c \
+					command.c \
+					factory_command_set.c \
+					factory_pathfinder.c \
+					buildin.c \
 					pword.c \
 					pstate.c \
 					pstate_core.c \
 					pstate_squotes.c \
 					pstate_wquotes.c \
 					pstate_env.c \
+					pstate_esc.c \
 					pstate_cntr.c \
 					environment_1.c \
 					environment_2.c \
@@ -116,4 +136,7 @@ norm:
 	norminette includes
 	norminette sources
 
-.PHONY: all clean fclean re norm
+val:
+	valgrind --leak-check=full --log-file=vallog ./minishell
+
+.PHONY: all clean fclean re norm val

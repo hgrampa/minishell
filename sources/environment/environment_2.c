@@ -6,13 +6,14 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:03 by ssentine          #+#    #+#             */
-/*   Updated: 2021/04/16 14:48:56 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/24 13:25:14 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 #include "environment.h"
-#include <stdio.h>
+#include "exit_code.h"
 
 int	env_update(t_env *env)
 {
@@ -31,6 +32,8 @@ int	env_destroy(t_env *env)
 	ft_lstclear(&env->collection, ft_free);
 	free_array(env->represent);
 	free(env->collection);
+	if (env->exit_code != NULL)
+		free(env->exit_code);
 	free(env);
 	return (1);
 }
@@ -40,11 +43,22 @@ int	get_value_from_key(t_pair *pair, char const *key)
 	return (ft_strncmp(pair->key, key, 30));
 }
 
+// TODO можно оставить числовое предмтавление и менять только если реально изменится
+char	*env_get_exit_code(t_env *env)
+{
+	if (env->exit_code != NULL)
+		free(env->exit_code);
+	env->exit_code = ft_itoa(exit_code_get());
+	return (env->exit_code);
+}
+
 char	*env_get_value(t_env *env, char const *key)
 {
 	t_list	*lst;
 	t_pair	*pair;
 
+	if (ft_strncmp(key, "?", 1) == 0)
+		return (env_get_exit_code(env));
 	lst = env->collection;
 	while (lst != NULL)
 	{	
