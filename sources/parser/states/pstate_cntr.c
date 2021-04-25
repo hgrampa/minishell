@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 12:48:44 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 11:45:34 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 
 static enum e_pword_type	cntrl_get_type(char *line)
 {
-	if (ft_strncmp(line, "|", 1))
+	if (ft_strncmp(line, "|", 1) == 0)
 		return (EWT_PIPE);
-	else if (ft_strncmp(line, ";", 1))
+	else if (ft_strncmp(line, ";", 1) == 0)
 		return (EWT_SEMICOLON);
-	else if (ft_strncmp(line, "<", 1))
+	else if (ft_strncmp(line, "<", 1) == 0)
 		return (EWT_REDIRECT1);
-	else if (ft_strncmp(line, ">>", 2))
+	else if (ft_strncmp(line, ">>", 2) == 0)
 		return (EWT_REDIRECT3);
-	else if (ft_strncmp(line, ">", 1))
+	else if (ft_strncmp(line, ">", 1) == 0)
 		return (EWT_REDIRECT2);
 	else
 		return (EWT_UNKNOWN);
