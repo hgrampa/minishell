@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int			is_chinstr(char const *s, char c)
+static int	is_chinstr(char const *s, char c)
 {
 	while (*s != '\0')
 	{
@@ -22,7 +22,7 @@ static int			is_chinstr(char const *s, char c)
 	return (0);
 }
 
-char				*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t			begin_index;
 	size_t			end_index;

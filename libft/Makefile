@@ -108,7 +108,6 @@ SRC_STRINGS		= 	ft_atoi.c \
 					ft_toupper.c \
 					ft_ultoa_base.c \
 					ft_utoa_base.c \
-					ft_nwrd.c \
 					ft_concat.c \
 					ft_strndup.c
 

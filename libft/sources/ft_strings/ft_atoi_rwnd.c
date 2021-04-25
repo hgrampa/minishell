@@ -19,7 +19,7 @@ static void	pass_empty(char **str)
 		(*str)++;
 }
 
-int			ft_atoi_rwnd(char **str)
+int	ft_atoi_rwnd(char **str)
 {
 	unsigned long	result;
 	int				signature;

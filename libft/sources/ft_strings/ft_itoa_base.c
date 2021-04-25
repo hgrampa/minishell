@@ -14,30 +14,34 @@
 
 static size_t	num_len(int value, size_t *sign, int base)
 {
-	size_t len;
+	size_t	len;
 
 	if (value < 0)
 		*sign = 1;
 	else
 		*sign = 0;
 	len = 1;
-	while (value /= base)
+	while (value > 0)
+	{
 		len++;
+		value /= base;
+	}
 	return (len);
 }
 
-char			*ft_itoa_base_lw(int value, int base, size_t wight)
+char	*ft_itoa_base_lw(int value, int base, size_t wight)
 {
 	char	*result;
 	size_t	sign;
 	size_t	len;
 
-	result = NULL;
 	if (base == 10 && value == _FT_SINT32_LAST)
 		return (ft_strdup(_FT_SINT32_LAST_STR));
-	if (wight > (len = num_len(value, &sign, base)))
+	len = num_len(value, &sign, base);
+	if (wight > len)
 		len = wight;
-	if (!(result = (char *)ft_calloc(len + sign + 1, sizeof(char))))
+	result = (char *)ft_calloc(len + sign + 1, sizeof(char));
+	if (!result)
 		return (NULL);
 	if (sign)
 	{
@@ -54,7 +58,7 @@ char			*ft_itoa_base_lw(int value, int base, size_t wight)
 	return (result);
 }
 
-char			*ft_itoa_base_up(int value, int base, size_t wight)
+char	*ft_itoa_base_up(int value, int base, size_t wight)
 {
 	char	*result;
 	size_t	sign;
@@ -63,9 +67,11 @@ char			*ft_itoa_base_up(int value, int base, size_t wight)
 	result = NULL;
 	if (base == 10 && value == _FT_SINT32_LAST)
 		return (ft_strdup(_FT_SINT32_LAST_STR));
-	if (wight > (len = num_len(value, &sign, base)))
+	len = num_len(value, &sign, base);
+	if (wight > len)
 		len = wight;
-	if (!(result = (char *)ft_calloc(len + 1, sizeof(char))))
+	result = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!result)
 		return (NULL);
 	if (sign)
 	{

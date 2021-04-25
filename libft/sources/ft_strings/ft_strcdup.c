@@ -23,7 +23,8 @@ char	*ft_strcdup(const char *str, char ch)
 	len = 0;
 	while (str[len] != '\0' && str[len] != ch)
 		len++;
-	if (!(result = (char *)ft_calloc(++len, sizeof(char))))
+	result = (char *)ft_calloc(++len, sizeof(char));
+	if (!result)
 		return (NULL);
 	ft_strlcpy(result, str, len);
 	return (result);

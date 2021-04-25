@@ -15,6 +15,6 @@
 int	ft_isalnum(int c)
 {
 	return ((c >= _FT_DIGIT_MIN && c <= _FT_DIGIT_MAX)
-			|| (c >= _FT_ALFAUP_MIN && c <= _FT_ALFAUP_MAX)
-			|| (c >= _FT_ALFADWN_MIN && c <= _FT_ALFADWN_MAX));
+		|| (c >= _FT_ALFAUP_MIN && c <= _FT_ALFAUP_MAX)
+		|| (c >= _FT_ALFADWN_MIN && c <= _FT_ALFADWN_MAX));
 }
