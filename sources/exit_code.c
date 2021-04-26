@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 12:00:07 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 13:28:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 19:15:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,9 @@ void	exit_code_set(int code)
 
 int exit_code_get(void)
 {
-	return (g_exit_code);
+	int code;
+
+	code = g_exit_code;
+	exit_code_set(0);
+	return (code);
 }

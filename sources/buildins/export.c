@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "environment.h"
+#include "minishell.h"
 
-void	print_export_list(t_list *collection)
+static void	print_export_list(t_list *collection)
 {
 	t_pair	*pair;
 	t_list	*tmp;
@@ -21,7 +22,7 @@ void	print_export_list(t_list *collection)
 	}
 }
 
-int	check_invalid_key(char *key)
+static int	check_invalid_key(char *key)
 {
 	if (ft_isdigit(key[0]))
 		return (1);
@@ -34,51 +35,106 @@ int	check_invalid_key(char *key)
 	return (0);
 }
 
-int	treat_arg(t_env	*env, char const *arg_str)
+static int	check_for_plus(char *str)
 {
-	t_pair	*new_pair;
-	int		result;
+	int	i;
 
-	result = 0;
-	new_pair = pair_from_str(arg_str);
-	if (new_pair->key[0] == '-')
+	if (str == NULL)
 	{
-		result = printf("bash: export: -%c: invalid option\n", new_pair->key[1]);
-		printf("export: usage: export [-nf] [name[=value] ...] or export -p\n");
+		printf("its NULL");
+		return (0);
 	}
-	else if (check_invalid_key(new_pair->key))
-		result = printf("bash: export: '%s' : not a valid identifier\n",
-				new_pair->key);
+	i = 0;
+	while (str[i + 1] != '\0')
+		i++;
+	if (str[i] != '+')
+		return (0);
+	str[i] = '\0';
+	return (1);
+}
+
+static int	continue_ta (int result, t_pair *e_pair, t_pair *n_pair, t_env *env)
+{
 	if (result == 0)
 	{
-		if (!ft_list_add(&(env->collection), new_pair) | !env_update(env))
-			result = 0;
+		if (e_pair == NULL)
+		{
+			if (!ft_list_add(&(env->collection), n_pair) || !env_update(env))
+				result = 1;
+		}
+		else
+		{
+			free(e_pair->value);
+			e_pair->value = ft_strdup(n_pair->value);
+			result = 21;
+		}
 	}
-	else
+	if (result != 0)
 	{
-		free_pair(new_pair);
-		free(new_pair);
+		free_pair(n_pair);
+		free(n_pair);
 	}
 	return (result);
 }
 
-int	main(int ac, char **av, char const **env)
+static int	treat_arg(t_env	*env, char const *arg_str)
 {
-	t_env	*environment;
-	int		i;
+	t_pair	*new_pair;
+	t_pair	*exist_pair;
+	int		result;
+	int		plus;
+	char	*test;
+
+	result = 0;
+	new_pair = pair_from_str(arg_str);
+	plus = check_for_plus(new_pair->key);
+	exist_pair = env_get_pair(env, new_pair->key);
+	if (new_pair && plus && exist_pair && exist_pair->value)
+	{
+		test = ft_strdup(new_pair->value);
+		free(new_pair->value);
+		new_pair->value = ft_concat2(exist_pair->value, test);
+		free(test);
+	}
+	if (new_pair->key[0] == '-')
+	{
+		printf("bash: export: -%c: invalid option\n", new_pair->key[1]);
+		printf("export: usage: export [-nf] [name[=value] ...] or export -p\n");
+		result = -1;
+	}
+	else if (check_invalid_key(new_pair->key))
+		result = printf("bash: export: '%s' : not a valid identifier\n", new_pair->key);
+	return (continue_ta(result, exist_pair, new_pair, env));
+}
+
+int	buildin_export(char **argv, t_minishell *shell)
+{
+	int	i;
+	int	result;
 
 	i = 1;
-	environment = env_create(env);
-	env_set(environment, "A", NULL);
-	if (ac == 1)
-		print_export_list(environment->collection);
+	result = 0;
+	if (argv[1] == 0)
+		print_export_list(shell->env->collection);
 	else
 	{
-		while (i != ac)
-			treat_arg(environment, av[i++]);
+		while (argv[i] != 0 && result != -1)
+			result = treat_arg(shell->env, argv[i++]);
 	}
-	// printf("________LISTS________\n");
-	// print_list(environment->collection);
-	env_destroy(environment);
-	return (0);
+	return (result == -1);
 }
+
+// int	main(int ac, char **av, char const **env)
+// {
+// 	t_minishell	*shell;
+
+// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
+// 	shell->env = env_create(env);
+// 	env_set(shell->env, "A", NULL);
+// 	printf("%d\n", buildin_export(av, shell));
+// 	printf("________LISTS________\n");
+// 	print_list(shell->env->collection);
+// 	env_destroy(shell->env);
+// 	free(shell);
+// 	return (0);
+// }

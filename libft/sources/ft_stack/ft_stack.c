@@ -14,7 +14,7 @@
 
 t_stack	*ft_stack_new(void *data)
 {
-	t_stack *new_node;
+	t_stack	*new_node;
 
 	new_node = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	if (new_node == NULL)
@@ -24,9 +24,9 @@ t_stack	*ft_stack_new(void *data)
 	return (new_node);
 }
 
-int		ft_stack_push(t_stack **root, void *data)
+int	ft_stack_push(t_stack **root, void *data)
 {
-	t_stack *node;
+	t_stack	*node;
 
 	if (*root != NULL)
 	{
@@ -38,7 +38,8 @@ int		ft_stack_push(t_stack **root, void *data)
 	}
 	else
 	{
-		if ((*root = ft_stack_new(data)) == NULL)
+		*root = ft_stack_new(data);
+		if (*root == NULL)
 			return (0);
 	}
 	return (1);
@@ -46,7 +47,7 @@ int		ft_stack_push(t_stack **root, void *data)
 
 void	*ft_stack_pop(t_stack **root)
 {
-	t_stack *node;
+	t_stack	*node;
 	void	*data;
 
 	data = NULL;
@@ -72,7 +73,7 @@ void	*ft_stack_peek(t_stack *root)
 
 void	ft_stack_free(t_stack **root, void (*del)(void *))
 {
-	t_stack *node;
+	t_stack	*node;
 
 	if (del != NULL)
 	{

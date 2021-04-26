@@ -6,12 +6,11 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 21:14:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 11:46:17 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 19:07:21 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "factory.h"
-
 
 // TODO переименовать
 int	factory_build_command_param(t_factory *factory, t_list **words,
@@ -52,7 +51,8 @@ int	factory_build_command_param(t_factory *factory, t_list **words,
 	return (1);
 }
 
-t_command	*factory_command_create(t_factory *factory, char *name)
+t_command	*factory_command_create(t_factory *factory, char *name,
+	struct s_build_context *context)
 {
 	t_command	*command;
 	t_buildin	buildin;
@@ -69,8 +69,14 @@ t_command	*factory_command_create(t_factory *factory, char *name)
 		if (command->name == NULL)
 		{
 			command_destroy(command);
-			return (NULL); // TODO word->value: No such file or directory
+			err_print_nofile(name, 0);
+			return (NULL);
 		}
+	}
+	if (!ft_list_add(&context->argl, command->name)) // ссылку а не инстанцию
+	{
+		command_destroy(command);
+		return (NULL);
 	}
 	return (command);
 }
@@ -80,12 +86,17 @@ int	factory_biuld_command(t_factory *factory, t_list **words,
 {
 	t_pword		*word;
 
+	if (*words == NULL)
+	{
+		context->process = 0;
+		return (1);
+	}
 	word = (t_pword *)(*words)->data;
 	if (word->type == EWT_WORD)
-		context->command = factory_command_create(factory, word->value);
+		context->command = factory_command_create(factory, word->value, context);
 	// TODO Тут отработку ридеректа как первого слова
 	else
-		return (0); // TODO syntax error near unexpected token `word->value'
+		return (err_print_untoken(word->value, 0));
 	if (context->command == NULL)
 		return (0);
 	*words = (*words)->next;
@@ -97,17 +108,21 @@ int factory_build_commands(t_factory *factory, t_list *words, t_minishell *shell
 	int						result;
 	struct s_build_context	context;
 
-	context.command = NULL;
 	context.process = 1;
 	while (context.process)
 	{
+		context.argl = NULL;
+		context.command = NULL;
 		result = factory_biuld_command(factory, &words, &context);
 		if (result == 0)
 			return (0);
-		// if (context.command != NULL)
+		if (context.command == NULL)
+			continue ;
+		context.command->argv = ft_list_tosa(context.argl); // TODO проверочку на ошибку бы
+		if (context.argl != NULL)
+			ft_list_free(&context.argl, NULL);	
 		ft_dlist_add(&factory->commands, context.command);
 	}
-	
 	return (1);
 }
 
@@ -123,12 +138,6 @@ int	factory_init(t_factory *factory, t_minishell *shell)
 	return (1);
 }
 
-int	factory_exec_commands(t_factory *factory, t_minishell *shell)
-{
-	ft_list_foreach((t_list *)factory->commands, command_print);
-	return (1);
-}
-
 int	factory_run_line(t_list *words, t_minishell *shell)
 {
 	t_pword		*word;
@@ -139,6 +148,7 @@ int	factory_run_line(t_list *words, t_minishell *shell)
 		return (0);
 	if (factory_build_commands(&factory, words, shell))
 	{
+		ft_list_foreach((t_list *)factory.commands, command_print);
 		factory_exec_commands(&factory, shell);
 	}
 	factory_destroy(&factory);

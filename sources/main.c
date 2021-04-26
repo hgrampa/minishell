@@ -6,16 +6,20 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 11:32:44 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 17:02:22 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/signal.h>
 #include "minishell.h"
 #include "input.h"
 #include "parser.h"
 #include "environment.h"
 #include "pword.h"
 #include "factory.h"
+
+void	signal_int_handler(int signum);
+void	signal_quit_handler(int signum);
 
 int		process(t_minishell *shell)
 {
@@ -78,6 +82,8 @@ int		main(int argc, char const *argv[], char const *envp[])
 {
 	t_minishell	*shell;
 
+	signal(SIGINT, signal_int_handler);
+	signal(SIGQUIT, signal_quit_handler);
 	shell = minishell_create(_MINISHELL_TITLE, envp);
 	if (shell == NULL)
 		return (1); // TODO возврат ошибки

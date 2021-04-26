@@ -104,7 +104,6 @@ char			*ft_strdup(const char *s1);
 char			*ft_strcdup(const char *str, char ch);
 char			*ft_strndup(const char *s1, int len);
 char			*ft_gnwrd(char **str);
-char			*ft_nwrd(char **str);
 int				ft_isnwrd(char *str, char *substr);
 int				ft_chnwrd(const char *str, const char *set);
 

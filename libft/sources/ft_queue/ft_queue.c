@@ -14,7 +14,7 @@
 
 t_queue	*ft_queue_new(void *data)
 {
-	t_queue *new_node;
+	t_queue	*new_node;
 
 	new_node = (t_queue *)ft_calloc(1, sizeof(t_queue));
 	if (!new_node)
@@ -24,9 +24,9 @@ t_queue	*ft_queue_new(void *data)
 	return (new_node);
 }
 
-int		ft_queue_enqueue(t_queue **root, void *data)
+int	ft_queue_enqueue(t_queue **root, void *data)
 {
-	t_queue *node;
+	t_queue	*node;
 
 	if (*root != NULL)
 	{
@@ -39,7 +39,8 @@ int		ft_queue_enqueue(t_queue **root, void *data)
 	}
 	else
 	{
-		if ((*root = ft_queue_new(data)) == NULL)
+		*root = ft_queue_new(data);
+		if (*root == NULL)
 			return (0);
 	}
 	return (1);
@@ -47,7 +48,7 @@ int		ft_queue_enqueue(t_queue **root, void *data)
 
 void	*ft_queue_dequeue(t_queue **root)
 {
-	t_queue *node;
+	t_queue	*node;
 	void	*data;
 
 	data = NULL;
@@ -73,7 +74,7 @@ void	*ft_queue_peek(t_queue *root)
 
 void	ft_queue_free(t_queue **root, void (*del)(void *))
 {
-	t_queue *node;
+	t_queue	*node;
 
 	if (del != NULL)
 	{

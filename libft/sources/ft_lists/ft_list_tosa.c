@@ -23,7 +23,7 @@ static char	**array_clear(char **array)
 	return (NULL);
 }
 
-char		**ft_list_tosa(t_list *list)
+char	**ft_list_tosa(t_list *list)
 {
 	size_t	i;
 	size_t	count;

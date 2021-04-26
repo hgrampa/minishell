@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "minishell.h"
 #include "libft.h"
 #include "environment.h"
 
-char *dash_case(char *str,t_pair *old_pwd_pair)
+char	*dash_case(char *str, t_pair *old_pwd_pair)
 {
 	if (ft_strncmp (str, "-", 2) == 0)
 	{
@@ -54,24 +55,43 @@ int	ft_cd (char *str, t_env *env)
 	return (result);
 }
 
-int	main(int ac, char **av, char const **env)
+int	buildin_cd(char **argv, t_minishell *shell)
 {
 	int		result;
-	t_env	*environment;
+	t_pair	*home_pair;
 
-	printf("%s\n", av[0]);
-	result = 0;
-	environment = env_create(env);
-	//env_unset(environment, "PWD");
-	//env_unset(environment, "OLDPWD");
-	// env_set(environment, "OLDPWD", NULL);
-	if (ac == 2)
-		result = ft_cd(av[1], environment);
-	else if (ac > 2)
+	if (argv[1] == 0)
+	{
+		home_pair = env_get_pair(shell->env, "HOME");
+		if (home_pair == NULL)
+		{
+			printf("bash: cd: HOME not set\n");
+			return (1);
+		}
+	}
+	if (argv[2] == 0)
+		result = ft_cd(argv[1], shell->env);
+	else
 		result = -1;
-	printf("result = %d\n", result);
-	// printf("________LISTS________\n");
-	// print_list(environment->collection);
-	env_destroy(environment);
-	return (result);
+	return (result); //TODO errror management to be done
 }
+
+// int	main(int ac, char **av, char const **env)
+// {
+// 	int		result;
+// 	t_minishell *shell;
+
+// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
+// 	shell->env = env_create(env);
+// 	env_unset(shell->env, "HOME");
+// 	// env_unset(shell->env, "PWD");
+// 	//env_unset(shell->env, "OLDPWD");
+// 	// env_set(shell->env, "OLDPWD", NULL);
+// 	result = buildin_cd(av, shell);
+// 	printf("result = %d\n", result);
+// 	// printf("________LISTS________\n");
+// 	// print_list(shell->env->collection);
+// 	env_destroy(shell->env);
+// 	free(shell);
+// 	return (result);
+// }

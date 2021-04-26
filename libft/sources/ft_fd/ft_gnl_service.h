@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-typedef struct	s_cash
+typedef struct s_cash
 {
 	char	*str;
 	int		len;

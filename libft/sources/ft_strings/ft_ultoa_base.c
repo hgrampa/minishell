@@ -14,23 +14,28 @@
 
 static size_t	num_len(unsigned long value, int base)
 {
-	size_t len;
+	size_t	len;
 
 	len = 1;
-	while (value /= base)
+	while (value > 0)
+	{
 		len++;
+		value /= base;
+	}
 	return (len);
 }
 
-char			*ft_ultoa_base_lw(unsigned long value, int base, size_t wight)
+char	*ft_ultoa_base_lw(unsigned long value, int base, size_t wight)
 {
 	char	*result;
 	size_t	len;
 
 	result = NULL;
-	if (wight > (len = num_len(value, base)))
+	len = num_len(value, base);
+	if (wight > len)
 		len = wight;
-	if (!(result = (char *)ft_calloc(len + 1, sizeof(char))))
+	result = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!result)
 		return (NULL);
 	result[len] = '\0';
 	while (len > 0)
@@ -41,15 +46,17 @@ char			*ft_ultoa_base_lw(unsigned long value, int base, size_t wight)
 	return (result);
 }
 
-char			*ft_ultoa_base_up(unsigned long value, int base, size_t wight)
+char	*ft_ultoa_base_up(unsigned long value, int base, size_t wight)
 {
 	char	*result;
 	size_t	len;
 
 	result = NULL;
-	if (wight > (len = num_len(value, base)))
+	len = num_len(value, base);
+	if (wight > len)
 		len = wight;
-	if (!(result = (char *)ft_calloc(len + 1, sizeof(char))))
+	result = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!result)
 		return (NULL);
 	result[len] = '\0';
 	while (len > 0)

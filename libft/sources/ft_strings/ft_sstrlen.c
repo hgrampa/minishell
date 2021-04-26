@@ -14,7 +14,7 @@
 
 size_t	ft_sstrlen(const char *s)
 {
-	size_t size;
+	size_t	size;
 
 	size = 0;
 	if (!s)

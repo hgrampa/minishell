@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/25 11:20:35 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/26 16:54:09 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ INCL			=	minishell.h \
 					pword.h
 
 SRC				=	main.c \
+					signals.c \
 					minishell.c \
 					minishell_title.c \
 					errors.c \
@@ -77,6 +78,7 @@ SRC				=	main.c \
 					exit_code.c \
 					factory.c \
 					command.c \
+					factory_exec.c \
 					factory_command_set.c \
 					factory_pathfinder.c \
 					buildin.c \

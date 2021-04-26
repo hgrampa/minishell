@@ -20,7 +20,7 @@ static const char	*pass_empty(const char *str)
 	return (str);
 }
 
-static double		fraction(const char *str)
+static double	fraction(const char *str)
 {
 	double	result;
 	int		e;
@@ -43,7 +43,7 @@ static double		fraction(const char *str)
 **		! relative error after 19 characters
 */
 
-double				ft_atof(const char *str)
+double	ft_atof(const char *str)
 {
 	double	result;
 	char	sign;

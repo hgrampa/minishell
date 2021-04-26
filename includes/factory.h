@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:24:23 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 11:51:21 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 16:52:18 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,22 @@
 # include "minishell.h"
 # include "command.h"
 # include "buildin.h"
+# include "errors.h"
+
+
+#define _PIPE_SIDE_OUT 0
+#define _PIPE_SIDE_IN 1
 
 // TODO bash: syntax error near unexpected token `|'
 // TODO bash: syntax error near unexpected token `;'
 // TODO bash: dfs: command not found
 
+
+
 struct s_build_context
 {
 	t_command		*command;
+	t_list			*argl;
 	unsigned char	process:1;
 };
 
@@ -36,6 +44,12 @@ typedef struct	s_factory
 	char		*env_path; // TODO потом убрать
 	char		**paths;
 }				t_factory;
+
+struct s_comm_pair
+{
+	t_command		*command;
+	t_command		*previous;
+};
 
 int	factory_destroy(t_factory *factory);
 int	factory_init(t_factory *factory, t_minishell *shell);

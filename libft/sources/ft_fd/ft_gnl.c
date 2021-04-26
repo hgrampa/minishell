@@ -35,13 +35,18 @@ int	clear_data(t_cash **cash, char **str1, int result)
 int	ft_gnl(int fd, char **line, int size)
 {
 	int				result;
-	static	t_cash	*cash;
+	static t_cash	*cash;
 
 	if (fd < 0 || !line || size <= 0)
 		return (-1);
-	if (cash == NULL && !(cash = (t_cash *)ft_calloc(1, sizeof(t_cash))))
-		return (-1);
-	if ((result = cash_read(&cash, fd, size)) == -1)
+	if (cash == NULL)
+	{
+		cash = (t_cash *)ft_calloc(1, sizeof(t_cash));
+		if (cash == NULL)
+			return (-1);
+	}
+	result = cash_read(&cash, fd, size);
+	if (result == -1)
 		return (-1);
 	if (!cash_set_next_line(cash, line))
 		return (clear_data(&cash, NULL, -1));
