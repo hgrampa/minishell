@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 21:14:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/26 19:07:21 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 20:15:44 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ int	factory_run_line(t_list *words, t_minishell *shell)
 	t_pword		*word;
 	t_factory	factory;
 
-	// factory_init(&factory, shell);
 	if (!factory_init(&factory, shell))
 		return (0);
 	if (factory_build_commands(&factory, words, shell))

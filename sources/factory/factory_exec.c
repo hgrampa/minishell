@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:18:43 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/26 18:15:42 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 21:21:49 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int factory_exec_set_out(struct s_comm_pair	com_pair)
 int factory_exec_set_in(struct s_comm_pair	com_pair)
 {
 	int	result;
-	
+
 	result = 1;
 	if (com_pair.command->input != -1)
 		result = dup2(com_pair.command->input, STDIN_FILENO);
@@ -60,6 +60,7 @@ int	factory_exec_command(t_dlist *node, t_minishell *shell)
 	struct s_comm_pair	com_pair;
 
 	com_pair = get_com_pair(node);
+	// TODO Узнать у дена зачем он это отдельным циклом делал (он не знает)
 	if (com_pair.command->is_pipe || (com_pair.previous != NULL && com_pair.previous->is_pipe))
 	{
 		if (pipe(com_pair.command->pipe) == -1)
@@ -87,6 +88,7 @@ int	factory_exec_command(t_dlist *node, t_minishell *shell)
 	return (pid);
 }
 
+// TODO и закрытие in out
 int	factory_exec_close_pipes(t_dlist *node)
 {
 	struct s_comm_pair	com_pair;
@@ -107,14 +109,11 @@ int	factory_exec_close_pipes(t_dlist *node)
 int	factory_handle_parent(t_dlist *node, int pid)
 {
 	int			status;
-	t_command	*command;
-	t_command	*previous;
 
 	waitpid(pid, &status, 0);
 	// factory_exec_close_pipes(node);
-	if (WIFEXITED(status)) // ! TODO запрещены ||
-		pid = WEXITSTATUS(status); // ! TODO запрещены
-	return (pid);
+	exit_code_clamp_set(status);
+	return (1);
 }
 
 int	factory_exec_commands(t_factory *factory, t_minishell *shell)
@@ -131,7 +130,6 @@ int	factory_exec_commands(t_factory *factory, t_minishell *shell)
 			factory_exec_close_pipes(node);
 		node = node->next;
 	}
-	pid = factory_handle_parent(node, pid);
-	// если надо верну пид в фабрике
+	factory_handle_parent(node, pid);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:24:23 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/26 16:52:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 20:12:51 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "command.h"
 # include "buildin.h"
 # include "errors.h"
-
+# include "exit_code.h"
 
 #define _PIPE_SIDE_OUT 0
 #define _PIPE_SIDE_IN 1
