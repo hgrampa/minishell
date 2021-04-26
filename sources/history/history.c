@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 19:23:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 13:13:29 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 19:10:00 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int			history_serealize(t_history *history)
 	fd = open(_HISTORY_FILE_NAME, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd)
 	{
+		write(fd, root->data, ft_strlen(root->data));
+		root = root->next;
 		while (root != NULL)
 		{
-			write(fd, root->data, ft_strlen(root->data));
 			write(fd, "\n", 1);
+			write(fd, root->data, ft_strlen(root->data));
 			root = root->next;
 		}
 	}
