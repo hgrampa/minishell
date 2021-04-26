@@ -57,10 +57,18 @@ int	ft_cd (char *str, t_env *env)
 
 int	buildin_cd(char **argv, t_minishell *shell)
 {
-	int	result;
+	int		result;
+	t_pair	*home_pair;
 
 	if (argv[1] == 0)
-		result = 0;
+	{
+		home_pair = env_get_pair(shell->env, "HOME");
+		if (home_pair == NULL)
+		{
+			printf("bash: cd: HOME not set\n");
+			return (1);
+		}
+	}
 	if (argv[2] == 0)
 		result = ft_cd(argv[1], shell->env);
 	else
@@ -75,13 +83,14 @@ int	buildin_cd(char **argv, t_minishell *shell)
 
 // 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
 // 	shell->env = env_create(env);
+// 	env_unset(shell->env, "HOME");
 // 	// env_unset(shell->env, "PWD");
 // 	//env_unset(shell->env, "OLDPWD");
 // 	// env_set(shell->env, "OLDPWD", NULL);
 // 	result = buildin_cd(av, shell);
 // 	printf("result = %d\n", result);
-// 	printf("________LISTS________\n");
-// 	print_list(shell->env->collection);
+// 	// printf("________LISTS________\n");
+// 	// print_list(shell->env->collection);
 // 	env_destroy(shell->env);
 // 	free(shell);
 // 	return (result);

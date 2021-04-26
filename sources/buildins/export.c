@@ -35,13 +35,67 @@ static int	check_invalid_key(char *key)
 	return (0);
 }
 
+static int	check_for_plus(char *str)
+{
+	int	i;
+
+	if (str == NULL)
+	{
+		printf("its NULL");
+		return (0);
+	}
+	i = 0;
+	while (str[i + 1] != '\0')
+		i++;
+	if (str[i] != '+')
+		return (0);
+	str[i] = '\0';
+	return (1);
+}
+
+static int	continue_ta (int result, t_pair *e_pair, t_pair *n_pair, t_env *env)
+{
+	if (result == 0)
+	{
+		if (e_pair == NULL)
+		{
+			if (!ft_list_add(&(env->collection), n_pair) || !env_update(env))
+				result = 1;
+		}
+		else
+		{
+			free(e_pair->value);
+			e_pair->value = ft_strdup(n_pair->value);
+			result = 21;
+		}
+	}
+	if (result != 0)
+	{
+		free_pair(n_pair);
+		free(n_pair);
+	}
+	return (result);
+}
+
 static int	treat_arg(t_env	*env, char const *arg_str)
 {
 	t_pair	*new_pair;
+	t_pair	*exist_pair;
 	int		result;
+	int		plus;
+	char	*test;
 
 	result = 0;
 	new_pair = pair_from_str(arg_str);
+	plus = check_for_plus(new_pair->key);
+	exist_pair = env_get_pair(env, new_pair->key);
+	if (new_pair && plus && exist_pair && exist_pair->value)
+	{
+		test = ft_strdup(new_pair->value);
+		free(new_pair->value);
+		new_pair->value = ft_concat2(exist_pair->value, test);
+		free(test);
+	}
 	if (new_pair->key[0] == '-')
 	{
 		printf("bash: export: -%c: invalid option\n", new_pair->key[1]);
@@ -49,19 +103,8 @@ static int	treat_arg(t_env	*env, char const *arg_str)
 		result = -1;
 	}
 	else if (check_invalid_key(new_pair->key))
-		result = printf("bash: export: '%s' : not a valid identifier\n",
-				new_pair->key);
-	if (result == 0)
-	{
-		if (!ft_list_add(&(env->collection), new_pair) | !env_update(env))
-			result = 0;
-	}
-	else
-	{
-		free_pair(new_pair);
-		free(new_pair);
-	}
-	return (result);
+		result = printf("bash: export: '%s' : not a valid identifier\n", new_pair->key);
+	return (continue_ta(result, exist_pair, new_pair, env));
 }
 
 int	buildin_export(char **argv, t_minishell *shell)
@@ -83,7 +126,7 @@ int	buildin_export(char **argv, t_minishell *shell)
 
 // int	main(int ac, char **av, char const **env)
 // {
-// 	t_minishell *shell;
+// 	t_minishell	*shell;
 
 // 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
 // 	shell->env = env_create(env);

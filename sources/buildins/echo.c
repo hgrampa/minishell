@@ -2,9 +2,20 @@
 #include "libft.h"
 #include "minishell.h"
 
+static int	check_arg_n(char *str)
+{
+	if (str[0] != '-')
+		return (0);
+	str++;
+	while (*str)
+		if (*str++ != 'n')
+			return (0);
+	return (1);
+}
+
 static void	print_n(char *str)
 {
-	if (ft_strncmp(str, "-n", 3) != 0)
+	if (!check_arg_n(str))
 		printf("\n");
 }
 
@@ -20,7 +31,7 @@ int	buildin_echo(char **argv, t_minishell *shell)
 	{
 		while (argv[++i] != 0)
 		{
-			temp = (ft_strncmp(argv[i], "-n", 3) == 0);
+			temp = check_arg_n(argv[i]);
 			if (temp == 0 || (temp && arg_n == 0))
 			{
 				arg_n = 0;
