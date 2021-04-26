@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 21:14:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 19:02:10 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 19:07:21 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ int	factory_biuld_command(t_factory *factory, t_list **words,
 {
 	t_pword		*word;
 
+	if (*words == NULL)
+	{
+		context->process = 0;
+		return (1);
+	}
 	word = (t_pword *)(*words)->data;
 	if (word->type == EWT_WORD)
 		context->command = factory_command_create(factory, word->value, context);
@@ -103,18 +108,19 @@ int factory_build_commands(t_factory *factory, t_list *words, t_minishell *shell
 	int						result;
 	struct s_build_context	context;
 
-	context.command = NULL;
 	context.process = 1;
-	context.argl = NULL;
 	while (context.process)
 	{
+		context.argl = NULL;
+		context.command = NULL;
 		result = factory_biuld_command(factory, &words, &context);
 		if (result == 0)
 			return (0);
+		if (context.command == NULL)
+			continue ;
 		context.command->argv = ft_list_tosa(context.argl); // TODO проверочку на ошибку бы
 		if (context.argl != NULL)
 			ft_list_free(&context.argl, NULL);	
-		// if (context.command != NULL)
 		ft_dlist_add(&factory->commands, context.command);
 	}
 	return (1);

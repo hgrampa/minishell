@@ -187,7 +187,7 @@ int	exec_cmds(t_pipelist **cmds, char **env)
 				close(crt->pipes[SIDE_IN]);
 				if (!crt->next || crt->type == TYPE_BREAK)
 					close(crt->pipes[SIDE_OUT]);
-			}	
+			}
 		}
 		if (!(*cmds)->next)
 			break ;
