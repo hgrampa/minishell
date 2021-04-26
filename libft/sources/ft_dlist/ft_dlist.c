@@ -26,9 +26,9 @@ t_dlist	*ft_dlist_new(void *data)
 	return (new_node);
 }
 
-int		ft_dlist_pull(t_dlist **root, void *data)
+int	ft_dlist_pull(t_dlist **root, void *data)
 {
-	t_dlist *new_node;
+	t_dlist	*new_node;
 
 	new_node = ft_dlist_new(data);
 	if (new_node == NULL)
@@ -44,7 +44,7 @@ int		ft_dlist_pull(t_dlist **root, void *data)
 
 void	ft_dlist_free(t_dlist **root, void (*del)(void*))
 {
-	t_dlist *node;
+	t_dlist	*node;
 
 	if (del != NULL)
 	{
@@ -77,7 +77,7 @@ void	ft_dlist_foreach(t_dlist *root, void (*f)(void *))
 	}
 }
 
-int		ft_dlist_add(t_dlist **root, void *data)
+int	ft_dlist_add(t_dlist **root, void *data)
 {
 	t_dlist	*node;
 	t_dlist	*new_node;
@@ -95,7 +95,8 @@ int		ft_dlist_add(t_dlist **root, void *data)
 	}
 	else
 	{
-		if ((*root = ft_dlist_new(data)) == NULL)
+		*root = ft_dlist_new(data);
+		if (*root == NULL)
 			return (0);
 	}
 	return (1);

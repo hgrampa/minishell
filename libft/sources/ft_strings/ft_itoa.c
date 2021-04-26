@@ -16,14 +16,17 @@ static size_t	ft_numlen(size_t *signature, int n)
 {
 	size_t	size;
 
-	*signature = (n < 0) ? 1 : 0;
+	*signature = (n < 0);
 	size = 1;
-	while (n /= 10)
+	while (n > 0)
+	{
 		size++;
+		n /= 10;
+	}
 	return (size);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*result;
 	size_t	len;

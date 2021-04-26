@@ -20,7 +20,7 @@ static const char	*pass_empty(const char *str)
 	return (str);
 }
 
-int					ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	unsigned long	result;
 	int				sign;

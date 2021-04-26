@@ -24,7 +24,7 @@ t_list	*ft_list_new(void *data)
 	return (new_node);
 }
 
-int		ft_list_add(t_list **root, void *data)
+int	ft_list_add(t_list **root, void *data)
 {
 	t_list	*node;
 
@@ -39,13 +39,14 @@ int		ft_list_add(t_list **root, void *data)
 	}
 	else
 	{
-		if ((*root = ft_list_new(data)) == NULL)
+		*root = ft_list_new(data);
+		if (*root == NULL)
 			return (0);
 	}
 	return (1);
 }
 
-int		ft_list_count(t_list *root)
+int	ft_list_count(t_list *root)
 {
 	int	count;
 
@@ -69,7 +70,7 @@ void	ft_list_foreach(t_list *root, void (*f)(void *))
 
 void	ft_list_free(t_list **root, void (*del)(void*))
 {
-	t_list *node;
+	t_list	*node;
 
 	if (del != NULL)
 	{
