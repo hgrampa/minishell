@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:18:43 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 19:40:12 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 18:15:42 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int factory_exec_set_out(struct s_comm_pair	com_pair)
 	int	result;
 	
 	result = 1;
+	
 	if (com_pair.command->output != -1)
 		result = dup2(com_pair.command->output, STDOUT_FILENO);
 	else if (com_pair.command->is_pipe)
@@ -69,19 +70,19 @@ int	factory_exec_command(t_dlist *node, t_minishell *shell)
 		return (0); // TODO возврат ошибки
 	else if (pid == 0)
 	{
-		// if (!factory_exec_set_out());
-		//		return (0);
-		
-		// if (!factory_exec_set_in());
-		//		return (0);
-
-		
-
-		
-		ret = execve(com_pair.command->name, com_pair.command->argv, shell->env->represent);
-		if (ret < 0)
-			return (0); // TODO описание ошибки
-		exit(ret);
+		if (!factory_exec_set_out(com_pair))
+			exit(1); // TODO описание ошибки и очистка
+		if (!factory_exec_set_in(com_pair))
+			exit(1); // TODO описание ошибки и очистка
+		if (com_pair.command->is_buildin)
+			com_pair.command->buildin(com_pair.command->argv, shell); // TODO возвращение кода возврата
+		else
+		{
+			ret = execve(com_pair.command->name, com_pair.command->argv, shell->env->represent);
+			if (ret < 0)
+				return (0); // TODO описание ошибки или выход? и очистка
+		}
+		exit(ret); 
 	}
 	return (pid);
 }
@@ -110,8 +111,8 @@ int	factory_handle_parent(t_dlist *node, int pid)
 	t_command	*previous;
 
 	waitpid(pid, &status, 0);
-	factory_exec_close_pipes(node);
-	if (WIFEXITED(status)) // ! TODO запрещены
+	// factory_exec_close_pipes(node);
+	if (WIFEXITED(status)) // ! TODO запрещены ||
 		pid = WEXITSTATUS(status); // ! TODO запрещены
 	return (pid);
 }
@@ -127,17 +128,10 @@ int	factory_exec_commands(t_factory *factory, t_minishell *shell)
 	{
 		pid = factory_exec_command(node, shell);
 		if (pid > 0)
-		{
 			factory_exec_close_pipes(node);
-		}
-		if (node->next == NULL)
-		{
-			if (pid != 0)
-				pid = factory_handle_parent(node, pid);
-			break ;
-		}
 		node = node->next;
 	}
+	pid = factory_handle_parent(node, pid);
 	// если надо верну пид в фабрике
 	return (1);
 }

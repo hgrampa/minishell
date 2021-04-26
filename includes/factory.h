@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:24:23 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 18:48:44 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 16:52:18 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ struct s_comm_pair
 	t_command		*command;
 	t_command		*previous;
 };
-
 
 int	factory_destroy(t_factory *factory);
 int	factory_init(t_factory *factory, t_minishell *shell);

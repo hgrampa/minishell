@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/25 14:35:36 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/26 16:54:09 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ INCL			=	minishell.h \
 					pword.h
 
 SRC				=	main.c \
+					signals.c \
 					minishell.c \
 					minishell_title.c \
 					errors.c \

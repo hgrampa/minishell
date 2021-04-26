@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 11:34:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 13:55:06 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/26 18:33:48 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <sys/wait.h>
-#include <signal.h>
 #include "factory.h"
+#include "exit_code.h"
 
-void	signal_handler(int signum)
+void	signal_quit_handler(int signum)
 {
 	int status;
 
 	wait(&status);
-	if (status == SIGINT)
-	{
-		// exit_code_set(130);
-	}
-	else if (status == SIGQUIT)
-	{
-		// exit_code_set(131);
-	}
-	// else if (signum == )
-	// {
+	exit_code_set(128 + status);
+	printf("Quit: %d\n", signum);
+}
 
-	// }
+void	signal_int_handler(int signum)
+{
+	int status;
 
+	wait(&status);
+	exit_code_set(128 + status);
+	ft_putchar('\n');
 }
