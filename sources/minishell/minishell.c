@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:28:16 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 12:50:29 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 14:31:31 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ t_minishell	*minishell_create(const char *title, const char **envp)
 	shell->env = env_create(envp);
 	shell->input = input_create();
 	shell->history = history_create();
+	shell->factory = factory_create();
 	if (shell->title == NULL || shell->env == NULL || shell->input == NULL
-		|| shell->history == NULL)
+		|| shell->history == NULL || shell->factory == NULL)
 	{
 		err_print(NULL, 0, 1); // сомнительно конеч
 		minishell_destroy(shell);
@@ -51,6 +52,8 @@ int			minishell_destroy(t_minishell *shell)
 		input_destroy(shell->input);
 	if (shell->history != NULL)
 		history_destroy(shell->history);
+	if (shell->factory != NULL)
+		factory_destroy(shell->factory);
 	free(shell);
 	return (1);
 }
