@@ -6,11 +6,13 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 13:00:48 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 20:55:43 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 22:22:22 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "factory.h"
+
+// TODO "yes | head" ломает сигналы
 
 // TODO переименовать
 int	factory_build_command_param(t_factory *factory, t_list **words,
