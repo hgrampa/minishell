@@ -35,10 +35,10 @@
 
 # define _MINISHELL_TITLE "minishell"
 
-typedef struct	s_minishell
+typedef struct s_minishell
 {
-	unsigned char	process:1;
-	char			*title; 
+	unsigned char	process :1;
+	char			*title;
 	t_env			*env;
 	t_input			*input;
 	t_history		*history;
@@ -61,4 +61,3 @@ void		minishell_signal_int(int signum);
 void		minishell_signal_quit(int signum);
 
 #endif
-

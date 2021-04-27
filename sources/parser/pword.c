@@ -14,7 +14,7 @@
 
 t_pword	*pword_new(char *value, enum e_pword_type type)
 {
-	t_pword *new;
+	t_pword	*new;
 
 	new = (t_pword *)ft_calloc(1, sizeof(t_pword));
 	if (new == NULL)
@@ -37,6 +37,6 @@ void	pword_print(void *data)
 {
 	t_pword	*word;
 
-	word = (t_pword  *)data;
+	word = (t_pword *)data;
 	printf(">> type: %d, val: \"%s\"\n", word->type, word->value);
 }

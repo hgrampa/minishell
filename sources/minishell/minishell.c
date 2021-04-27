@@ -15,7 +15,7 @@
 
 t_minishell	*minishell_create(const char *title, const char **envp)
 {
-	t_minishell *shell;
+	t_minishell	*shell;
 
 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
 	if (shell == NULL)
@@ -28,7 +28,7 @@ t_minishell	*minishell_create(const char *title, const char **envp)
 	if (shell->title == NULL || shell->env == NULL || shell->input == NULL
 		|| shell->history == NULL || shell->factory == NULL)
 	{
-		err_print(NULL, 0, 1); // сомнительно конеч
+		err_print(NULL, 0, 1); // TODO delete comment --> сомнительно конеч
 		minishell_destroy(shell);
 		return (NULL);
 	}
@@ -42,7 +42,7 @@ void	minishell_exit(t_minishell *shell, int status)
 	exit(0);
 }
 
-int			minishell_destroy(t_minishell *shell)
+int	minishell_destroy(t_minishell *shell)
 {
 	if (shell->title != NULL)
 		free(shell->title);
@@ -58,7 +58,7 @@ int			minishell_destroy(t_minishell *shell)
 	return (1);
 }
 
-int			minishell_at_newline(t_minishell *shell)
+int	minishell_at_newline(t_minishell *shell)
 {
 	shell->line = NULL;
 	if (shell->words != NULL)
@@ -67,7 +67,7 @@ int			minishell_at_newline(t_minishell *shell)
 	return (1);
 }
 
-int			minishell_init(t_minishell *shell)
+int	minishell_init(t_minishell *shell)
 {
 	signal(SIGINT, minishell_signal_int);
 	signal(SIGQUIT, minishell_signal_quit);

@@ -24,7 +24,7 @@ static void	parse_context_init(struct s_pcontext *context, t_env *env)
 	context->env = env;
 }
 
-int			parse_line(t_env *env, char *line, t_list **words)
+int	parse_line(t_env *env, char *line, t_list **words)
 {
 	int					result;
 	struct s_pcontext	context;

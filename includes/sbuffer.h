@@ -25,7 +25,7 @@
 **			!!! CAN NOT BE 0
 **			realloc are used by this value
 */
-typedef struct	s_sbuffer
+typedef struct s_sbuffer
 {
 	char	*str;
 	size_t	len;
