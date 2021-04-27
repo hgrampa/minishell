@@ -17,12 +17,12 @@
 # include <unistd.h>
 # include "libft.h"
 
-typedef struct		s_dlist
+typedef struct s_dlist
 {
 	void			*data;
 	struct s_dlist	*next;
 	struct s_dlist	*previous;
-}					t_dlist;
+}				t_dlist;
 
 t_dlist				*ft_dlist_new(void *data);
 void				ft_dlist_free(t_dlist **root, void (*del)(void*));

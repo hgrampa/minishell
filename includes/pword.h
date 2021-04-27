@@ -23,7 +23,7 @@ enum e_pword_type
 	EWT_WORD,
 	EWT_PIPE,
 	EWT_SEMICOLON,
-	EWT_REDIRECT1, // <
+	EWT_REDIRECT1, // < TODO norm delete comment
 	EWT_REDIRECT2, // >
 	EWT_REDIRECT3, // >>
 };

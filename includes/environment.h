@@ -88,8 +88,8 @@ int		env_set(t_env *env, char const *key, char const *value);
 */
 int		env_unset(t_env *env, char const *key);
 
-int get_value_from_key(t_pair *pair, char const *key);
-int create_represent(t_env *environment, int ln);
+int		get_value_from_key(t_pair *pair, char const *key);
+int		create_represent(t_env *environment, int ln);
 t_pair	*env_get_pair(t_env *env, char const *key);
 t_pair	*pair_from_str(char const *str);
 t_pair	*create_new_pair(char const *key, char const *value);

@@ -29,16 +29,3 @@ int	buildin_env(char **argv, t_minishell *shell)
 	}
 	return (result);
 }
-
-// int	main(int ac, char **av, char const **env)
-// {
-// 	t_minishell *shell;
-
-// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-// 	shell->env = env_create(env);
-// 	//env_unset(shell->env, "PATH");
-// 	buildin_env(av, shell);
-// 	env_destroy(shell->env);
-// 	free(shell);
-// 	return (0);
-// }

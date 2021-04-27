@@ -14,7 +14,7 @@
 #include "parser.h"
 #include "errors.h"
 
-int		pstate_esc(char **line, struct s_pcontext *context)
+int	pstate_esc(char **line, struct s_pcontext *context)
 {
 	if (!pbuffer_open(context, EWT_WORD))
 		return (0);
@@ -26,7 +26,6 @@ int		pstate_esc(char **line, struct s_pcontext *context)
 	{
 		if (!pbuffer_add_char(context, '\\'))
 			return (0);
-		
 	}
 	if (!pbuffer_add_char(context, **line))
 		return (0);

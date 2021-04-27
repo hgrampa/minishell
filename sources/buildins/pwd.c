@@ -30,13 +30,3 @@ int	buildin_pwd(char **argv, t_minishell *shell)
 	free(result);
 	return (0);
 }
-
-// int	main(int ac, char **av)
-// {
-// 	t_minishell *shell;
-
-// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-// 	buildin_pwd(av, shell);
-// 	free(shell);
-// 	return (0);
-// }

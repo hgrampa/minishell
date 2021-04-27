@@ -47,13 +47,3 @@ int	buildin_echo(char **argv, t_minishell *shell)
 		ft_putstr_fd("\n", 1);
 	return (0);
 }
-
-// int	main(int ac, char **av)
-// {
-// 	t_minishell	*shell;
-
-// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-// 	buildin_echo(av, shell);
-// 	free(shell);
-// 	return (0);
-// }

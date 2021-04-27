@@ -36,4 +36,8 @@ int			buildin_export(char **argv, t_minishell *shell);
 int			buildin_pwd(char **argv, t_minishell *shell);
 int			buildin_unset(char **argv, t_minishell *shell);
 
+void		print_export_list(t_list *collection);
+int			check_invalid_key(char *key);
+int			check_for_plus(char *str);
+
 #endif

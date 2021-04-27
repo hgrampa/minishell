@@ -43,7 +43,7 @@ int	err_print_untoken(char *token, int status)
 
 int	err_print_nofile(char *file, int status)
 {	
-	char *messege;
+	char	*messege;
 
 	messege = strerror(errno);
 	ft_putstr_fd(_ERR_TITLE, STDERR_FILENO);

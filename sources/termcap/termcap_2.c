@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_code.c                                        :+:      :+:    :+:   */
+/*   termcap_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/24 12:00:07 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 10:42:57 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/27 12:26:58 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	g_exit_code;
+#include "terminal.h"
+#include "errors.h"
 
-void	exit_code_set(int code)
+int	term_on_new_line(t_terminal *term)
 {
-	g_exit_code = code;
+	tputs(save_cursor, 1, ft_putchar);
+	if (!term_set_mode(term))
+		return (err_print(NULL, 0, 1));
+	return (1);
 }
 
-void	exit_code_clamp_set(int code)
+int	term_clear_line(void)
 {
-	if (code > 255)
-		exit_code_set(code % 256);
-	else
-		exit_code_set(code);
-}
-
-int	exit_code_get(void)
-{
-	int	code;
-
-	code = g_exit_code;
-	exit_code_set(0);
-	return (code);
+	tputs(restore_cursor, 1, ft_putchar);
+	tputs(clr_eos, 1, ft_putchar);
+	return (1);
 }

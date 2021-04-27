@@ -19,7 +19,7 @@
 
 void	minishell_signal_quit(int signum)
 {
-	int status;
+	int	status;
 
 	wait(&status);
 	exit_code_set(128 + status);
@@ -28,7 +28,7 @@ void	minishell_signal_quit(int signum)
 
 void	minishell_signal_int(int signum)
 {
-	int status;
+	int	status;
 
 	wait(&status);
 	exit_code_set(128 + status);

@@ -14,7 +14,7 @@
 
 t_input	*input_create(void)
 {
-	t_input *input;
+	t_input	*input;
 
 	input = (t_input *)ft_calloc(1, sizeof(t_input));
 	if (input == NULL)
@@ -35,7 +35,7 @@ t_input	*input_create(void)
 	return (input);
 }
 
-int		input_destroy(t_input *input)
+int	input_destroy(t_input *input)
 {
 	sbuffer_destroy(input->buffer);
 	term_destroy(input->term);
@@ -45,7 +45,7 @@ int		input_destroy(t_input *input)
 	return (1);
 }
 
-int		input_init(t_input *input)
+int	input_init(t_input *input)
 {
 	if (!term_init(input->term))
 		return (0);

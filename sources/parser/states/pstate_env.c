@@ -16,6 +16,7 @@
 #include "errors.h"
 
 // TODO Эту функцию к env перенести
+// TODO norm delete all comments 
 static int	env_isname_char(char c)
 {
 	return (ft_isalnum(c) || c == '_');
@@ -42,7 +43,7 @@ static char	*get_var_name(char **line)
 
 static int	pstate_set_value(struct s_pcontext *context, char *name)
 {
-	char *value;
+	char	*value;
 
 	value = env_get_value(context->env, name); // получение значения по имени (строка, пустая строка, NULL)
 	if (value == NULL)
@@ -71,7 +72,7 @@ static int	pstate_set_value(struct s_pcontext *context, char *name)
 
 static int	pstate_rename_var(char **line, struct s_pcontext *context) // TODO Придумать понятное имя функции
 {
-	char *name;
+	char	*name;
 
 	if (env_isname_char(**line) && !ft_isdigit(**line)) //	проверка следуещего за $ символа - может ли он начинать имя (главное чтоб не цифра)
 	{
@@ -94,12 +95,12 @@ static int	pstate_rename_var(char **line, struct s_pcontext *context) // TODO П
 	return (pcontext_return_state(context)); // стадия закрывается
 }
 
-int			pstate_env(char **line, struct s_pcontext *context)
+int	pstate_env(char **line, struct s_pcontext *context)
 {
-	char *anchor;
+	char	*anchor;
 
 	anchor = *(line) + 1;
-	if (*anchor == '\0' || ft_strchr(_PRS_DELIMITERS, *anchor) != NULL 
+	if (*anchor == '\0' || ft_strchr(_PRS_DELIMITERS, *anchor) != NULL
 		|| ft_strchr(_PRS_CONTROLERS, *anchor) != NULL)
 	{
 		if (!pbuffer_add_char(context, **line)) // $ добавляется к слову 
@@ -123,5 +124,5 @@ int			pstate_env(char **line, struct s_pcontext *context)
 		}
 	}
 	(*line)++;
-	return (pstate_rename_var(line, context));
+	return (pstate_rename_var(line, context)); //TODO 25 lines
 }

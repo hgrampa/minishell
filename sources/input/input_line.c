@@ -14,10 +14,9 @@
 #include "input.h"
 #include "sbuffer.h"
 
-int		input_set_line(t_input *input, char *line)
+int	input_set_line(t_input *input, char *line)
 {
-	term_clear_line();	
-
+	term_clear_line();
 	ft_putstr_fd(line, STDOUT_FILENO);
 	sbuffer_clear(input->buffer);
 	sbuffer_add_str(input->buffer, line);
@@ -25,7 +24,7 @@ int		input_set_line(t_input *input, char *line)
 	return (1);
 }
 
-int		input_save_line(t_input *input)
+int	input_save_line(t_input *input)
 {
 	if (input->save_line == NULL)
 	{
@@ -36,9 +35,9 @@ int		input_save_line(t_input *input)
 	return (1);
 }
 
-int		input_restore_save_line(t_input *input)
+int	input_restore_save_line(t_input *input)
 {
-	char *line;
+	char	*line;
 
 	term_clear_line();
 	line = input->save_line;

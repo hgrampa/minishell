@@ -21,12 +21,12 @@
 # include "libft.h"
 # include "buildin.h"
 
-typedef struct	s_command
+typedef struct s_command
 {
 	char			*name;
 	char			**argv;
-	unsigned char	is_pipe:1;
-	unsigned char	is_buildin:1;
+	unsigned char	is_pipe :1;
+	unsigned char	is_buildin :1;
 	int				pipe[2];
 	int				input;
 	int				output;
