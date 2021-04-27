@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 17:10:40 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 20:17:42 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 21:29:45 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ char *factory_find_path(t_factory *factory, char *bin)
 {
 	char *path;
 
+	if (bin == NULL)
+		return (NULL);
+	if (bin[0] == '\0')
+		return (NULL);
 	if (factory->paths == NULL)
 		return (NULL);
 	if (check_abs_path(bin))
