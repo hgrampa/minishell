@@ -6,11 +6,12 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:18:43 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 13:46:30 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 14:52:08 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "factory.h"
+#include "minishell.h"
 
 struct s_comm_pair get_com_pair(t_dlist *node)
 {
@@ -75,8 +76,6 @@ int	factory_exec_command(t_dlist *node, t_minishell *shell)
 			exit(1); // TODO описание ошибки и очистка
 		if (!factory_exec_set_in(com_pair))
 			exit(1); // TODO описание ошибки и очистка
-		if (com_pair.command->is_buildin)
-			com_pair.command->buildin(com_pair.command->argv, shell); // TODO возвращение кода возврата
 		else
 		{
 			ret = execve(com_pair.command->name, com_pair.command->argv, shell->env->represent);
@@ -120,10 +119,13 @@ int	factory_exec_commands(t_factory *factory, t_minishell *shell)
 {
 	int			pid;
 	t_dlist		*node;
+	t_command	*command;
 
 	node = factory->commands;
 	while (node != NULL)
 	{
+		// command = (t_command *)node->data;
+		// if ()
 		pid = factory_exec_command(node, shell);
 		if (pid > 0)
 			factory_exec_close_pipes(node);
