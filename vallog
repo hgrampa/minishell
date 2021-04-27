@@ -1,46 +1,49 @@
-==71528== Memcheck, a memory error detector
-==71528== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==71528== Using Valgrind-3.17.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
-==71528== Command: ./minishell
-==71528== Parent PID: 71520
-==71528== 
---71528-- run: /usr/bin/dsymutil "./minishell"
-==71528== 
-==71528== HEAP SUMMARY:
-==71528==     in use at exit: 26,232 bytes in 190 blocks
-==71528==   total heap usage: 770 allocs, 580 frees, 51,114 bytes allocated
-==71528== 
+==63796== Memcheck, a memory error detector
+==63796== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==63796== Using Valgrind-3.17.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==63796== Command: ./minishell
+==63796== Parent PID: 63795
+==63796== 
+--63796-- run: /usr/bin/dsymutil "./minishell"
+==63796== Invalid read of size 1
+==63796==    at 0x100005CC7: pstate_core (pstate_core.c:20)
+==63796==    by 0x100003098: parse_line (parser.c:35)
+==63796==    by 0x100001545: process (main.c:46)
+==63796==    by 0x100001444: main (main.c:73)
+==63796==  Address 0x1010660ab is 0 bytes after a block of size 11 alloc'd
+==63796==    at 0x1000E8995: malloc (in /Users/hgrampa/.brew/Cellar/valgrind/HEAD-adaae87/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==63796==    by 0x100007A75: ft_calloc (ft_calloc.c:20)
+==63796==    by 0x100008F11: ft_strndup (ft_strndup.c:19)
+==63796==    by 0x100001E97: input_get_next_line (input_gnl.c:76)
+==63796==    by 0x1000014C5: process (main.c:28)
+==63796==    by 0x100001444: main (main.c:73)
 
+==63796== HEAP SUMMARY:
+==63796==     in use at exit: 32,668 bytes in 467 blocks
+==63796==   total heap usage: 785 allocs, 318 frees, 53,505 bytes allocated
+==63796==
+==63796== 2 bytes in 1 blocks are definitely lost in loss record 3 of 96
+==63796==    at 0x1000E8995: malloc (in /Users/hgrampa/.brew/Cellar/valgrind/HEAD-adaae87/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==63796==    by 0x100007A75: ft_calloc (ft_calloc.c:20)
+==63796==    by 0x10000897D: ft_strdup (ft_strdup.c:21)
+==63796==    by 0x10000367A: command_create (command.c:24)
+==63796==    by 0x100003A5C: factory_command_create (factory_build.c:62)
+==63796==    by 0x100003BAA: factory_biuld_command (factory_build.c:99)
+==63796==    by 0x100003CAB: factory_build_commands (factory_build.c:121)
+==63796==    by 0x1000034E4: factory_run_line (factory.c:43)
+==63796==    by 0x100001573: process (main.c:49)
+==63796==    by 0x100001444: main (main.c:73)
+==63796== 
 
-==71528== 91 bytes in 10 blocks are definitely lost in loss record 35 of 56
-==71528==    at 0x1000E5995: malloc (in /Users/hgrampa/.brew/Cellar/valgrind/HEAD-adaae87/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==71528==    by 0x100005DF5: ft_calloc (ft_calloc.c:20)
-==71528==    by 0x100007047: ft_concat3 (ft_concat.c:45)
-==71528==    by 0x100003DED: find_required_rel_path (factory_pathfinder.c:24)
-==71528==    by 0x100003CD0: factory_find_path (factory_pathfinder.c:69)
-==71528==    by 0x10000323F: factory_command_create (factory_build.c:68)
-==71528==    by 0x10000333A: factory_biuld_command (factory_build.c:96)
-==71528==    by 0x1000033FB: factory_build_commands (factory_build.c:116)
-==71528==    by 0x100002D72: factory_run_line (factory.c:36)
-==71528==    by 0x100000E13: process (main.c:54)
-==71528==    by 0x100000C84: main (main.c:79)
-==71528== 
-
-==71528== 
-
-==71528== 
-
-==71528== 
-
-==71528== 
-==71528== LEAK SUMMARY:
-==71528==    definitely lost: 91 bytes in 10 blocks
-==71528==    indirectly lost: 0 bytes in 0 blocks
-==71528==      possibly lost: 8,840 bytes in 7 blocks
-==71528==    still reachable: 17,301 bytes in 173 blocks
-==71528==         suppressed: 0 bytes in 0 blocks
-==71528== Reachable blocks (those to which a pointer was found) are not shown.
-==71528== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==71528== 
-==71528== For lists of detected and suppressed errors, rerun with: -s
-==71528== ERROR SUMMARY: 7 errors from 7 contexts (suppressed: 401 from 10)
+==63796== 
+==63796== LEAK SUMMARY:
+==63796==    definitely lost: 2 bytes in 1 blocks
+==63796==    indirectly lost: 0 bytes in 0 blocks
+==63796==      possibly lost: 8,840 bytes in 7 blocks
+==63796==    still reachable: 23,826 bytes in 459 blocks
+==63796==         suppressed: 0 bytes in 0 blocks
+==63796== Reachable blocks (those to which a pointer was found) are not shown.
+==63796== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==63796== 
+==63796== For lists of detected and suppressed errors, rerun with: -s
+==63796== ERROR SUMMARY: 8 errors from 8 contexts (suppressed: 401 from 10)
