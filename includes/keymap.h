@@ -22,7 +22,7 @@ enum e_key_type
 	EKT_BACKSPACE,
 	EKT_CNTRLD,
 	EKT_CNTRLC,
-	// EKT_CNTRL\,
+	// EKT_CNTRL\,  \\TODO norm, delete comment
 };
 
 #endif

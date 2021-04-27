@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <stdio.h>
-# include "sbuffer.h"
-# include "errors.h"
+#include <stdio.h>
+#include "sbuffer.h"
+#include "errors.h"
 
 static int	sbuffer_realloc(t_sbuffer *buffer, size_t rec_size)
 {
 	size_t	count;
 	size_t	new_size;
 	char	*ptr;
-	
+
 	count = rec_size / buffer->step + 1;
 	new_size = buffer->step * count;
 	ptr = buffer->str;
@@ -50,7 +50,7 @@ t_sbuffer	*sbuffer_create(size_t step)
 	return (buffer);
 }
 
-int			sbuffer_destroy(t_sbuffer *buffer)
+int	sbuffer_destroy(t_sbuffer *buffer)
 {
 	if (buffer->str != NULL)
 		free(buffer->str);
@@ -58,7 +58,7 @@ int			sbuffer_destroy(t_sbuffer *buffer)
 	return (1);
 }
 
-int			sbuffer_add_str(t_sbuffer *buffer, char *str)
+int	sbuffer_add_str(t_sbuffer *buffer, char *str)
 {
 	size_t	i;
 	size_t	str_len;
@@ -80,7 +80,7 @@ int			sbuffer_add_str(t_sbuffer *buffer, char *str)
 	return (1);
 }
 
-int			sbuffer_add_char(t_sbuffer *buffer, char c)
+int	sbuffer_add_char(t_sbuffer *buffer, char c)
 {
 	size_t	rec_size;
 	char	*buff_end;
@@ -92,25 +92,8 @@ int			sbuffer_add_char(t_sbuffer *buffer, char c)
 			return (0);
 	}
 	buff_end = &(buffer->str[buffer->len]);
-	*buff_end = c; 
+	*buff_end = c;
 	buffer->len += 1;
-	return (1);
-}
-
-int			sbuffer_clear(t_sbuffer *buffer)
-{
-	ft_bzero(buffer->str, buffer->size);
-	buffer->len = 0;
-	return (1);
-}
-
-int			sbuffer_backspace(t_sbuffer *buffer)
-{
-	if (buffer->len > 0)
-	{
-		buffer->len--;
-		buffer->str[buffer->len] = '\0';
-	}
 	return (1);
 }
 
@@ -143,7 +126,8 @@ int			sbuffer_backspace(t_sbuffer *buffer)
 // 	return (0);
 // }
 
-// gcc -g -L ../libft/ -lft -I ../libft/includes -I ../includes sbuffer.c -o buffer  
+// gcc -g -L ../libft/ -lft -I ../libft/includes -I ../includes
+// sbuffer.c -o buffer  
 // #define READ_BUFFSIZE 32
 // #define S_BUFFSIZE_1 1
 // #define S_BUFFSIZE_2 256

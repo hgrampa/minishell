@@ -5,7 +5,7 @@
 #include "environment.h"
 #include "minishell.h"
 
-static int	check_invalid_key(char *key)
+static int	unset_check_invalid_key(char *key)
 {
 	if (ft_isdigit(key[0]))
 		return (1);
@@ -36,7 +36,7 @@ static int	treat_arg(t_env	*env, char const *arg_str)
 	new_pair = pair_from_str(arg_str);
 	if (new_pair->key[0] == '-')
 		result = error_option(new_pair->key[1]);
-	else if (check_invalid_key(new_pair->key))
+	else if (unset_check_invalid_key(new_pair->key))
 	{
 		ft_putstr_fd("bash: unset: ", 2);
 		ft_putstr_fd(new_pair->key, 2);
@@ -67,18 +67,3 @@ int	buildin_unset(char **argv, t_minishell *shell)
 	}
 	return (result == -1);
 }
-
-// int	main(int ac, char **av, char const **env)
-// {
-// 	t_minishell	*shell;
-
-// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-// 	shell->env = env_create(env);
-// 	env_set(shell->env, "A", NULL);
-// 	printf("%d\n", buildin_unset(av, shell));
-// 	// printf("________LISTS________\n");
-// 	// print_list(shell->env->collection);
-// 	env_destroy(shell->env);
-// 	free(shell);
-// 	return (0);
-// }

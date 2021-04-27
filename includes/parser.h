@@ -28,7 +28,7 @@
 
 // TODO текущая стадия - полем
 
-struct s_pcontext;
+struct			s_pcontext;
 
 typedef int		(*t_state_body)(char**, struct s_pcontext*);
 
@@ -41,12 +41,13 @@ struct s_pcontext
 	enum e_pword_type	buffer_type;
 	t_list				*words;
 	t_env				*env;
-	unsigned char		process:1;
+	unsigned char		process :1;
 };
 
 int				parse_line(t_env *env, char *line, t_list **words);
 
-int				pcontext_set_state(struct s_pcontext *context, t_state_body next_state);
+int				pcontext_set_state(struct s_pcontext *context,
+					t_state_body next_state);
 int				pcontext_return_state(struct s_pcontext *context);
 t_state_body	pcontext_previous_state(struct s_pcontext *context);
 int				pcontext_end_process(struct s_pcontext *context, int status);
@@ -60,7 +61,8 @@ int				pstate_cntrl(char **line, struct s_pcontext *context);
 
 int				pbuffer_add_char(struct s_pcontext *context, char c);
 int				pbuffer_add_str(struct s_pcontext *context, char *str);
-int				pbuffer_open(struct s_pcontext *context, enum e_pword_type type);
-int				pbuffer_close(struct s_pcontext *context); 
+int				pbuffer_open(struct s_pcontext *context,
+					enum e_pword_type type);
+int				pbuffer_close(struct s_pcontext *context);
 
 #endif

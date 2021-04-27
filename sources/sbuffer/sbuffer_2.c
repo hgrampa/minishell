@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_code.c                                        :+:      :+:    :+:   */
+/*   sbuffer_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/24 12:00:07 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 10:42:57 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/19 11:16:31 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/27 11:02:28 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	g_exit_code;
+#include <stdio.h>
+#include "sbuffer.h"
+#include "errors.h"
 
-void	exit_code_set(int code)
+int	sbuffer_clear(t_sbuffer *buffer)
 {
-	g_exit_code = code;
+	ft_bzero(buffer->str, buffer->size);
+	buffer->len = 0;
+	return (1);
 }
 
-void	exit_code_clamp_set(int code)
+int	sbuffer_backspace(t_sbuffer *buffer)
 {
-	if (code > 255)
-		exit_code_set(code % 256);
-	else
-		exit_code_set(code);
-}
-
-int	exit_code_get(void)
-{
-	int	code;
-
-	code = g_exit_code;
-	exit_code_set(0);
-	return (code);
+	if (buffer->len > 0)
+	{
+		buffer->len--;
+		buffer->str[buffer->len] = '\0';
+	}
+	return (1);
 }

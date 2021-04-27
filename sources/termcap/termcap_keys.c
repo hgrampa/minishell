@@ -14,14 +14,14 @@
 #include "errors.h"
 
 // TODO добавить суда проверку на ASCII
-static int		term_is_key_muted(char *buff, ssize_t len)
+static int	term_is_key_muted(char *buff, ssize_t len)
 {
 	return (ft_strncmp(buff, key_right, len) == 0
 		|| ft_strncmp(buff, key_left, len) == 0
-		|| ft_strncmp(buff, key_ppage, len) == 0 
+		|| ft_strncmp(buff, key_ppage, len) == 0
 		|| ft_strncmp(buff, key_npage, len) == 0
-		|| ft_strncmp(buff, key_home, len) == 0 
-		|| ft_strncmp(buff, "\t", len) == 0 
+		|| ft_strncmp(buff, key_home, len) == 0
+		|| ft_strncmp(buff, "\t", len) == 0
 		|| ft_strncmp(buff, key_end, len) == 0);
 }
 

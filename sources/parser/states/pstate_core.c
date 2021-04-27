@@ -38,7 +38,7 @@ int	pstate_core(char **line, struct s_pcontext *context)
 		else if (**line == '\\')
 			return (pcontext_set_state(context, pstate_esc));
 		else if (ft_strchr(_PRS_CONTROLERS, **line) != NULL)
-			return(pcontext_set_state(context, pstate_cntrl));
+			return (pcontext_set_state(context, pstate_cntrl));
 		else if (ft_strchr(_PRS_DELIMITERS, **line) != NULL)
 		{
 			if (!pbuffer_close(context))
@@ -52,5 +52,5 @@ int	pstate_core(char **line, struct s_pcontext *context)
 			(*line)++;
 		}
 	}
-	return (1);
+	return (1); // TODO norm 25 lines 
 }

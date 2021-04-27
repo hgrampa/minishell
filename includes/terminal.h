@@ -24,7 +24,7 @@
 # include "libft.h"
 # include "keymap.h"
 
-typedef struct	s_terminal
+typedef struct s_terminal
 {
 	struct termios	termios;
 	struct termios	save_termios;

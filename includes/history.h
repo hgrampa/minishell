@@ -21,7 +21,7 @@
 # define _HISTORY_FILE_NAME ".mini_history"
 # define _HISTORY_READ_BUFF_SIZE 80
 
-typedef struct	s_history
+typedef struct s_history
 {
 	t_dlist	*root;
 	t_dlist	*carriage;

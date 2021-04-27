@@ -43,13 +43,3 @@ int	buildin_exit(char **argv, t_minishell *shell)
 	}
 	return (1);
 }
-
-// int	main(int ac, char **av)
-// {
-// 	t_minishell *shell;
-
-// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-// 	printf("%d\n", buildin_exit(av, shell));
-// 	free(shell);
-// 	return (0);
-// }
