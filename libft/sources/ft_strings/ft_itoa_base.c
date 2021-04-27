@@ -21,6 +21,7 @@ static size_t	num_len(int value, size_t *sign, int base)
 	else
 		*sign = 0;
 	len = 1;
+	value /= base;
 	while (value > 0)
 	{
 		len++;
