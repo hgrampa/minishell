@@ -5,13 +5,13 @@
 #include "libft.h"
 #include "environment.h"
 
-char	*dash_case(char *str, t_pair *old_pwd_pair)
+static char	*dash_case(char *str, t_pair *old_pwd_pair)
 {
 	if (ft_strncmp (str, "-", 2) == 0)
 	{
 		if (old_pwd_pair == NULL || old_pwd_pair->value == NULL)
 		{
-			printf("bash: cd: OLDPWD not set\n");
+			ft_putstr_fd("bash: cd: OLDPWD not set\n", 2);
 			return (NULL);
 		}
 		else
@@ -21,7 +21,13 @@ char	*dash_case(char *str, t_pair *old_pwd_pair)
 		return (str);
 }
 
-int	ft_cd (char *str, t_env *env)
+static void	set_new_value(t_pair *pair, char *new_value)
+{
+	free(pair->value);
+	pair->value = ft_strdup(new_value);
+}
+
+static int	ft_cd (char *str, t_env *env)
 {
 	char	cwd[100];
 	int		result;
@@ -36,22 +42,14 @@ int	ft_cd (char *str, t_env *env)
 	if (pwd_pair == NULL && old_pwd_pair == NULL)
 		result = 0;
 	else if (pwd_pair == NULL)
-		old_pwd_pair->value = ft_strdup("");
+		set_new_value(old_pwd_pair, "");
 	else if (pwd_pair == NULL)
-	{
-		free(old_pwd_pair->value);
-		old_pwd_pair->value = ft_strdup(getcwd(cwd, 100));
-	}
+		set_new_value(old_pwd_pair, getcwd(cwd, 100));
 	else if (old_pwd_pair != NULL)
-	{
-		free(old_pwd_pair->value);
-		old_pwd_pair->value = ft_strdup(pwd_pair->value);
-	}
-	printf("old pwd %s\n", getcwd(cwd, 100));
+		set_new_value(old_pwd_pair, pwd_pair->value);
 	result = chdir(str);
 	if (result != -1 && pwd_pair != NULL)
 		env_set(env, "PWD", getcwd(cwd, 100));
-	printf("new pwd %s\n", getcwd(cwd, 100));
 	return (result);
 }
 
@@ -65,15 +63,16 @@ int	buildin_cd(char **argv, t_minishell *shell)
 		home_pair = env_get_pair(shell->env, "HOME");
 		if (home_pair == NULL)
 		{
-			printf("bash: cd: HOME not set\n");
+			ft_putstr_fd("bash: cd: HOME not set\n", 2);
 			return (1);
 		}
+		return (0);
 	}
 	if (argv[2] == 0)
 		result = ft_cd(argv[1], shell->env);
 	else
 		result = -1;
-	return (result); //TODO errror management to be done
+	return (result == -1); //TODO errror management to be done
 }
 
 // int	main(int ac, char **av, char const **env)
@@ -83,10 +82,10 @@ int	buildin_cd(char **argv, t_minishell *shell)
 
 // 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
 // 	shell->env = env_create(env);
-// 	env_unset(shell->env, "HOME");
+// 	//env_unset(shell->env, "HOME");
 // 	// env_unset(shell->env, "PWD");
-// 	//env_unset(shell->env, "OLDPWD");
-// 	// env_set(shell->env, "OLDPWD", NULL);
+// 	// env_unset(shell->env, "OLDPWD");
+// 	//env_set(shell->env, "OLDPWD", NULL);
 // 	result = buildin_cd(av, shell);
 // 	printf("result = %d\n", result);
 // 	// printf("________LISTS________\n");

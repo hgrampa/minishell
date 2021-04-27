@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static size_t	ft_numlen(size_t *signature, int n)
 {
@@ -18,7 +19,8 @@ static size_t	ft_numlen(size_t *signature, int n)
 
 	*signature = (n < 0);
 	size = 1;
-	while (n > 0)
+	n /= 10;
+	while (n != 0)
 	{
 		size++;
 		n /= 10;

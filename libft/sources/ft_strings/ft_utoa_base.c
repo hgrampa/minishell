@@ -17,6 +17,7 @@ static size_t	num_len(unsigned int value, int base)
 	size_t	len;
 
 	len = 1;
+	value /= base;
 	while (value > 0)
 	{
 		len++;

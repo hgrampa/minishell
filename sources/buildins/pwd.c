@@ -10,18 +10,23 @@ int	buildin_pwd(char **argv, t_minishell *shell)
 
 	result = (char *)malloc(100);
 	result = getcwd(result, 100);
+	shell = NULL;
 	if (argv[1] != 0)
 	{
 		if (argv[1][0] == '-')
 		{
-			printf("bash: pwd: -%c: invalid option\n", argv[1][1]);
-			errno = 1;
+			ft_putstr_fd("bash: pwd: -", 2);
+			ft_putstr_fd(&argv[1][1], 2);
+			ft_putstr_fd(": invalid option\n", 2);
+			free(result);
+			return (1);
 		}
 		else
-			printf("%s\n", result);
+			ft_putstr_fd(result, 1);
 	}
 	else
-		printf("%s\n", result);
+		ft_putstr_fd(result, 1);
+	ft_putstr_fd("\n", 1);
 	free(result);
 	return (0);
 }

@@ -20,7 +20,10 @@ void	print_represent(char **array)
 
 	i = 0;
 	while (array[i] != NULL)
-		printf("%s\n", array[i++]);
+	{
+		ft_putstr_fd(array[i++], 1);
+		ft_putstr_fd("\n", 1);
+	}
 }
 
 void	print_list(t_list *lst)

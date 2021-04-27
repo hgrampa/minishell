@@ -14,10 +14,15 @@ static void	print_export_list(t_list *collection)
 	while (tmp != NULL)
 	{
 		pair = tmp->data;
-		printf("declare -x %s", pair->key);
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(pair->key, 1);
 		if (pair->value != NULL)
-			printf("=\"%s\"", pair->value);
-		printf("\n");
+		{
+			ft_putstr_fd("=\"", 1);
+			ft_putstr_fd(pair->value, 1);
+			ft_putstr_fd("\"", 1);
+		}
+		ft_putstr_fd("\n", 1);
 		tmp = tmp->next;
 	}
 }
@@ -40,10 +45,7 @@ static int	check_for_plus(char *str)
 	int	i;
 
 	if (str == NULL)
-	{
-		printf("its NULL");
 		return (0);
-	}
 	i = 0;
 	while (str[i + 1] != '\0')
 		i++;
@@ -77,6 +79,24 @@ static int	continue_ta (int result, t_pair *e_pair, t_pair *n_pair, t_env *env)
 	return (result);
 }
 
+static int	error_option(char c)
+{
+	ft_putstr_fd("bash: export: -", 2);
+	ft_putchar_fd(c, 2);
+	ft_putstr_fd(": invalid option\n", 2);
+	ft_putstr_fd("export: usage: export [-nf] ", 2);
+	ft_putstr_fd("[name[=value] ...] or export -p\n", 2);
+	return (-1);
+}
+
+static int	error_invalid(char *str)
+{
+	ft_putstr_fd("bash: export: '", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("' : not a valid identifier\n", 2);
+	return (-1);
+}
+
 static int	treat_arg(t_env	*env, char const *arg_str)
 {
 	t_pair	*new_pair;
@@ -97,13 +117,9 @@ static int	treat_arg(t_env	*env, char const *arg_str)
 		free(test);
 	}
 	if (new_pair->key[0] == '-')
-	{
-		printf("bash: export: -%c: invalid option\n", new_pair->key[1]);
-		printf("export: usage: export [-nf] [name[=value] ...] or export -p\n");
-		result = -1;
-	}
+		result = error_option(new_pair->key[1]);
 	else if (check_invalid_key(new_pair->key))
-		result = printf("bash: export: '%s' : not a valid identifier\n", new_pair->key);
+		result = error_invalid(new_pair->key);
 	return (continue_ta(result, exist_pair, new_pair, env));
 }
 
@@ -121,7 +137,7 @@ int	buildin_export(char **argv, t_minishell *shell)
 		while (argv[i] != 0 && result != -1)
 			result = treat_arg(shell->env, argv[i++]);
 	}
-	return (result == -1);
+	return (result != 0);
 }
 
 // int	main(int ac, char **av, char const **env)
@@ -132,8 +148,8 @@ int	buildin_export(char **argv, t_minishell *shell)
 // 	shell->env = env_create(env);
 // 	env_set(shell->env, "A", NULL);
 // 	printf("%d\n", buildin_export(av, shell));
-// 	printf("________LISTS________\n");
-// 	print_list(shell->env->collection);
+// 	// printf("________LISTS________\n");
+// 	// print_list(shell->env->collection);
 // 	env_destroy(shell->env);
 // 	free(shell);
 // 	return (0);

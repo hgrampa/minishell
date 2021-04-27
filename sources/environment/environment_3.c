@@ -92,7 +92,7 @@ int	env_unset(t_env *env, char const *key)
 	{
 		pair = env->collection;
 		test = pair->data;
-		if (ft_strncmp(key, test->key, 30) == 0)
+		if (ft_strcmp(key, test->key) == 0)
 		{
 			pair = env->collection;
 			env->collection = env->collection->next;
