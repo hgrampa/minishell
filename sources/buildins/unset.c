@@ -5,7 +5,7 @@
 #include "environment.h"
 #include "minishell.h"
 
-int	check_invalid_key(char *key)
+static int	check_invalid_key(char *key)
 {
 	if (ft_isdigit(key[0]))
 		return (1);
@@ -18,7 +18,16 @@ int	check_invalid_key(char *key)
 	return (0);
 }
 
-int	treat_arg(t_env	*env, char const *arg_str)
+static int	error_option(char c)
+{
+	ft_putstr_fd("bash: unset: -", 2);
+	ft_putchar_fd(c, 2);
+	ft_putstr_fd(": invalid option\n", 2);
+	ft_putstr_fd("unset: usage: unset [-f] [-v] [name ...]\n", 2);
+	return (-1);
+}
+
+static int	treat_arg(t_env	*env, char const *arg_str)
 {
 	t_pair	*new_pair;
 	int		result;
@@ -26,14 +35,14 @@ int	treat_arg(t_env	*env, char const *arg_str)
 	result = 0;
 	new_pair = pair_from_str(arg_str);
 	if (new_pair->key[0] == '-')
+		result = error_option(new_pair->key[1]);
+	else if (check_invalid_key(new_pair->key))
 	{
-		result = printf("bash: unset: -%c: invalid option\n", new_pair->key[1]);
-		printf("unset: usage: unset [-f] [-v] [name ...]\n");
+		ft_putstr_fd("bash: unset: ", 2);
+		ft_putstr_fd(new_pair->key, 2);
+		ft_putstr_fd("' : not a valid identifier\n", 2);
 		result = -1;
 	}
-	else if (check_invalid_key(new_pair->key))
-		result = printf("bash: unset: '%s' : not a valid identifier\n",
-				new_pair->key);
 	if (result == 0)
 	{
 		if (!env_unset(env, arg_str))
@@ -61,14 +70,14 @@ int	buildin_unset(char **argv, t_minishell *shell)
 
 // int	main(int ac, char **av, char const **env)
 // {
-// 	t_minishell *shell;
+// 	t_minishell	*shell;
 
 // 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
 // 	shell->env = env_create(env);
 // 	env_set(shell->env, "A", NULL);
-// 	buildin_unset(av, shell);
-// 	printf("________LISTS________\n");
-// 	print_list(shell->env->collection);
+// 	printf("%d\n", buildin_unset(av, shell));
+// 	// printf("________LISTS________\n");
+// 	// print_list(shell->env->collection);
 // 	env_destroy(shell->env);
 // 	free(shell);
 // 	return (0);
