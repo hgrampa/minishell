@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 23:24:40 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 18:54:46 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 15:00:47 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	factory_command_set_pipe(t_list **words, struct s_build_context *context)
 {
+	if ((*words)->next == NULL)
+		return (err_print_untoken("newline", 0)); // TODO syntax error near unexpected token `newline'
 	*words = (*words)->next;
 	context->command->is_pipe = 1;
 	return (1);
