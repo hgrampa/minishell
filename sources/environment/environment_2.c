@@ -40,7 +40,7 @@ int	env_destroy(t_env *env)
 
 int	get_value_from_key(t_pair *pair, char const *key)
 {
-	return (ft_strncmp(pair->key, key, 30));
+	return (ft_strcmp(pair->key, key));
 }
 
 // TODO можно оставить числовое предмтавление и менять только если реально изменится

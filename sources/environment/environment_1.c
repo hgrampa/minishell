@@ -61,7 +61,7 @@ int	create_represent(t_env *environment, int ln)
 	}
 	represent[i] = NULL;
 	free_array(environment->represent);
-	free(environment->represent);
+	//free(environment->represent);
 	environment->represent = represent;
 	return (1);
 }
@@ -72,7 +72,7 @@ t_pair	*pair_from_str(char const *str)
 
 	new_pair = (t_pair *)ft_calloc(1, sizeof(t_pair));
 	new_pair->key = ft_strcdup(str, '=');
-	if (ft_strncmp(new_pair->key, str, 30) == '\0')
+	if (ft_strcmp(new_pair->key, str) == '\0')
 		new_pair->value = NULL;
 	else
 	{
