@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/27 13:20:14 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/27 17:22:47 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC				= gcc
 
 # TODO убрать -g перед eval
 # TODO добавить -Wall -Wextra -Werror
-CC_FLAGS		:= -g 
+CC_FLAGS		:= -g
 CC_LIBS			:=
 
 FT_PATH			= ./libft
@@ -85,6 +85,13 @@ SRC				=	main.c \
 					factory_command_set.c \
 					factory_pathfinder.c \
 					buildin.c \
+					cd.c \
+					echo.c \
+					env.c \
+					exit.c \
+					export.c \
+					pwd.c \
+					unset.c \
 					pword.c \
 					pstate.c \
 					pstate_core.c \

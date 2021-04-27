@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 12:34:11 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 18:49:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static int	process(t_minishell *shell)
 		if (!parse_line(shell->env, shell->line, &shell->words))
 			return (1); // TODO возврат ошибки
 		// отдаю слова фабрике
-		if (!factory_run_line(shell->words, shell))
+		if (!factory_run_line(shell->factory, shell->words, shell))
 		{
-			ft_list_free(&shell->words, pword_destroy);
+			// ft_list_free(&shell->words, pword_destroy);
 			return (0);
 		}
 

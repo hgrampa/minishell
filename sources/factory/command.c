@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 21:33:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 13:26:24 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 18:46:34 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ t_command *command_create(char *name)
 	command = (t_command *)ft_calloc(1, sizeof(t_command));
 	if (!command)
 		return (NULL);
-	command->name = name;
+	command->name = ft_strdup(name);
 	command->input = -1;
 	command->output = -1;
+	command->pid = -1;
 	return (command);
 }
 
