@@ -45,25 +45,25 @@
 # define _FT_FALSE 0
 # define _FT_TRUE 1
 
-typedef struct	s_list
+typedef struct s_list
 {
 	void			*data;
 	struct s_list	*next;
 }				t_list;
 
-typedef struct	s_queue
+typedef struct s_queue
 {
 	void			*data;
 	struct s_queue	*next;
 }				t_queue;
 
-typedef struct	s_stack
+typedef struct s_stack
 {
 	void			*data;
 	struct s_stack	*next;
 }				t_stack;
 
-typedef struct		s_dlist
+typedef struct s_dlist
 {
 	void			*data;
 	struct s_dlist	*next;

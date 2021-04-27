@@ -52,38 +52,20 @@ void	free_pair(void *ptr)
 	pair->value = NULL;
 }
 
-int	compare_pairs(t_list *elem_cmp, t_list *temp_elem)
+t_pair	*env_get_pair(t_env *env, char const *key)
 {
-	t_pair	*data_pair;
-	t_pair	*elem_pair;
+	t_list	*lst;
+	t_pair	*pair;
 
-	data_pair = (t_pair *)elem_cmp->data;
-	elem_pair = (t_pair *)temp_elem->data;
-	return (ft_strncmp(data_pair->key, elem_pair->key, 30) < 0);
-}
-
-void	ft_list_sort(t_list *elem)
-{
-	t_list	*temp_data;
-	t_list	*temp_elem;
-	t_list	*elem_cmp;
-
-	while (elem->next != NULL)
-	{
-		temp_data = elem->data;
-		temp_elem = elem;
-		elem_cmp = elem->next;
-		while (elem_cmp != NULL)
+	lst = env->collection;
+	while (lst != NULL)
+	{	
+		if (get_value_from_key(lst->data, key) == 0)
 		{
-			if (compare_pairs(elem_cmp, temp_elem))
-			{
-				temp_data = elem_cmp->data;
-				temp_elem = elem_cmp;
-			}
-			elem_cmp = elem_cmp->next;
+			pair = lst->data;
+			return (lst->data);
 		}
-		temp_elem->data = elem->data;
-		elem->data = temp_data;
-		elem = elem->next;
+		lst = lst->next;
 	}
+	return (NULL);
 }

@@ -98,6 +98,7 @@ t_env	*env_create(char const *represent[])
 			return (NULL);
 	}
 	ft_list_sort(environment->collection);
-	create_represent(environment, ft_list_count(environment->collection) + 1); // TODO защитить
+	create_represent(environment, ft_list_count(environment->collection) + 1);
+	// TODO защитить
 	return (environment);
 }

@@ -57,7 +57,7 @@ char	*env_get_value(t_env *env, char const *key)
 	t_list	*lst;
 	t_pair	*pair;
 
-	if (ft_strncmp(key, "?", 1) == 0)
+	if (key[0] == '?')
 		return (env_get_exit_code(env));
 	lst = env->collection;
 	while (lst != NULL)
@@ -66,24 +66,6 @@ char	*env_get_value(t_env *env, char const *key)
 		{
 			pair = lst->data;
 			return (pair->value);
-		}
-		lst = lst->next;
-	}
-	return (NULL);
-}
-
-t_pair	*env_get_pair(t_env *env, char const *key)
-{
-	t_list	*lst;
-	t_pair	*pair;
-
-	lst = env->collection;
-	while (lst != NULL)
-	{	
-		if (get_value_from_key(lst->data, key) == 0)
-		{
-			pair = lst->data;
-			return (lst->data);
 		}
 		lst = lst->next;
 	}

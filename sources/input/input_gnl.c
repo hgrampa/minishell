@@ -17,7 +17,7 @@ static int	input_has_next_line(t_input *input, int *index)
 {
 	int		i;
 	char	*buffer;
-	
+
 	buffer = input->buffer->str;
 	i = -1;
 	while (buffer[++i] != '\0')
@@ -56,7 +56,7 @@ static int	input_read(t_input *input, t_minishell *shell)
 // TODO проверить cntl+v нескольких строк (не будет работать)
 // TODO добавить EOF как конец команды (или всего процесса)
 // TODO Проверить ошибку рида (закрыв STDIN_FILENO после пары строк)
-int			input_get_next_line(t_input *input, char **line, t_minishell *shell)
+int	input_get_next_line(t_input *input, char **line, t_minishell *shell)
 {
 	int	next_i;
 	int	read_res;
@@ -75,7 +75,7 @@ int			input_get_next_line(t_input *input, char **line, t_minishell *shell)
 	else
 		*line = ft_strndup(input->buffer->str, next_i);
 	sbuffer_clear(input->buffer);
-	if(!term_reset_mode(input->term))
+	if (!term_reset_mode(input->term))
 		return (0);
 	return (1);
 }

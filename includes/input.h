@@ -28,7 +28,7 @@ typedef struct s_input
 	char			*save_line;
 	t_terminal		*term;
 	int				line_len;
-	unsigned char	abort:1;
+	unsigned char	abort :1;
 }				t_input;
 
 typedef struct s_minishell	t_minishell;

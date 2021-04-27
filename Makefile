@@ -60,7 +60,8 @@ INCL			=	minishell.h \
 					command.h \
 					exit_code.h \
 					pword.h \
-					utilities.h
+					utilities.h \
+					buildin.h
 
 SRC				=	main.c \
 					signals.c \
@@ -73,8 +74,10 @@ SRC				=	main.c \
 					input_keycall.c \
 					keycall.c \
 					termcap.c \
+					termcap_2.c \
 					termcap_keys.c \
 					history.c \
+					history_2.c \
 					parser.c \
 					pbuffer.c \
 					exit_code.c \
@@ -90,6 +93,7 @@ SRC				=	main.c \
 					env.c \
 					exit.c \
 					export.c \
+					export_2.c \
 					pwd.c \
 					unset.c \
 					pword.c \
@@ -105,7 +109,8 @@ SRC				=	main.c \
 					environment_3.c \
 					environment_4.c \
 					utilities.c \
-					sbuffer.c
+					sbuffer.c \
+					sbuffer_2.c
 
 OBJ				= $(SRC:.c=.o)
 OBJ_PATH		= $(addprefix $(OBJ_DIR), $(OBJ))

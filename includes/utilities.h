@@ -13,9 +13,12 @@
 #ifndef UTILITIES_H
 # define UTILITIES_H
 
-#include <unistd.h>
-#include <stdlib.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include "libft.h"
+# include "environment.h"
 
 void	free_array(char **array);
+void	ft_list_sort(t_list *elem);
 
 #endif

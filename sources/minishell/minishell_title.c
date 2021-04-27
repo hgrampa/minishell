@@ -15,10 +15,10 @@
 static unsigned char	ft_rand(t_minishell *shell)
 {
 	shell->rand_next = shell->rand_next * 1103515245;
-	return((unsigned char)(shell->rand_next / 65536) * 2768);
+	return ((unsigned char)(shell->rand_next / 65536) *2768);
 }
 
-static void				mini_ctoa(char *str, unsigned char num)
+static void	mini_ctoa(char *str, unsigned char num)
 {
 	int		i;
 
@@ -30,7 +30,7 @@ static void				mini_ctoa(char *str, unsigned char num)
 	}
 }
 
-int						minishell_write_title(t_minishell *shell)
+int	minishell_write_title(t_minishell *shell)
 {
 	int				i;
 	char			color[4];

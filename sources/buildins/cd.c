@@ -74,23 +74,3 @@ int	buildin_cd(char **argv, t_minishell *shell)
 		result = -1;
 	return (result == -1); //TODO errror management to be done
 }
-
-// int	main(int ac, char **av, char const **env)
-// {
-// 	int		result;
-// 	t_minishell *shell;
-
-// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-// 	shell->env = env_create(env);
-// 	//env_unset(shell->env, "HOME");
-// 	// env_unset(shell->env, "PWD");
-// 	// env_unset(shell->env, "OLDPWD");
-// 	//env_set(shell->env, "OLDPWD", NULL);
-// 	result = buildin_cd(av, shell);
-// 	printf("result = %d\n", result);
-// 	// printf("________LISTS________\n");
-// 	// print_list(shell->env->collection);
-// 	env_destroy(shell->env);
-// 	free(shell);
-// 	return (result);
-// }
