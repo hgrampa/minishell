@@ -16,7 +16,7 @@ static int	check_arg_n(char *str)
 static void	print_n(char *str)
 {
 	if (!check_arg_n(str))
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 }
 
 int	buildin_echo(char **argv, t_minishell *shell)
@@ -27,6 +27,7 @@ int	buildin_echo(char **argv, t_minishell *shell)
 
 	i = 0;
 	arg_n = 1;
+	shell = NULL;
 	if (argv[1] != 0)
 	{
 		while (argv[++i] != 0)
@@ -35,15 +36,15 @@ int	buildin_echo(char **argv, t_minishell *shell)
 			if (temp == 0 || (temp && arg_n == 0))
 			{
 				arg_n = 0;
-				printf("%s", argv[i]);
+				ft_putstr_fd(argv[i], 1);
 				if (argv[i + 1] != 0)
-					printf(" ");
+					ft_putstr_fd(" ", 1);
 			}
 		}
 		print_n(argv[1]);
 	}
 	else
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 	return (0);
 }
 
@@ -54,4 +55,5 @@ int	buildin_echo(char **argv, t_minishell *shell)
 // 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
 // 	buildin_echo(av, shell);
 // 	free(shell);
+// 	return (0);
 // }
