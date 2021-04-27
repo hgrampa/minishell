@@ -6,13 +6,13 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:03 by ssentine          #+#    #+#             */
-/*   Updated: 2021/04/24 17:19:55 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 13:13:59 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 #include "environment.h"
-#include <stdio.h>
 
 void	print_represent(char **array)
 {
@@ -50,22 +50,6 @@ void	free_pair(void *ptr)
 	pair->key = NULL;
 	free(pair->value);
 	pair->value = NULL;
-}
-
-void	free_array(char **array) // TODO в утилиты
-{
-	int	i;
-
-	i = 0;
-	if (array != NULL)
-	{
-		while (array[i] != NULL)
-		{
-			free(array[i]);
-			array[i++] = NULL;
-		}
-	}
-	free(array);
 }
 
 int	compare_pairs(t_list *elem_cmp, t_list *temp_elem)

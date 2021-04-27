@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   utilities.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/24 11:34:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 13:55:06 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/27 13:10:20 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/27 13:10:55 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <sys/wait.h>
-#include <signal.h>
-#include "factory.h"
+#ifndef UTILITIES_H
+# define UTILITIES_H
 
-void	signal_handler(int signum)
-{
-	int status;
+#include <unistd.h>
+#include <stdlib.h>
 
-	wait(&status);
-	if (status == SIGINT)
-	{
-		// exit_code_set(130);
-	}
-	else if (status == SIGQUIT)
-	{
-		// exit_code_set(131);
-	}
-	// else if (signum == )
-	// {
+void	free_array(char **array);
 
-	// }
-
-}
+#endif

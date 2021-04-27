@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:03 by ssentine          #+#    #+#             */
-/*   Updated: 2021/04/23 12:52:25 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/25 17:01:22 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	create_represent(t_env *environment, int ln)
 	}
 	represent[i] = NULL;
 	free_array(environment->represent);
-	//free(environment->represent);
 	environment->represent = represent;
 	return (1);
 }

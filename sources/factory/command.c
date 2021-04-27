@@ -6,11 +6,12 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 21:33:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 11:41:36 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 13:26:24 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
+#include "utilities.h"
 
 t_command *command_create(char *name)
 {
@@ -27,13 +28,22 @@ t_command *command_create(char *name)
 
 int	command_destroy(t_command *command)
 {
+	char **argv;
+
 	if (command->argv != NULL)
-		ft_list_free(&command->argv, NULL);
+		free_array(command->argv);
+	if (command->name != NULL)
+		free(command->name);
 	free(command);
-	return (0);
+	return (1);
 }
 
-void	command_set_buildin(t_command *command, int (*buildin)(t_list))
+void		command_list_destroy(void *data)
+{
+	command_destroy((t_command *)data);
+}
+
+void	command_set_buildin(t_command *command, t_buildin buildin)
 {
 	command->is_buildin = 1;
 	command->buildin = buildin;
@@ -54,7 +64,7 @@ void command_print(void *data)
 	command = (t_command *)data;
 	printf("[\n\tname: %s,\n", command->name);
 	printf("\targv:\n\t[\n");
-	ft_list_foreach(command->argv, command_print_argv);
+	// ft_list_foreach(command->argl, command_print_argv);
 	printf("\t]\n");
 	printf("\tis_pipe: %d,\n", command->is_pipe);
 	printf("\tis_buildin: %d,\n", command->is_buildin);

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 12:24:53 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 13:19:28 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 13:14:08 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ENVIRONMENT_H
 
 # include "libft.h"
+# include "utilities.h"
 
 /*
 **	Pair of key-value environment variable
@@ -95,7 +96,6 @@ t_pair	*create_new_pair(char const *key, char const *value);
 void	print_represent(char **array);
 void	print_list(t_list *lst);
 void	free_pair(void *ptr);
-void	free_array(char **array);
 void	ft_list_sort(t_list *elem);
 char	*env_get_exit_code(t_env *env);
 

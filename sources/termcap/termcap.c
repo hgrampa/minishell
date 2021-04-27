@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 11:18:25 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 12:26:58 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int		term_reset_mode(t_terminal *term)
 {
 	if (tcsetattr(0, TCSANOW, &term->save_termios) == -1)
-		return (0);
+		return (err_print(NULL, 0, 1));
 	else
 		return (1);
 	tputs(keypad_local, 1, ft_putchar);
@@ -57,12 +57,12 @@ int		term_init(t_terminal *term)
 	// !!! TODO Убрать
 	term_type = "xterm-256color";
 	if (!isatty(STDIN_FILENO))
-		return (err_print(_ERR_NOTTERM, 0));
+		return (err_print(_ERR_NOTTERM, 0, 1));
 	if (term_type == NULL)
-		return (err_print(_ERR_NOTTERMENV, 0));
+		return (err_print(_ERR_NOTTERMENV, 0, 1));
 	success = tgetent(NULL, term_type);
 	if (success < 1)
-		return (err_print(_ERR_NOTTERMTYPE, 0));
+		return (err_print(_ERR_NOTTERMTYPE, 0, 1));
 	// TODO необходимо добавить признак того что растройки восстановленны
 	// 	если при чтении возникнет ошибка и в обработке исключения восстановить режим
 	return(1);
@@ -74,9 +74,11 @@ int		term_destroy(t_terminal *term)
 	return (1);
 }
 
-int		term_on_new_line(void)
+int		term_on_new_line(t_terminal *term)
 {
 	tputs(save_cursor, 1, ft_putchar);
+	if(!term_set_mode(term))
+		return (err_print(NULL, 0, 1));
 	return (1);
 }
 

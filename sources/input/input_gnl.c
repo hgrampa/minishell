@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 11:19:09 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 19:36:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 12:33:57 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static int	input_read(t_input *input, t_minishell *shell)
 	enum e_key_type	key;
 
 	ft_bzero(read_buffer, _INP_READ_BUFFSIZE + 1);
-	read_len = read(0, read_buffer, _INP_READ_BUFFSIZE);
+	read_len = read(STDIN_FILENO, read_buffer, _INP_READ_BUFFSIZE);
 	if (read_len == -1)
-		return (-1); // TODO код ошибки
-	if (read_len == 0)
-		return (0);
+		return (err_print(NULL, 0, 1));
+	// if (read_len == 0)
+	// 	return (0);
 	key = term_key_type(read_buffer, read_len);
 	if (key == EKT_NOTKEY)
 	{
@@ -51,17 +51,13 @@ static int	input_read(t_input *input, t_minishell *shell)
 		sbuffer_add_str(input->buffer, read_buffer);
 	}
 	else
-	{
-		if (input_take_key(key, shell))
-			return (1); // TODO код ошибки
-		else
-			return (-1);
-	}
+		return (input_take_key(key, shell));
 	return (1);
 }
 
 // TODO проверить cntl+v нескольких строк (не будет работать)
 // TODO добавить EOF как конец команды (или всего процесса)
+// TODO Проверить ошибку рида (закрыв STDIN_FILENO после пары строк)
 int			input_get_next_line(t_input *input, char **line, t_minishell *shell)
 {
 	int	next_i;
@@ -69,17 +65,12 @@ int			input_get_next_line(t_input *input, char **line, t_minishell *shell)
 
 	input->line_len = 0;
 	input->abort = 0;
-	if(!term_set_mode(input->term))
-		return (-1); // TODO код ошибки
-	term_on_new_line();
-
+	if (!term_on_new_line(input->term))
+		return (0);
 	while (!input->abort && !input_has_next_line(input, &next_i))
 	{
-		read_res = input_read(input, shell);
-		if (read_res == -1)
-			return (-1); // TODO код ошибки
-		else if (read_res == 0)
-			break ;
+		if (!input_read(input, shell))
+			input->abort = 1;
 	}
 	if (input->abort)
 		*line = NULL;
@@ -87,6 +78,6 @@ int			input_get_next_line(t_input *input, char **line, t_minishell *shell)
 		*line = ft_strndup(input->buffer->str, next_i);
 	sbuffer_clear(input->buffer);
 	if(!term_reset_mode(input->term))
-		return (-1); // TODO код ошибки
+		return (0);
 	return (1);
 }

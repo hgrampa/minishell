@@ -6,10 +6,11 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 11:32:44 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 12:34:11 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/signal.h>
 #include "minishell.h"
 #include "input.h"
 #include "parser.h"
@@ -17,73 +18,69 @@
 #include "pword.h"
 #include "factory.h"
 
-int		process(t_minishell *shell)
+static int	process(t_minishell *shell)
 {
-	t_list		*words;
-	char		*line;
-	int			gnl;
-
-	words = NULL;
-	line = NULL;
-	while (21)
+	while (shell->process)
 	{
-		minishell_write_title(shell);
+		minishell_at_newline(shell);
+
 		// TODO работаться уже с возвращаем значении
-		gnl = input_get_next_line(shell->input, &line, shell);
-		if (gnl == -1)
-			return (0); // TODO возврат ошибки
-		if (line == NULL)
+		if (!input_get_next_line(shell->input, &shell->line, shell))
+			return (0); // TODO очистку при ошибках (вроде есть)
+		if (shell->line == NULL)
 			continue ;
-		if (ft_strnstr(line, "exit", ft_strlen(line)))
+
+		// TODO вырезать и переделать
+		if (ft_strnstr(shell->line, "exit", ft_strlen(shell->line)))
 		{
-			free(line);
-			ft_list_free(&words, pword_destroy);	
+			free(shell->line);
+			ft_list_free(&shell->words, pword_destroy);	
 			minishell_exit(shell, 0);	
 		}
 
-		printf(">\"%s\"\n", line);
-		
+		// printf(">\"%s\"\n", line);
+
 		// Добавляю instance в историю
-		if (!history_add(shell->history, line))
+		if (!history_add(shell->history, shell->line))
 		{
-			free (line);
+			free (shell->line);
 			return (0); // TODO возврат ошибки
 		}
 
 		// Получаю слова от парсера
-		if (!parse_line(shell->env, line, &words))
+		if (!parse_line(shell->env, shell->line, &shell->words))
 			return (1); // TODO возврат ошибки
 		// отдаю слова фабрике
-		if (!factory_run_line(words, shell))
+		if (!factory_run_line(shell->words, shell))
 		{
-			ft_list_free(&words, pword_destroy);
+			ft_list_free(&shell->words, pword_destroy);
 			return (0);
 		}
-		
+
 		// ft_list_foreach(words, pword_print);
 
-
-		// Не чищу а отдаю истории чтоб не перевыделять
-		line = NULL;
-		ft_list_free(&words, pword_destroy);
-		words = NULL;
-		// 
-		if (gnl == 0)
-			minishell_exit(shell, 0);
+		// if (gnl == 0)
+		// 	minishell_exit(shell, 0);
 	}
 	return (1);
 }
 
 int		main(int argc, char const *argv[], char const *envp[])
 {
+	int			result;
 	t_minishell	*shell;
 
 	shell = minishell_create(_MINISHELL_TITLE, envp);
 	if (shell == NULL)
-		return (1); // TODO возврат ошибки
-	if (!minishell_init(shell))
-		return (1); // TODO возврат ошибки
-	if (!process(shell))
-		return (1);
-	return (0);
+		return (err_print(NULL, 1, 1));
+	result = 0;
+	if (minishell_init(shell))
+	{
+		if (!process(shell))
+			result = 1;
+	}
+	else
+		result = 1;
+	minishell_destroy(shell);
+	return (result);
 }
