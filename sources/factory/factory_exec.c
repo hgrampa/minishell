@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:18:43 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 14:52:08 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 18:57:56 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,55 @@ int	factory_exec_command(t_dlist *node, t_minishell *shell)
 	}
 	pid = fork();
 	if (pid == -1)
-		return (-1); // TODO возврат ошибки
+		return (0); // TODO возврат ошибки
 	else if (pid == 0)
 	{
+		shell->pid = pid;
 		if (!factory_exec_set_out(com_pair))
 			exit(1); // TODO описание ошибки и очистка
 		if (!factory_exec_set_in(com_pair))
 			exit(1); // TODO описание ошибки и очистка
+		if (com_pair.command->is_buildin)
+			ret = com_pair.command->buildin(com_pair.command->argv, shell);
 		else
-		{
 			ret = execve(com_pair.command->name, com_pair.command->argv, shell->env->represent);
-			if (ret < 0)
-				return (0); // TODO описание ошибки или выход? и очистка
-		}
-		exit(ret); 
+		exit(ret);
 	}
-	return (pid);
+	com_pair.command->pid = pid;
+	return (1);
+}
+
+int	factory_exec_buildin(t_dlist *node, t_minishell *shell)
+{
+	pid_t				pid;
+	int					ret;
+	struct s_comm_pair	com_pair;
+
+	com_pair = get_com_pair(node);
+	// TODO Узнать у дена зачем он это отдельным циклом делал (он не знает)
+	if (com_pair.command->is_pipe || (com_pair.previous != NULL && com_pair.previous->is_pipe))
+	{
+		if (pipe(com_pair.command->pipe) == -1)
+			return (-1); // TODO описание ошибки
+	}
+	pid = fork();
+	if (pid == -1)
+		return (0); // TODO возврат ошибки
+	else if (pid == 0)
+	{
+		shell->pid = pid;
+		if (!factory_exec_set_out(com_pair))
+			exit(1); // TODO описание ошибки и очистка
+		if (!factory_exec_set_in(com_pair))
+			exit(1); // TODO описание ошибки и очистка
+		if (com_pair.command->is_buildin)
+			ret = com_pair.command->buildin(com_pair.command->argv, shell);
+		else
+			ret = execve(com_pair.command->name, com_pair.command->argv, shell->env->represent);
+		exit(ret);
+	}
+	com_pair.command->pid = pid;
+	return (1);
 }
 
 // TODO и закрытие in out
@@ -93,6 +126,10 @@ int	factory_exec_close_pipes(t_dlist *node)
 	struct s_comm_pair	com_pair;
 
 	com_pair = get_com_pair(node);
+	if (com_pair.command->input != -1)
+		close(com_pair.command->input);
+	if (com_pair.command->output != -1)
+		close(com_pair.command->output);
 	if (com_pair.command->is_pipe || (com_pair.previous != NULL
 		&& com_pair.previous->is_pipe))
 	{
@@ -105,37 +142,46 @@ int	factory_exec_close_pipes(t_dlist *node)
 	return (1);
 }
 
-int	factory_handle_parent(t_dlist *node, int pid)
+int	factory_wait_command(t_dlist *node)
 {
 	int			status;
+	t_command	*command;
 
-	waitpid(pid, &status, 0);
-	// factory_exec_close_pipes(node);
-	exit_code_clamp_set(status);
+	command = (t_command *)node->data;
+	// if (!command->is_buildin && command->pid != -1)
+	if (command->pid != -1)
+	{
+		waitpid(command->pid, &status, 0);
+		factory_exec_close_pipes(node);
+		exit_code_clamp_set(status);
+	}
 	return (1);
 }
 
 int	factory_exec_commands(t_factory *factory, t_minishell *shell)
 {
-	int			pid;
 	t_dlist		*node;
-	t_command	*command;
 
 	node = factory->commands;
+	// сначала откроем всем пайпы
+	// потом выполняем комманды в цикле уснанавливая pid
 	while (node != NULL)
 	{
-		// command = (t_command *)node->data;
-		// if ()
-		pid = factory_exec_command(node, shell);
-		if (pid > 0)
-			factory_exec_close_pipes(node);
-		else if (pid == -1)
+		if (!factory_exec_command(node, shell))
 		{
 			factory->result = 0;
-			return (0); // TODO А если уже есть открытые дети???
+			break ;
+			// return (0); // TODO А если уже есть открытые дети???
 		}
 		node = node->next;
 	}
-	factory_handle_parent(node, pid);
+	// потом ждем все pid в другом цикле
+	// потом закрываю все пайпы - дескрипторы
+	node = factory->commands;
+	while (node != NULL)
+	{
+		factory_wait_command(node);
+		node = node->next;
+	}
 	return (1);
 }

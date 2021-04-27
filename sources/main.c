@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 14:40:28 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 18:49:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	process(t_minishell *shell)
 		// отдаю слова фабрике
 		if (!factory_run_line(shell->factory, shell->words, shell))
 		{
-			ft_list_free(&shell->words, pword_destroy);
+			// ft_list_free(&shell->words, pword_destroy);
 			return (0);
 		}
 

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:04:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 14:44:27 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 17:47:45 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <dirent.h>
 # include <sys/errno.h>
 # include <termios.h>
+# include <fcntl.h>
 
 # include "libft.h"
 # include "environment.h"
@@ -45,6 +46,7 @@ typedef struct	s_minishell
 	unsigned long	rand_next;
 	t_list			*words;
 	char			*line;
+	pid_t			pid;
 }				t_minishell;
 
 t_minishell	*minishell_create(const char *title, const char **envp);

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 11:19:09 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 12:33:57 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 18:54:51 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ static int	input_read(t_input *input, t_minishell *shell)
 	read_len = read(STDIN_FILENO, read_buffer, _INP_READ_BUFFSIZE);
 	if (read_len == -1)
 		return (err_print(NULL, 0, 1));
-	// if (read_len == 0)
-	// 	return (0);
 	key = term_key_type(read_buffer, read_len);
 	if (key == EKT_NOTKEY)
 	{
