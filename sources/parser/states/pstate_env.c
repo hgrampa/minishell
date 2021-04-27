@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:05 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 13:21:20 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 10:59:45 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	pstate_rename_var(char **line, struct s_pcontext *context) // TODO П
 	{
 		name = get_var_name(line);
 		if (name == NULL)
-			return (pcontext_end_process(context, err_print(NULL, 0)));
+			return (pcontext_end_process(context, err_print(NULL, 0, 1)));
 		if (!pstate_set_value(context, name))
 		{
 			free(name);

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 18:55:36 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 10:59:40 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int							pstate_cntrl(char **line, struct s_pcontext *context)
 	
 	type = cntrl_get_type(*line);
 	if (type == EWT_UNKNOWN)
-		return (pcontext_end_process(context, err_print(_ERR_UNKNOWN, 0)));
+		return (pcontext_end_process(context, err_print(_ERR_UNKNOWN, 0, 1)));
 	if (!pbuffer_close(context)	|| !pbuffer_open(context, type)
 		|| !cntrl_add_value(type, context) || !pbuffer_close(context))
 		return (0);
-	if (type == EWT_REDIRECT3) 	// проматываю line
+	if (type == EWT_REDIRECT3) // проматываю line
 		(*line) += 2;
 	else
 		(*line)++;

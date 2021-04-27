@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 11:35:44 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 12:48:44 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 10:59:34 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	pbuffer_open(struct s_pcontext *context, enum e_pword_type type)
 	{
 		context->buffer = sbuffer_create(_PRS_BUFFSIZE);
 		if (context->buffer == NULL)
-			return (err_print(NULL, 0));
+			return (err_print(NULL, 0, 1));
 		context->buffer_type = type;
 	}
 	return (1);
@@ -54,7 +54,7 @@ int	pbuffer_close(struct s_pcontext *context)
 	{
 		word = (t_pword *)ft_calloc(1, sizeof(t_pword));
 		if (word == NULL)
-			return (err_print(NULL, 0));
+			return (err_print(NULL, 0, 1));
 		word->type = context->buffer_type;
 		word->value = ft_strdup(context->buffer->str);
 		if (!ft_list_add(&context->words, word))
@@ -62,7 +62,7 @@ int	pbuffer_close(struct s_pcontext *context)
 			free(word->value);
 			free(word);
 			sbuffer_destroy(context->buffer);
-			return (err_print(NULL, 0));
+			return (err_print(NULL, 0, 1));
 		}
 		sbuffer_destroy(context->buffer);
 		context->buffer = NULL;

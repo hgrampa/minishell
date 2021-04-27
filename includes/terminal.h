@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:04:04 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 11:17:43 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 12:18:38 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int				term_init(t_terminal *term);
 int				term_destroy(t_terminal *term);
 int				term_reset_mode(t_terminal *term);
 int				term_set_mode(t_terminal *term);
-int				term_on_new_line(void);
+int				term_on_new_line(t_terminal *term);
 enum e_key_type	term_key_type(char *buff, ssize_t len);
 int				term_clear_line(void);
 

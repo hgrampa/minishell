@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_code.c                                        :+:      :+:    :+:   */
+/*   free_carray.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/24 12:00:07 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 10:42:57 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/27 13:09:35 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/27 13:10:11 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	g_exit_code;
+#include "utilities.h"
 
-void	exit_code_set(int code)
+void	free_array(char **array)
 {
-	g_exit_code = code;
-}
+	int	i;
 
-void	exit_code_clamp_set(int code)
-{
-	if (code > 255)
-		exit_code_set(code % 256);
-	else
-		exit_code_set(code);
-}
-
-int exit_code_get(void)
-{
-	int code;
-
-	code = g_exit_code;
-	exit_code_set(0);
-	return (code);
+	i = 0;
+	if (array != NULL)
+	{
+		while (array[i] != NULL)
+		{
+			free(array[i]);
+			array[i++] = NULL;
+		}
+	}
+	free(array);
 }

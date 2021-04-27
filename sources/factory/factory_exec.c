@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:18:43 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/26 21:21:49 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 13:46:30 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ int	factory_exec_command(t_dlist *node, t_minishell *shell)
 	if (com_pair.command->is_pipe || (com_pair.previous != NULL && com_pair.previous->is_pipe))
 	{
 		if (pipe(com_pair.command->pipe) == -1)
-			return (0); // TODO описание ошибки
+			return (-1); // TODO описание ошибки
 	}
 	pid = fork();
 	if (pid == -1)
-		return (0); // TODO возврат ошибки
+		return (-1); // TODO возврат ошибки
 	else if (pid == 0)
 	{
 		if (!factory_exec_set_out(com_pair))
@@ -120,7 +120,6 @@ int	factory_exec_commands(t_factory *factory, t_minishell *shell)
 {
 	int			pid;
 	t_dlist		*node;
-	t_command	*command;
 
 	node = factory->commands;
 	while (node != NULL)
@@ -128,6 +127,11 @@ int	factory_exec_commands(t_factory *factory, t_minishell *shell)
 		pid = factory_exec_command(node, shell);
 		if (pid > 0)
 			factory_exec_close_pipes(node);
+		else if (pid == -1)
+		{
+			factory->result = 0;
+			return (0); // TODO А если уже есть открытые дети???
+		}
 		node = node->next;
 	}
 	factory_handle_parent(node, pid);
