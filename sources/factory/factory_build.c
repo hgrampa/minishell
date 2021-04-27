@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 13:00:48 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 18:45:25 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 20:55:43 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	factory_build_command_param(t_factory *factory, t_list **words,
 		}
 		else
 		{
-			if (!factory_command_set_argv(word, context)) // 
+			if (!factory_command_set_argv(word, context))
 				return (0);
 		}	
 		*words = (*words)->next;
@@ -93,13 +93,16 @@ int	factory_biuld_command(t_factory *factory, t_list **words,
 	}
 	word = (t_pword *)(*words)->data;
 	if (word->type == EWT_WORD)
+	{
 		context->command = factory_command_create(factory, word->value, context);
-	// TODO Тут отработку ридеректа как первого слова
+		*words = (*words)->next;
+	}
+	else if (word->type == EWT_REDIRECT1 || word->type == EWT_REDIRECT2 || word->type == EWT_REDIRECT3)
+		context->command = command_create(NULL);
 	else
 		return (err_print_untoken(word->value, 0));
 	if (context->command == NULL)
 		return (0);
-	*words = (*words)->next;
 	return (factory_build_command_param(factory, words, context));
 }
 
