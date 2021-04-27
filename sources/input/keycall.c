@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:07:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 11:27:14 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 12:03:15 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int		keycall_up_arrow(t_minishell *shell)
 	line = history_up(shell->history);
 	if (line == NULL)
 		return (keycall_bell());
-	input_save_line(shell->input);
+	if (!input_save_line(shell->input))
+		return (1);
 	return (input_set_line(shell->input, line));
 }
 

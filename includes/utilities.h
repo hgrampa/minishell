@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   utilities.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/24 11:34:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/26 18:33:48 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/27 13:10:20 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/27 13:10:55 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <sys/wait.h>
-#include "factory.h"
-#include "exit_code.h"
+#ifndef UTILITIES_H
+# define UTILITIES_H
 
-void	signal_quit_handler(int signum)
-{
-	int status;
+#include <unistd.h>
+#include <stdlib.h>
 
-	wait(&status);
-	exit_code_set(128 + status);
-	printf("Quit: %d\n", signum);
-}
+void	free_array(char **array);
 
-void	signal_int_handler(int signum)
-{
-	int status;
-
-	wait(&status);
-	exit_code_set(128 + status);
-	ft_putchar('\n');
-}
+#endif

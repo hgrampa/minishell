@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/26 16:54:09 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/27 13:20:14 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ INCL_DIR		=	includes/ \
 					libft/includes/
 
 SRC_DIR			=	sources/ \
+					sources/minishell \
 					sources/parser \
 					sources/parser/states \
 					sources/factory \
@@ -41,7 +42,7 @@ SRC_DIR			=	sources/ \
 					sources/history \
 					sources/errors \
 					sources/buildins \
-					sources/minishell
+					sources/utilites
 
 OBJ_DIR			=	objects/
 
@@ -58,7 +59,8 @@ INCL			=	minishell.h \
 					factory.h \
 					command.h \
 					exit_code.h \
-					pword.h
+					pword.h \
+					utilities.h
 
 SRC				=	main.c \
 					signals.c \
@@ -78,6 +80,7 @@ SRC				=	main.c \
 					exit_code.c \
 					factory.c \
 					command.c \
+					factory_build.c \
 					factory_exec.c \
 					factory_command_set.c \
 					factory_pathfinder.c \
@@ -94,6 +97,7 @@ SRC				=	main.c \
 					environment_2.c \
 					environment_3.c \
 					environment_4.c \
+					utilities.c \
 					sbuffer.c
 
 OBJ				= $(SRC:.c=.o)

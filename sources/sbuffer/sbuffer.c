@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 11:16:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 12:48:44 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 11:02:28 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	sbuffer_realloc(t_sbuffer *buffer, size_t rec_size)
 	ptr = buffer->str;
 	buffer->str = (char *)ft_calloc(1, new_size);
 	if (buffer->str == NULL)
-		return (err_print(NULL, 0));
+		return (err_print(NULL, 0, 1));
 	ft_memcpy(buffer->str, ptr, buffer->size);
 	free(ptr);
 	buffer->size = new_size;

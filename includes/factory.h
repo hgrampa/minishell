@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:24:23 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/26 16:52:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 13:00:02 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,10 @@
 # include "command.h"
 # include "buildin.h"
 # include "errors.h"
-
+# include "exit_code.h"
 
 #define _PIPE_SIDE_OUT 0
 #define _PIPE_SIDE_IN 1
-
-// TODO bash: syntax error near unexpected token `|'
-// TODO bash: syntax error near unexpected token `;'
-// TODO bash: dfs: command not found
-
-
 
 struct s_build_context
 {
@@ -41,7 +35,6 @@ typedef struct	s_factory
 {
 	t_dlist		*commands;
 	int			result;
-	char		*env_path; // TODO потом убрать
 	char		**paths;
 }				t_factory;
 

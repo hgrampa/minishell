@@ -6,11 +6,12 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 21:33:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 18:53:50 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 13:26:24 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
+#include "utilities.h"
 
 t_command *command_create(char *name)
 {
@@ -30,14 +31,16 @@ int	command_destroy(t_command *command)
 	char **argv;
 
 	if (command->argv != NULL)
-	{
-		argv = command->argv;
-		while ((*argv) != NULL)
-			free((*argv)++);
-		free(argv); // TODO проверить очисткуу
-	}
+		free_array(command->argv);
+	if (command->name != NULL)
+		free(command->name);
 	free(command);
-	return (0);
+	return (1);
+}
+
+void		command_list_destroy(void *data)
+{
+	command_destroy((t_command *)data);
 }
 
 void	command_set_buildin(t_command *command, t_buildin buildin)

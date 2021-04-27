@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_code.c                                        :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/24 12:00:07 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 10:42:57 by hgrampa          ###   ########.fr       */
+/*   Created: 2021/04/24 11:34:59 by hgrampa           #+#    #+#             */
+/*   Updated: 2021/04/27 12:35:53 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	g_exit_code;
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
+#include <stdio.h>
+#include "minishell.h"
 
-void	exit_code_set(int code)
+void	minishell_signal_quit(int signum)
 {
-	g_exit_code = code;
+	int status;
+
+	wait(&status);
+	exit_code_set(128 + status);
+	printf("Quit: %d\n", signum);
 }
 
-void	exit_code_clamp_set(int code)
+void	minishell_signal_int(int signum)
 {
-	if (code > 255)
-		exit_code_set(code % 256);
-	else
-		exit_code_set(code);
-}
+	int status;
 
-int exit_code_get(void)
-{
-	int code;
-
-	code = g_exit_code;
-	exit_code_set(0);
-	return (code);
+	wait(&status);
+	exit_code_set(128 + status);
+	ft_putchar('\n');
 }
