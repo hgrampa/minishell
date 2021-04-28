@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 22:29:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 08:56:47 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@
 #include "environment.h"
 #include "pword.h"
 #include "factory.h"
+
+// TODO
+// 	снес PATH и перестали работать билдын env
+// 	и перестали работать относительные пути (и мб абсолютные)
+// 	env после удаления всех переменных
+// !!!	export a=b; echo $a - не напечатал b (парсить только до ;) - фабрику в парсер
+//	echo asadads $test echo lsds - asadads ;echo lsds (test =";")
+//	echo asadads $test echo lsds - asadads ; echo lsds (пробел)
+//	exit 99999999999999999999999999999999999999999999999
+// 		(bash: exit: 99999999999999999999999999999999999999999999999: numeric argument required)
+// 	exit 257 - сега
 
 static int	process(t_minishell *shell)
 {

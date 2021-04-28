@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:07:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 12:03:15 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 08:52:46 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	keycall_backspace(t_minishell *shell)
 int	keycall_cntrl_c(t_minishell *shell)
 {
 	write(1, "\n", 1);// TODO омега костыль
+	exit_code_set(1);
 	shell->input->abort = 1;
 	return (1);
 }

@@ -18,23 +18,6 @@
 ==63796==    by 0x1000014C5: process (main.c:28)
 ==63796==    by 0x100001444: main (main.c:73)
 
-==63796== HEAP SUMMARY:
-==63796==     in use at exit: 32,668 bytes in 467 blocks
-==63796==   total heap usage: 785 allocs, 318 frees, 53,505 bytes allocated
-==63796==
-==63796== 2 bytes in 1 blocks are definitely lost in loss record 3 of 96
-==63796==    at 0x1000E8995: malloc (in /Users/hgrampa/.brew/Cellar/valgrind/HEAD-adaae87/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==63796==    by 0x100007A75: ft_calloc (ft_calloc.c:20)
-==63796==    by 0x10000897D: ft_strdup (ft_strdup.c:21)
-==63796==    by 0x10000367A: command_create (command.c:24)
-==63796==    by 0x100003A5C: factory_command_create (factory_build.c:62)
-==63796==    by 0x100003BAA: factory_biuld_command (factory_build.c:99)
-==63796==    by 0x100003CAB: factory_build_commands (factory_build.c:121)
-==63796==    by 0x1000034E4: factory_run_line (factory.c:43)
-==63796==    by 0x100001573: process (main.c:49)
-==63796==    by 0x100001444: main (main.c:73)
-==63796== 
-
 ==63796== 
 ==63796== LEAK SUMMARY:
 ==63796==    definitely lost: 2 bytes in 1 blocks
