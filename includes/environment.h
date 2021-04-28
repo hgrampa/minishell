@@ -98,5 +98,6 @@ void	print_list(t_list *lst);
 void	free_pair(void *ptr);
 void	ft_list_sort(t_list *elem);
 char	*env_get_exit_code(t_env *env);
+void	increment_shlvl(t_env *env);
 
 #endif

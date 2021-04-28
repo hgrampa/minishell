@@ -20,7 +20,7 @@ static int	unset_check_invalid_key(char *key)
 
 static int	error_option(char c)
 {
-	ft_putstr_fd("bash: unset: -", 2);
+	ft_putstr_fd("minishell: unset: -", 2);
 	ft_putchar_fd(c, 2);
 	ft_putstr_fd(": invalid option\n", 2);
 	ft_putstr_fd("unset: usage: unset [-f] [-v] [name ...]\n", 2);
@@ -38,7 +38,7 @@ static int	treat_arg(t_env	*env, char const *arg_str)
 		result = error_option(new_pair->key[1]);
 	else if (unset_check_invalid_key(new_pair->key))
 	{
-		ft_putstr_fd("bash: unset: ", 2);
+		ft_putstr_fd("minishell: unset: ", 2);
 		ft_putstr_fd(new_pair->key, 2);
 		ft_putstr_fd("' : not a valid identifier\n", 2);
 		result = -1;

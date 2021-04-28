@@ -7,18 +7,21 @@
 
 static int	continue_ta (int result, t_pair *e_pair, t_pair *n_pair, t_env *env)
 {
+	if (n_pair->value == NULL && e_pair)
+		result = 1;
 	if (result == 0)
 	{
 		if (e_pair == NULL)
 		{
-			if (!ft_list_add(&(env->collection), n_pair) || !env_update(env))
-				result = 1;
+			ft_list_add(&(env->collection), n_pair);
+			env_update(env);
 		}
 		else
 		{
 			free(e_pair->value);
 			e_pair->value = ft_strdup(n_pair->value);
-			result = 21;
+			env_update(env);
+			result = 1;
 		}
 	}
 	if (result != 0)
@@ -31,7 +34,7 @@ static int	continue_ta (int result, t_pair *e_pair, t_pair *n_pair, t_env *env)
 
 static int	error_option(char c)
 {
-	ft_putstr_fd("bash: export: -", 2);
+	ft_putstr_fd("minishell: export: -", 2);
 	ft_putchar_fd(c, 2);
 	ft_putstr_fd(": invalid option\n", 2);
 	ft_putstr_fd("export: usage: export [-nf] ", 2);
@@ -41,7 +44,7 @@ static int	error_option(char c)
 
 static int	error_invalid(char *str)
 {
-	ft_putstr_fd("bash: export: '", 2);
+	ft_putstr_fd("minishell: export: '", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("' : not a valid identifier\n", 2);
 	return (-1);
@@ -89,18 +92,3 @@ int	buildin_export(char **argv, t_minishell *shell)
 	}
 	return (result != 0);
 }
-
-// int	main(int ac, char **av, char const **env)
-// {
-// 	t_minishell	*shell;
-//
-// 	shell = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-// 	shell->env = env_create(env);
-// 	env_set(shell->env, "A", NULL);
-// 	printf("%d\n", buildin_export(av, shell));
-// 	// printf("________LISTS________\n");
-// 	// print_list(shell->env->collection);
-// 	env_destroy(shell->env);
-// 	free(shell);
-// 	return (0);
-// }

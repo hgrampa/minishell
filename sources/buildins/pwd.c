@@ -15,7 +15,7 @@ int	buildin_pwd(char **argv, t_minishell *shell)
 	{
 		if (argv[1][0] == '-')
 		{
-			ft_putstr_fd("bash: pwd: -", 2);
+			ft_putstr_fd("minishell: pwd: -", 2);
 			ft_putstr_fd(&argv[1][1], 2);
 			ft_putstr_fd(": invalid option\n", 2);
 			free(result);

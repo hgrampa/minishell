@@ -11,11 +11,14 @@ static char	*dash_case(char *str, t_pair *old_pwd_pair)
 	{
 		if (old_pwd_pair == NULL || old_pwd_pair->value == NULL)
 		{
-			ft_putstr_fd("bash: cd: OLDPWD not set\n", 2);
+			ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
 			return (NULL);
 		}
 		else
+		{
+			printf("%s\n", old_pwd_pair->value);
 			return (old_pwd_pair->value);
+		}
 	}
 	else
 		return (str);
@@ -63,7 +66,7 @@ int	buildin_cd(char **argv, t_minishell *shell)
 		home_pair = env_get_pair(shell->env, "HOME");
 		if (home_pair == NULL)
 		{
-			ft_putstr_fd("bash: cd: HOME not set\n", 2);
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 			return (1);
 		}
 		return (0);
