@@ -6,16 +6,23 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:04:19 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 10:50:27 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 11:21:12 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
 #include "environment.h"
+#include "factory.h"
 
-static void	parse_context_init(struct s_pcontext *context, t_env *env)
+static void	parse_context_init(struct s_pcontext *context, t_env *env,
+	t_list **words)
 {
+	if (*words != NULL)
+	{
+		ft_list_free(words, pword_destroy);
+		*words = NULL;
+	}
 	context->current_state = pstate_core;
 	context->state_stack = NULL;
 	context->buffer = NULL;
@@ -31,12 +38,7 @@ int	parse_line(t_minishell *shell, char *line, t_list **words)
 
 	while (*line != '\0')
 	{
-		if (*words != NULL);
-		{
-			ft_list_free(&shell->words, pword_destroy);
-			*words = NULL;
-		}
-		parse_context_init(&context, shell->env);
+		parse_context_init(&context, shell->env, words);
 		while (context.process)
 		{
 			result = context.current_state(&line, &context);
