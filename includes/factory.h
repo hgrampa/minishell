@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:24:23 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 20:33:40 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 12:11:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,38 @@ struct s_comm_pair
 	t_command		*previous;
 };
 
-t_factory	*factory_create(void);
-int			factory_destroy(t_factory *factory);
-int			factory_clear(t_factory *factory);
-int			factory_init(t_factory *factory, t_minishell *shell);
+t_factory			*factory_create(void);
+int					factory_destroy(t_factory *factory);
+int					factory_clear(t_factory *factory);
+int					factory_init(t_factory *factory, t_minishell *shell);
 
-int			factory_run_line(t_factory *factory, t_list *words,
+int					factory_run_line(t_factory *factory, t_list *words,
 	t_minishell *shell);
-int			factory_build_commands(t_factory *factory, t_list *words,
+int					factory_build_commands(t_factory *factory, t_list *words,
 	t_minishell *shell);
-int			factory_exec_commands(t_factory *factory, t_minishell *shell);
-char		*factory_find_path(t_factory *factory, char *bin);
+int					factory_exec_commands(t_factory *factory,
+	t_minishell *shell);
+char				*factory_find_path(t_factory *factory, char *bin);
 
-int			factory_command_set_pipe(t_list **words,
+int					factory_command_set_pipe(t_list **words,
 	struct s_build_context *context);
-int			factory_command_set_semicolon(t_list **words, 
+int					factory_command_set_semicolon(t_list **words, 
 	struct s_build_context *context);
-int			factory_command_set_input(t_list **words,
+int					factory_command_set_input(t_list **words,
 	struct s_build_context *context);
-int			factory_command_set_output(t_list **words,
+int					factory_command_set_output(t_list **words,
 	struct s_build_context *context,
 	int to_end);
-int			factory_command_set_argv(t_pword *word,
+int					factory_command_set_argv(t_pword *word,
 	struct s_build_context *context);
+
+struct s_comm_pair	factory_get_com_pair(t_dlist *node);
+int					factory_exec_set_out(struct s_comm_pair	pair);
+int					factory_exec_set_in(struct s_comm_pair	pair);
+int					factory_exec_command(t_dlist *node, t_minishell *shell);
+int					factory_exec_buildin(struct s_comm_pair pair,
+	t_minishell *shell);
+int					factory_exec_bin(struct s_comm_pair	pair,
+	t_minishell *shell);
 
 #endif

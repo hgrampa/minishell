@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 13:00:48 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 22:47:06 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 12:26:55 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	factory_biuld_command(t_factory *factory, t_list **words,
 		context->command = factory_command_create(factory, word->value, context);
 		*words = (*words)->next;
 	}
-	else if (word->type == EWT_REDIRECT1 || word->type == EWT_REDIRECT2 || word->type == EWT_REDIRECT3)
+	else if (word->type == EWT_REDIRECT1 || word->type == EWT_REDIRECT2
+		|| word->type == EWT_REDIRECT3)
 		context->command = command_create(NULL);
 	else
 		return (err_print_untoken(word->value, 0));
@@ -109,7 +110,8 @@ int	factory_biuld_command(t_factory *factory, t_list **words,
 	return (factory_build_command_param(factory, words, context));
 }
 
-int factory_build_commands(t_factory *factory, t_list *words, t_minishell *shell)
+int factory_build_commands(t_factory *factory, t_list *words,
+	t_minishell *shell)
 {
 	int						result;
 	struct s_build_context	context;
