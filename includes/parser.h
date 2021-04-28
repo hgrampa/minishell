@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 08:49:43 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 09:43:02 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 
 struct			s_pcontext;
 
+typedef struct s_minishell	t_minishell;
+
+
 typedef int		(*t_state_body)(char**, struct s_pcontext*);
 
 struct s_pcontext
@@ -44,7 +47,7 @@ struct s_pcontext
 	unsigned char		process :1;
 };
 
-int				parse_line(t_env *env, char *line, t_list **words);
+int				parse_line(t_minishell *shell, char *line, t_list **words);
 
 int				pcontext_set_state(struct s_pcontext *context,
 					t_state_body next_state);

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 08:56:47 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 09:55:59 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@
 // TODO
 // 	снес PATH и перестали работать билдын env
 // 	и перестали работать относительные пути (и мб абсолютные)
+
 // 	env после удаления всех переменных
-// !!!	export a=b; echo $a - не напечатал b (парсить только до ;) - фабрику в парсер
+
+// export a=b; echo $a - не напечатал b (парсить только до ;) - фабрику в парсер
+
 //	echo asadads $test echo lsds - asadads ;echo lsds (test =";")
-//	echo asadads $test echo lsds - asadads ; echo lsds (пробел)
-//	exit 99999999999999999999999999999999999999999999999
+//		echo asadads $test echo lsds - asadads ; echo lsds (пробел)
+
+//	exit 99999999999999999999999999999999999999999999999 - сега
 // 		(bash: exit: 99999999999999999999999999999999999999999999999: numeric argument required)
+
 // 	exit 257 - сега
 
 static int	process(t_minishell *shell)
@@ -54,14 +59,14 @@ static int	process(t_minishell *shell)
 		}
 
 		// Получаю слова от парсера
-		if (!parse_line(shell->env, shell->line, &shell->words))
+		if (!parse_line(shell, shell->line, &shell->words))
 			return (1); // TODO возврат ошибки
 		// отдаю слова фабрике
-		if (!factory_run_line(shell->factory, shell->words, shell))
-		{
-			// ft_list_free(&shell->words, pword_destroy);
-			return (0);
-		}
+		// if (!factory_run_line(shell->factory, shell->words, shell))
+		// {
+		// 	// ft_list_free(&shell->words, pword_destroy);
+		// 	return (0);
+		// }
 
 		// ft_list_foreach(words, pword_print);
 		// if (gnl == 0)
