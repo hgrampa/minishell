@@ -86,6 +86,6 @@ void	increment_shlvl(t_env *env)
 		else if (level == 1001)
 			shlvl_pair->value = ft_strdup("1");
 		else
-			shlvl_pair->value = ft_strdup(ft_itoa(level));
+			shlvl_pair->value = ft_itoa(level);
 	}
 }
