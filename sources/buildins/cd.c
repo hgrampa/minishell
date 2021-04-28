@@ -83,5 +83,7 @@ int	buildin_cd(char **argv, t_minishell *shell)
 		result = ft_cd(argv[1], shell->env);
 	else
 		result = -1;
-	return (result == -1);  //TODO errror management to be done
+	if (result == -1)
+		cd_err_print(NULL, 1, 1, argv[1]);
+	return (result == -1);
 }
