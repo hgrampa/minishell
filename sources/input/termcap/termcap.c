@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:18:20 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:32:34 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ int	term_init(void)
 	int		success;
 	char	*term_type;
 
-	term_type = getenv("TERM");
+	// term_type = getenv("TERM");
+	// !!! TODO Убрать
+	term_type = "xterm-256color";
 	if (!isatty(STDIN_FILENO))
 		return (err_print(_ERR_NOTTERM, 0, 1));
 	if (term_type == NULL)

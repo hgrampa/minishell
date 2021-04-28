@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:04:18 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:20:17 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:35:18 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	factory_build_command_param(t_list **words,
 		else if (word->type == EWT_SEMICOLON)
 			return (factory_command_set_semicolon(words, context));
 		else if (word->type == EWT_REDIRECT1 || word->type == EWT_REDIRECT2
-			|| word->type == EWT_REDIRECT1)
+			|| word->type == EWT_REDIRECT3)
 		{
 			if (!factory_command_set_redirect(word->type, words, context))
 				return (0);
