@@ -16,7 +16,7 @@ int	buildin_env(char **argv, t_minishell *shell)
 		path_pair = env_get_pair(shell->env, "PATH");
 		if (path_pair == NULL)
 		{
-			ft_putstr_fd("bash: env: No such file or directory\n", 2);
+			ft_putstr_fd("minishell: env: No such file or directory\n", 2);
 			result = 1;
 		}
 		else

@@ -69,3 +69,23 @@ t_pair	*env_get_pair(t_env *env, char const *key)
 	}
 	return (NULL);
 }
+
+void	increment_shlvl(t_env *env)
+{
+	t_pair	*shlvl_pair;
+	int		level;
+
+	shlvl_pair = env_get_pair(env, "SHLVL");
+	if (shlvl_pair != NULL)
+	{
+		level = ft_atoi(shlvl_pair->value);
+		level++;
+		free(shlvl_pair->value);
+		if (level == 1000)
+			shlvl_pair->value = ft_strdup("");
+		else if (level == 1001)
+			shlvl_pair->value = ft_strdup("1");
+		else
+			shlvl_pair->value = ft_strdup(ft_itoa(level));
+	}
+}
