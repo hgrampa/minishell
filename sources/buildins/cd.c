@@ -33,9 +33,9 @@ static void	set_new_value(t_pair *pair, char *new_value)
 static char	*set_pwd(t_pair *pwd_pair)
 {
 	if (pwd_pair)
-		return (ft_strdup(pwd_pair->value));
+		return (pwd_pair->value);
 	else
-		return (ft_strdup(""));
+		return ("");
 }
 
 static int	ft_cd (char *str, t_env *env)
@@ -76,11 +76,12 @@ int	buildin_cd(char **argv, t_minishell *shell)
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 			return (1);
 		}
-		return (0);
+		else
+			result = ft_cd(home_pair->value, shell->env);
 	}
-	if (argv[2] == 0)
+	else if (argv[2] == 0)
 		result = ft_cd(argv[1], shell->env);
 	else
 		result = -1;
-	return (result == -1); //TODO errror management to be done
+	return (result == -1);  //TODO errror management to be done
 }
