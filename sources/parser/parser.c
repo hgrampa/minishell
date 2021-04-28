@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:04:19 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 09:51:45 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 10:50:27 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ int	parse_line(t_minishell *shell, char *line, t_list **words)
 
 	while (*line != '\0')
 	{
+		if (*words != NULL);
+		{
+			ft_list_free(&shell->words, pword_destroy);
+			*words = NULL;
+		}
 		parse_context_init(&context, shell->env);
 		while (context.process)
 		{
@@ -41,8 +46,9 @@ int	parse_line(t_minishell *shell, char *line, t_list **words)
 		ft_stack_free(&(context.state_stack), NULL);
 		if (context.buffer != NULL)
 			sbuffer_destroy(context.buffer);
+		*words = context.words;
 		if (result == 1)
-			result = factory_run_line(shell->factory, context.words, shell);
+			result = factory_run_line(shell->factory, *words, shell);
 		if (!result)
 			break ;
 	}
