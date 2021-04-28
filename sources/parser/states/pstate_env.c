@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:05 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 10:59:45 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 10:10:01 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static int	pstate_rename_var(char **line, struct s_pcontext *context) // TODO П
 			return (0);
 		}
 		free(name); // TODO можно переделать get_var_name чтоб без малока было
+		return (pcontext_return_state(context));
 	}
 	else if (**line == '?')
 	{
