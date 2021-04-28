@@ -13,7 +13,7 @@
 ==82577== 2 bytes in 1 blocks are definitely lost in loss record 1 of 56
 ==82577==    at 0x1000E9995: malloc (in /Users/hgrampa/.brew/Cellar/valgrind/HEAD-adaae87/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
 ==82577==    by 0x100008337: ft_itoa (ft_itoa.c:40)
-==82577==    by 0x100007454: increment_shlvl (environment_4.c:89)
+==82577==    by 0x100007454: envincrement_shlvl (environment_4.c:89)
 ==82577==    by 0x100006C49: env_create (environment_1.c:100)
 ==82577==    by 0x100001264: minishell_create (minishell.c:24)
 ==82577==    by 0x100001009: main (main.c:76)
