@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 23:24:40 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 20:37:49 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 12:11:45 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	factory_command_set_output(t_list **words, struct s_build_context *context,
 	word = (t_pword *)(*words)->data;
 	if (word->type != EWT_WORD)
 		return (err_print_untoken(word->value, 0));
-	if (context->command->output != -1) // закрываем старый
+	if (context->command->output != -1)
 		close(context->command->output);
 	if (to_end)
 		fd = open(word->value, O_WRONLY | O_APPEND | O_CREAT, S_IRWXU);
