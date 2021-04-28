@@ -79,7 +79,7 @@ int	buildin_cd(char **argv, t_minishell *shell)
 		else
 			result = ft_cd(home_pair->value, shell->env);
 	}
-	if (argv[2] == 0)
+	else if (argv[2] == 0)
 		result = ft_cd(argv[1], shell->env);
 	else
 		result = -1;
