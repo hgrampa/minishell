@@ -6,14 +6,13 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 13:00:48 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 13:04:31 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:19:43 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "factory.h"
 
-int	factory_build_commands(t_factory *factory, t_list *words,
-	t_minishell *shell)
+int	factory_build_commands(t_factory *factory, t_list *words)
 {
 	int						result;
 	struct s_build_context	context;

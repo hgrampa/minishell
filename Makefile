@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/28 17:54:19 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/28 18:16:21 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC				= gcc
 
 # TODO убрать -g перед eval
 # TODO добавить -Wall -Wextra -Werror
-CC_FLAGS		:= -g
+CC_FLAGS		:= -g -Wall -Wextra -Werror
 CC_LIBS			:=
 
 FT_PATH			= ./libft

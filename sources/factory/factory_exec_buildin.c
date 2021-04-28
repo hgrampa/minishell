@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 12:04:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:09:46 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:20:25 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	factory_exec_buildin_child(struct s_comm_pair pair,
 int	factory_exec_buildin(struct s_comm_pair pair, t_minishell *shell)
 {
 	pid_t				pid;
-	int					ret;
 
 	if (pair.command->is_pipe
 		|| (pair.previous != NULL && pair.previous->is_pipe))

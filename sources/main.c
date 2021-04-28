@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 17:09:13 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:16:59 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,7 @@ int		main(int argc, char const *argv[], char const *envp[])
 	else
 		result = 1;
 	minishell_exit(shell, result);
+	argc = 0;
+	argv = 0;
 	return (0);
 }

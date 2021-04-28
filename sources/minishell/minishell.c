@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:28:16 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 11:15:51 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:19:14 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	minishell_init(t_minishell *shell)
 {
 	signal(SIGINT, minishell_signal_int);
 	signal(SIGQUIT, minishell_signal_quit);
-	if (!input_init(shell->input))
+	if (!input_init())
 		return (0);
 	if (!history_init(shell->history))
 		return (0);
