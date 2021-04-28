@@ -6,14 +6,14 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 12:05:38 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 12:11:38 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 13:44:44 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "factory.h"
 #include "minishell.h"
 
-static void	factory_exec_bin_child(struct s_comm_pair	pair, t_minishell *shell)
+static void	factory_exec_bin_child(struct s_comm_pair pair, t_minishell *shell)
 {
 	int	ret;
 
