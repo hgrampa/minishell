@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/28 12:08:26 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/28 13:06:02 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ SRC				=	main.c \
 					factory.c \
 					command.c \
 					factory_build.c \
+					factory_build_command.c \
 					factory_exec.c \
 					factory_exec_buildin.c \
 					factory_exec_bin.c \
