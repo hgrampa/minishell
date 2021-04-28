@@ -4,6 +4,8 @@
 
 static int	check_arg_n(char *str)
 {
+	if (ft_strcmp(str, "-") == 0)
+		return (0);
 	if (str[0] != '-')
 		return (0);
 	str++;
