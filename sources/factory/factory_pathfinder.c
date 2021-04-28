@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 17:10:40 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 21:29:45 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 09:48:33 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ char *factory_find_path(t_factory *factory, char *bin)
 		return (NULL);
 	if (bin[0] == '\0')
 		return (NULL);
+	if (check_abs_path(bin)) // TODO проверить перемещение
+		return (find_required_abs_path(bin));
 	if (factory->paths == NULL)
 		return (NULL);
-	if (check_abs_path(bin))
-		path = find_required_abs_path(bin);
 	else
 		path = find_required_rel_path(factory->paths, bin);
 	return(path);

@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/27 17:22:47 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/28 09:40:44 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC_DIR			=	sources/ \
 					sources/environment \
 					sources/sbuffer \
 					sources/input \
-					sources/termcap \
+					sources/input/termcap \
 					sources/history \
 					sources/errors \
 					sources/buildins \
@@ -155,6 +155,6 @@ norm:
 	norminette sources
 
 val:
-	valgrind --leak-check=full --log-file=vallog ./minishell
+	valgrind --leak-check=full --log-file=vallog ./$(NAME)
 
 .PHONY: all clean fclean re norm val

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 10:59:40 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 09:24:33 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ int	pstate_cntrl(char **line, struct s_pcontext *context)
 		(*line) += 2;
 	else
 		(*line)++;
+	if (type == EWT_SEMICOLON)
+		return (pcontext_end_process(context, 1));
 	return (pcontext_return_state(context));
 }

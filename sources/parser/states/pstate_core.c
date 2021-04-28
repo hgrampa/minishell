@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:03:49 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 12:45:01 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/27 22:49:43 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	pstate_core(char **line, struct s_pcontext *context)
 {
 	while (21)
 	{
-		if (**line == '\0')
+		if (**line == '\0') // TODO тут Invalid read of size 1
 		{
 			if (!pbuffer_close(context))
 				return (0);

@@ -17,7 +17,8 @@ static int	check_digit(char *str)
 
 int	buildin_exit(char **argv, t_minishell *shell)
 {
-	shell = NULL;
+	int	exit_code;
+
 	if (argv[1] == 0)
 	{
 		ft_putstr_fd("exit\n", 1);
@@ -30,13 +31,13 @@ int	buildin_exit(char **argv, t_minishell *shell)
 			ft_putstr_fd("bash: exit: ", 2);
 			ft_putstr_fd(argv[1], 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
-			exit(255);
+			minishell_exit(shell, 255);
 		}
 		if (argv[2] == 0)
 		{
-			errno = ft_atoi(argv[1]) % 255;
+			exit_code = ft_atoi(argv[1]) % 255;
 			ft_putstr_fd("exit\n", 1);
-			exit(errno);
+			minishell_exit(shell, exit_code);
 		}			
 		else
 			ft_putstr_fd("bash: exit: too many arguments\n", 2);

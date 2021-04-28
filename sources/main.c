@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 19:27:30 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 11:16:34 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,26 @@
 #include "environment.h"
 #include "pword.h"
 #include "factory.h"
+
+// TODO
+// //	снес PATH и перестали работать билдын env
+// //	и перестали работать относительные пути (и мб абсолютные)
+
+// // 	env после удаления всех переменных
+
+// // export a=b; echo $a - не напечатал b (парсить только до ;) - фабрику в парсер
+
+//	// echo asadads $test echo lsds - asadads ;echo lsds (test =";")
+//		// echo asadads $test echo lsds - asadads ; echo lsds (пробел)
+
+//	exit 99999999999999999999999999999999999999999999999 - сега
+// 		(bash: exit: 99999999999999999999999999999999999999999999999: numeric argument required)
+
+// 	exit 257 - сега
+
+//	buildins - поменять bash в предупреждениях
+
+// Убрать pid из минишела
 
 static int	process(t_minishell *shell)
 {
@@ -30,11 +50,6 @@ static int	process(t_minishell *shell)
 		if (shell->line == NULL)
 			continue ;
 
-		// TODO вырезать и переделать
-		// s
-
-		// printf(">\"%s\"\n", line);
-
 		// Добавляю instance в историю
 		if (!history_add(shell->history, shell->line))
 		{
@@ -43,19 +58,8 @@ static int	process(t_minishell *shell)
 		}
 
 		// Получаю слова от парсера
-		if (!parse_line(shell->env, shell->line, &shell->words))
+		if (!parse_line(shell, shell->line, &shell->words))
 			return (1); // TODO возврат ошибки
-		// отдаю слова фабрике
-		if (!factory_run_line(shell->factory, shell->words, shell))
-		{
-			// ft_list_free(&shell->words, pword_destroy);
-			return (0);
-		}
-
-		// ft_list_foreach(words, pword_print);
-
-		// if (gnl == 0)
-		// 	minishell_exit(shell, 0);
 	}
 	return (1);
 }
@@ -76,6 +80,6 @@ int		main(int argc, char const *argv[], char const *envp[])
 	}
 	else
 		result = 1;
-	minishell_destroy(shell);
-	return (result);
+	minishell_exit(shell, result);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/25 11:52:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 09:43:02 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@
 # define _PRS_DELIMITERS " \t"
 # define _PRS_CONTROLERS ";|<>"
 // # define _PRS_ESC_CORE_CAHRS "\"\';|><$ \t"
-# define _PRS_ESC_WQUOTES_CAHRS "\"$"
+# define _PRS_ESC_WQUOTES_CAHRS "\"$`"
 # define _PRS_QUOTES "\"\'"
 # define _PRS_BUFFSIZE 40
 
 // TODO текущая стадия - полем
 
 struct			s_pcontext;
+
+typedef struct s_minishell	t_minishell;
+
 
 typedef int		(*t_state_body)(char**, struct s_pcontext*);
 
@@ -44,7 +47,7 @@ struct s_pcontext
 	unsigned char		process :1;
 };
 
-int				parse_line(t_env *env, char *line, t_list **words);
+int				parse_line(t_minishell *shell, char *line, t_list **words);
 
 int				pcontext_set_state(struct s_pcontext *context,
 					t_state_body next_state);
