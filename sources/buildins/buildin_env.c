@@ -20,7 +20,7 @@ int	buildin_env(char **argv, t_minishell *shell)
 			result = 1;
 		}
 		else
-			print_represent(shell->env->represent);
+			env_print_represent(shell->env->represent);
 	}	
 	else
 	{

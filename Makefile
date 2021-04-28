@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/28 13:06:02 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/28 17:54:19 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,14 +92,14 @@ SRC				=	main.c \
 					factory_command_set.c \
 					factory_pathfinder.c \
 					buildin.c \
-					cd.c \
-					echo.c \
-					env.c \
-					exit.c \
-					export.c \
-					export_2.c \
-					pwd.c \
-					unset.c \
+					buildin_cd.c \
+					buildin_echo.c \
+					buildin_env.c \
+					buildin_exit.c \
+					buildin_export.c \
+					buildin_export_2.c \
+					buildin_pwd.c \
+					buildin_unset.c \
 					pword.c \
 					pstate.c \
 					pstate_core.c \
@@ -108,10 +108,11 @@ SRC				=	main.c \
 					pstate_env.c \
 					pstate_esc.c \
 					pstate_cntr.c \
-					environment_1.c \
-					environment_2.c \
-					environment_3.c \
-					environment_4.c \
+					env.c \
+					env_additions.c \
+					env_get.c \
+					env_pair.c \
+					env_represent.c \
 					utilities.c \
 					sbuffer.c \
 					sbuffer_2.c
