@@ -36,23 +36,27 @@ static int	ft_cd (char *str, t_env *env)
 	int		result;
 	t_pair	*pwd_pair;
 	t_pair	*old_pwd_pair;
+	char *pwd;
 
 	pwd_pair = env_get_pair(env, "PWD");
 	old_pwd_pair = env_get_pair(env, "OLDPWD");
 	str = dash_case(str, old_pwd_pair);
 	if (str == NULL)
 		return (-1);
-	if (pwd_pair == NULL && old_pwd_pair == NULL)
-		result = 0;
-	else if (pwd_pair == NULL)
-		set_new_value(old_pwd_pair, "");
-	else if (pwd_pair == NULL)
-		set_new_value(old_pwd_pair, getcwd(cwd, 100));
-	else if (old_pwd_pair != NULL)
-		set_new_value(old_pwd_pair, pwd_pair->value);
+	if (pwd_pair)
+		pwd = ft_strdup(pwd_pair->value);
+	else
+		pwd = ft_strdup("");
 	result = chdir(str);
 	if (result != -1 && pwd_pair != NULL)
 		env_set(env, "PWD", getcwd(cwd, 100));
+	if (result != -1 && old_pwd_pair != NULL)
+	{
+		if (old_pwd_pair->value[0] == '\0')
+			env_set(env, "OLDPWD", getcwd(cwd, 100));
+		else
+			env_set(env, "OLDPWD", pwd);
+	}
 	return (result);
 }
 
