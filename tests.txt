@@ -1,0 +1,80 @@
+/bin/date
+/bin/cat file
+/bin/ls
+date
+ls -la
+mkdir test : cd test ; pwd
+echo
+echo some shit
+echo -n some shit
+echo -n -n -n -nnnm some shit
+exit
+exit 1
+exit 200
+exit 290000 ; echo $?
+exit r6134583476534 ; echo $?
+exit 9999999999999999999
+exit -1
+exit -oioi
+ls "-la" ; echo $?
+ls "-la" ; echo $?
+'cat'
+"cat"
+cd -; cd -; cd -; cd -; cd -; cd -
+cd - ; pwd ; /bin/date
+cd ; echo ooops ; meow ; pwd
+
+cat cntr + cntr + c ; echo $?
+cat cntr + cntr + / ; echo $?
+empty prompt + cntr + c
+empty prompt + cntr + d
+empty prompt + cntr + \
+someshit +  cntr + c
+someshit + cntr + d
+someshit + cntr + \
+date ";" date
+
+export
+export a aa= aaa=aa aaa+=aa aaaa+=aa 12aa= ; env
+export USER PWD= OLDPWD=123 HOME+=123 -ooops ; env
+
+unset a aa aaa aaaa aaaaa 123qq -ooops
+
+echo "$PWD" ; echo '$PWD'
+
+cd ..
+cd -
+cd someshit
+cd filename
+cd
+unset HOME ; cd
+unset OLDPWD ; cd -
+unset OLDPWD ; unset PWD ; cd .. ; cd -
+cd /goinfre : cd -
+cd /some/shit/ ; pwd
+
+env
+unset PATH ; env
+
+echo '' ; echo ""
+echo '
+echo "
+
+> filename
+>> filename
+< filename
+echo 123 > 123
+echo 123 > 123 > 456
+echo 123 >> 123
+echo 123 >> 123 > 456
+echo 123 > 123 >> 456
+cat < 123 > 456 >> 456
+
+cat | cat | cat
+date | date | cat
+date |date > filename
+date >> filename
+someshit | cat
+someshit > filename
+someshit >> filename
+someshit < filename
