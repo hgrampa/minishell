@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:32:22 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 19:06:52 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 19:25:53 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	err_print_nocommand(char *file, int status)
 
 int	err_print_object(char *object, char *messege, int exit_code, int status)
 {	
-	char	*messege;
-
 	ft_putstr_fd(_ERR_TITLE, STDERR_FILENO);
 	ft_putstr_fd(object, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
