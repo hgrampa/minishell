@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 09:43:02 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:15:25 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,13 @@
 
 # define _PRS_DELIMITERS " \t"
 # define _PRS_CONTROLERS ";|<>"
-// # define _PRS_ESC_CORE_CAHRS "\"\';|><$ \t"
 # define _PRS_ESC_WQUOTES_CAHRS "\"$`"
 # define _PRS_QUOTES "\"\'"
 # define _PRS_BUFFSIZE 40
 
-// TODO текущая стадия - полем
-
 struct			s_pcontext;
 
 typedef struct s_minishell	t_minishell;
-
 
 typedef int		(*t_state_body)(char**, struct s_pcontext*);
 

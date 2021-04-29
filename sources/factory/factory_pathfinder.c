@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 17:10:40 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:11:46 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:18:18 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static char	*find_required_rel_path(char **path_array, char *str)
 	return (NULL);
 }
 
-// TODO Добавить ../ ./
 static int	check_abs_path(char *str)
 {
 	while (*str)
@@ -65,7 +64,7 @@ char	*factory_find_path(t_factory *factory, char *bin)
 		return (NULL);
 	if (bin[0] == '\0')
 		return (NULL);
-	if (check_abs_path(bin)) // TODO проверить перемещение
+	if (check_abs_path(bin))
 		return (find_required_abs_path(bin));
 	if (factory->paths == NULL)
 		return (NULL);
