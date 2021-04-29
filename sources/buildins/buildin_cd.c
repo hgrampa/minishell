@@ -24,11 +24,11 @@ static char	*dash_case(char *str, t_pair *old_pwd_pair)
 		return (str);
 }
 
-// static void	set_new_value(t_pair *pair, char *new_value)
-// {
-// 	free(pair->value);
-// 	pair->value = ft_strdup(new_value);
-// }
+static void	set_new_value(t_pair *pair, char *new_value)
+{
+	free(pair->value);
+	pair->value = ft_strdup(new_value);
+}
 
 static char	*set_pwd(t_pair *pwd_pair)
 {
@@ -79,9 +79,9 @@ int	buildin_cd(char **argv, t_minishell *shell)
 		else
 			result = ft_cd(home_pair->value, shell->env);
 	}
-	else if (argv[2] == 0)
-		result = ft_cd(argv[1], shell->env);
 	else
-		result = -1;
-	return (result == -1);  //TODO errror management to be done
+		result = ft_cd(argv[1], shell->env);
+	if (result == -1)
+		cd_err_print(NULL, 1, 1, argv[1]);
+	return (result == -1);
 }
