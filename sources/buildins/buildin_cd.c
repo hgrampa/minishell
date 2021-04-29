@@ -43,7 +43,7 @@ static int	ft_cd (char *str, t_env *env)
 	old_pwd_pair = env_get_pair(env, "OLDPWD");
 	str = dash_case(str, old_pwd_pair);
 	if (str == NULL)
-		return (-1);
+		return (1);
 	result = chdir(str);
 	if (result != -1 && old_pwd_pair != NULL)
 	{
