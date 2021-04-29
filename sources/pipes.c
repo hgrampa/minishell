@@ -2,7 +2,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
-#include "libft.h"
+#include <strings.h>
+// #include "libft.h"
 
 #define SIDE_OUT    0
 #define SIDE_IN     1
@@ -65,7 +66,7 @@ int	add_arg(t_pipelist *cmd, char *arg)
 	int		i;
 
 	i = 0;
-	tmp = (char **)ft_calloc(1, sizeof(*tmp) * (cmd->len + 2));
+	tmp = (char **)calloc(1, sizeof(*tmp) * (cmd->len + 2));
 	if (tmp == NULL)
 		return (exit_fatal());
 	while (i < cmd->len)
@@ -76,7 +77,7 @@ int	add_arg(t_pipelist *cmd, char *arg)
 	if (cmd->len > 0)
 		free(cmd->args);
 	cmd->args = tmp;
-	cmd->args[i++] = ft_strdup(arg);
+	cmd->args[i++] = strdup(arg);
 	cmd->args[i] = 0;
 	cmd->len++;
 	return (EXIT_SUCCESS);
@@ -86,7 +87,7 @@ int	list_push(t_pipelist **list, char *arg)
 {
 	t_pipelist	*new;
 
-	new = (t_pipelist *)ft_calloc(1, sizeof(*new));
+	new = (t_pipelist *)calloc(1, sizeof(*new));
 	if (new == NULL)
 		return (exit_fatal());
 	new->args = NULL;
@@ -107,12 +108,12 @@ int	parse_arg(t_pipelist **cmds, char *arg)
 {
 	int	is_break;
 
-	is_break = (ft_strncmp(";", arg, 2) == 0);
+	is_break = (strncmp(";", arg, 2) == 0);
 	if (is_break && !*cmds)
 		return (EXIT_SUCCESS);
 	else if (!is_break && (!*cmds || (*cmds)->type > TYPE_END))
 		return (list_push(cmds, arg));
-	else if (ft_strncmp("|", arg, 2) == 0)
+	else if (strncmp("|", arg, 2) == 0)
 		(*cmds)->type = TYPE_PIPE;
 	else if (is_break)
 		(*cmds)->type = TYPE_BREAK;
