@@ -31,6 +31,7 @@
 # define _ERR_NOFILE "No such file or directory"
 
 // int	err_fatal(char *messege, int status);
+int	cd_err_print(char *messege, int return_status, int exit_code, char *arg);
 int	err_print(char *messege, int return_status, int exit_code);
 int	err_print_untoken(char *token, int status);
 int	err_print_nofile(char *file, int status);

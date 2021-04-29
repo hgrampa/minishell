@@ -21,6 +21,19 @@
 // 	return (status);
 // }
 
+int	cd_err_print(char *messege, int return_status, int exit_code, char *arg)
+{
+	if (messege == NULL)
+		messege = strerror(errno);
+	ft_putstr_fd(_ERR_TITLE, STDERR_FILENO);
+	ft_putstr_fd("cd: ", STDERR_FILENO);
+	ft_putstr_fd(arg, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putendl_fd(messege, STDERR_FILENO);
+	exit_code_set(exit_code);
+	return (return_status);
+}
+
 int	err_print(char *messege, int return_status, int exit_code)
 {
 	if (messege == NULL)
