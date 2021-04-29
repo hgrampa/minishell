@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 23:24:40 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 15:30:56 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:39:12 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	factory_command_set_input(t_list **words, struct s_build_context *context)
 	return (1);
 }
 
-int	factory_command_set_output(t_list **words, struct s_bu
+int	factory_command_set_output(t_list **words, struct s_build_context *context,
 	int to_end)
 {
 	int		fd;
