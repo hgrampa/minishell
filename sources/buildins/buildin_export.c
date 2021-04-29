@@ -26,7 +26,7 @@ static int	continue_ta (int result, t_pair *e_pair, t_pair *n_pair, t_env *env)
 	}
 	if (result != 0)
 	{
-		free_pair(n_pair);
+		env_free_pair(n_pair);
 		free(n_pair);
 	}
 	return (result);
@@ -59,7 +59,7 @@ static int	treat_arg(t_env	*env, char const *arg_str)
 	char	*test;
 
 	result = 0;
-	new_pair = pair_from_str(arg_str);
+	new_pair = env_pair_from_str(arg_str);
 	plus = check_for_plus(new_pair->key);
 	exist_pair = env_get_pair(env, new_pair->key);
 	if (new_pair && plus && exist_pair && exist_pair->value)

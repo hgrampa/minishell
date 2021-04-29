@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 21:33:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 13:27:47 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:19:28 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ t_command	*command_create(char *name)
 
 int	command_destroy(t_command *command)
 {
-	char	**argv;
-
 	if (command->argv != NULL)
 		free_array(command->argv);
 	if (command->name != NULL)

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:46:56 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 15:30:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:18:59 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	input_destroy(t_input *input)
 	return (1);
 }
 
-int	input_init(t_input *input)
+int	input_init(void)
 {
-	if (!term_init(input->term))
+	if (!term_init())
 		return (0);
 	return (1);
 }

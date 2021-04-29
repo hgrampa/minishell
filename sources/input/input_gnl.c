@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 11:19:09 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 18:54:51 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:17:32 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static int	input_read(t_input *input, t_minishell *shell)
 int	input_get_next_line(t_input *input, char **line, t_minishell *shell)
 {
 	int	next_i;
-	int	read_res;
 
 	input->line_len = 0;
 	input->abort = 0;

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 15:29:22 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:32:34 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_terminal	*term_create(void)
 	return (term);
 }
 
-int	term_init(t_terminal *term)
+int	term_init(void)
 {
 	int		success;
 	char	*term_type;

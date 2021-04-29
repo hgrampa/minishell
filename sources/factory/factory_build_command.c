@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:04:18 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 13:04:58 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 12:29:00 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static int	factory_command_set_redirect(enum e_pword_type type, t_list **words,
 	struct s_build_context *context)
 {
-	if (type == EWT_REDIRECT1)
+	if (type == EWT_REDIR_IN)
 	{
 		if (!factory_command_set_input(words, context))
 			return (0);
 	}
-	else if (type == EWT_REDIRECT2)
+	else if (type == EWT_REDIR_OUT)
 	{
 		if (!factory_command_set_output(words, context, 0))
 			return (0);
 	}
-	else if (type == EWT_REDIRECT3)
+	else if (type == EWT_REDIR_APPEND)
 	{
 		if (!factory_command_set_output(words, context, 1))
 			return (0);
@@ -33,7 +33,7 @@ static int	factory_command_set_redirect(enum e_pword_type type, t_list **words,
 	return (1);
 }
 
-static int	factory_build_command_param(t_factory *factory, t_list **words,
+static int	factory_build_command_param(t_list **words,
 	struct s_build_context *context)
 {
 	t_pword		*word;
@@ -45,8 +45,8 @@ static int	factory_build_command_param(t_factory *factory, t_list **words,
 			return (factory_command_set_pipe(words, context));
 		else if (word->type == EWT_SEMICOLON)
 			return (factory_command_set_semicolon(words, context));
-		else if (word->type == EWT_REDIRECT1 || word->type == EWT_REDIRECT2
-			|| word->type == EWT_REDIRECT1)
+		else if (word->type == EWT_REDIR_IN || word->type == EWT_REDIR_OUT
+			|| word->type == EWT_REDIR_APPEND)
 		{
 			if (!factory_command_set_redirect(word->type, words, context))
 				return (0);
@@ -116,12 +116,12 @@ int	factory_biuld_command(t_factory *factory, t_list **words,
 		con->command = factory_command_create(factory, word->value, con);
 		*words = (*words)->next;
 	}
-	else if (word->type == EWT_REDIRECT1 || word->type == EWT_REDIRECT2
-		|| word->type == EWT_REDIRECT3)
+	else if (word->type == EWT_REDIR_IN || word->type == EWT_REDIR_OUT
+		|| word->type == EWT_REDIR_APPEND)
 		con->command = command_create(NULL);
 	else
 		return (err_print_untoken(word->value, 0));
 	if (con->command == NULL)
 		return (0);
-	return (factory_build_command_param(factory, words, con));
+	return (factory_build_command_param(words, con));
 }
