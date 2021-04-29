@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 11:22:31 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 11:23:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:07:43 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	input_save_line(t_input *input)
 	{
 		input->save_line = ft_strdup(input->buffer->str);
 		if (input->save_line == NULL)
-			return (0); // TODO возврат ошибки
+			return (0);
 	}
 	return (1);
 }
