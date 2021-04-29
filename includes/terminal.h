@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:04:04 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 12:18:38 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:18:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_terminal
 }				t_terminal;
 
 t_terminal		*term_create(void);
-int				term_init(t_terminal *term);
+int				term_init(void);
 int				term_destroy(t_terminal *term);
 int				term_reset_mode(t_terminal *term);
 int				term_set_mode(t_terminal *term);

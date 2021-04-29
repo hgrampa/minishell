@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 12:04:29 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 12:21:25 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:20:25 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	factory_exec_buildin_no_pipe(struct s_comm_pair pair,
 	int	result;
 	int	save_stdout;
 	int	save_stdin;
-	
+
 	result = 1;
 	save_stdin = dup(STDIN_FILENO);
 	save_stdout = dup(STDOUT_FILENO);
@@ -61,7 +61,6 @@ static void	factory_exec_buildin_child(struct s_comm_pair pair,
 int	factory_exec_buildin(struct s_comm_pair pair, t_minishell *shell)
 {
 	pid_t				pid;
-	int					ret;
 
 	if (pair.command->is_pipe
 		|| (pair.previous != NULL && pair.previous->is_pipe))

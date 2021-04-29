@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:18:43 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 12:12:11 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:09:26 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	factory_close_pipes(t_dlist *node)
 		close(pair.command->input);
 	if (pair.command->output != -1)
 		close(pair.command->output);
-	if (pair.command->is_pipe || (pair.previous != NULL
-		&& pair.previous->is_pipe))
+	if (pair.command->is_pipe
+		|| (pair.previous != NULL && pair.previous->is_pipe))
 	{
 		close(pair.command->pipe[_PIPE_SIDE_IN]);
 		if (node->next == NULL)

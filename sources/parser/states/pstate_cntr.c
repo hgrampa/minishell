@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 09:24:33 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 12:29:03 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static enum e_pword_type	cntrl_get_type(char *line)
 	else if (ft_strncmp(line, ";", 1) == 0)
 		return (EWT_SEMICOLON);
 	else if (ft_strncmp(line, "<", 1) == 0)
-		return (EWT_REDIRECT1);
+		return (EWT_REDIR_IN);
 	else if (ft_strncmp(line, ">>", 2) == 0)
-		return (EWT_REDIRECT3);
+		return (EWT_REDIR_APPEND);
 	else if (ft_strncmp(line, ">", 1) == 0)
-		return (EWT_REDIRECT2);
+		return (EWT_REDIR_OUT);
 	else
 		return (EWT_UNKNOWN);
 }
@@ -36,19 +36,18 @@ static int	cntrl_add_value(enum e_pword_type type, struct s_pcontext *context)
 		return (pbuffer_add_str(context, "|"));
 	else if (type == EWT_SEMICOLON)
 		return (pbuffer_add_str(context, ";"));
-	else if (type == EWT_REDIRECT1)
+	else if (type == EWT_REDIR_IN)
 		return (pbuffer_add_str(context, "<"));
-	else if (type == EWT_REDIRECT2)
-		return (pbuffer_add_str(context, ">"));
-	else if (type == EWT_REDIRECT3)
+	else if (type == EWT_REDIR_APPEND)
 		return (pbuffer_add_str(context, ">>"));
+	else if (type == EWT_REDIR_OUT)
+		return (pbuffer_add_str(context, ">"));
 	return (1);
 }
 
 int	pstate_cntrl(char **line, struct s_pcontext *context)
 {
 	enum e_pword_type	type;
-	char				*value;
 
 	type = cntrl_get_type(*line);
 	if (type == EWT_UNKNOWN)
@@ -56,7 +55,7 @@ int	pstate_cntrl(char **line, struct s_pcontext *context)
 	if (!pbuffer_close(context) || !pbuffer_open(context, type)
 		|| !cntrl_add_value(type, context) || !pbuffer_close(context))
 		return (0);
-	if (type == EWT_REDIRECT3) // TODO delete comment --> проматываю line
+	if (type == EWT_REDIR_APPEND) // TODO delete comment --> проматываю line
 		(*line) += 2;
 	else
 		(*line)++;
