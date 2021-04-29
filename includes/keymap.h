@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:46:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/23 17:26:09 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:48:21 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ enum e_key_type
 	EKT_DWARR,
 	EKT_BACKSPACE,
 	EKT_CNTRLD,
-	EKT_CNTRLC,
-	// EKT_CNTRL\,  \\TODO norm, delete comment
+	EKT_CNTRLC
 };
 
 #endif
