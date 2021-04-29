@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/28 18:16:21 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/29 12:23:59 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,11 @@ NAME			= minishell
 
 CC				= gcc
 
-# TODO убрать -g перед eval
-# TODO добавить -Wall -Wextra -Werror
-CC_FLAGS		:= -g -Wall -Wextra -Werror
+CC_FLAGS		:= -Wall -Wextra -Werror
 CC_LIBS			:=
 
 FT_PATH			= ./libft
-FT_LIB			= libft.a
+FT_LIB			= $(FT_PATH)/libft.a
 CC_LIBS			+= -L $(FT_PATH) -lft
 
 CC_LIBS			+= -ltermcap
@@ -47,21 +45,23 @@ SRC_DIR			=	sources/ \
 OBJ_DIR			=	objects/
 
 # ---------------------------------------------------------------------------- #
-INCL			=	minishell.h \
-					libft.h \
-					errors.h \
-					sbuffer.h \
-					environment.h \
-					input.h \
-					terminal.h \
-					parser.h \
-					keymap.h \
-					factory.h \
+INCL			=	libft.h \
+					buildin.h \
 					command.h \
+					dlists.h \
+					environment.h \
+					errors.h \
 					exit_code.h \
+					factory.h \
+					history.h \
+					input.h \
+					keymap.h \
+					minishell.h \
+					parser.h \
 					pword.h \
-					utilities.h \
-					buildin.h
+					sbuffer.h \
+					terminal.h \
+					utilities.h
 
 SRC				=	main.c \
 					signals.c \
@@ -129,21 +129,25 @@ vpath %.o		$(OBJ_DIR)
 
 all: $(NAME)
 
-$(OBJ_DIR):
-	mkdir $@
+$(NAME): | libft_make
 
 $(NAME): $(FT_LIB) $(OBJ)
 	$(CC) $(CC_FLAGS) $(OBJ_PATH) $(CC_LIBS) -o $@
 
-$(FT_LIB): libft.h
+$(OBJ_DIR):
+	mkdir $@
+
+libft_make:
 	$(MAKE) -wC $(FT_PATH)
 
+$(FT_LIB): libft_make
+	
 $(OBJ): %.o: %.c $(INCL) | $(OBJ_DIR)
 	$(CC) $(CC_FLAGS) $(CC_INCL) -c $< -o $(OBJ_DIR)$@
 
 # ---------------------------------------------------------------------------- #
 
-clean: 
+clean:
 	-rm -f $(OBJ_PATH)
 
 fclean: clean
@@ -162,4 +166,4 @@ norm:
 val:
 	valgrind --leak-check=full --log-file=vallog ./$(NAME)
 
-.PHONY: all clean fclean re norm val
+.PHONY: all clean fclean re norm libft_make val
