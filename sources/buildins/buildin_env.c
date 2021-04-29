@@ -24,7 +24,7 @@ int	buildin_env(char **argv, t_minishell *shell)
 	}	
 	else
 	{
-		ft_putstr_fd("out of subject\n", 2); // TODO return errno
+		ft_putstr_fd("out of subject\n", 2);
 		result = 1;
 	}
 	return (result);
