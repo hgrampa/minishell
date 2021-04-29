@@ -6,14 +6,13 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 11:13:24 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:13:26 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:53:10 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "terminal.h"
 #include "errors.h"
 
-// TODO добавить суда проверку на ASCII
 static int	term_is_key_muted(char *buff, ssize_t len)
 {
 	return (ft_strncmp(buff, key_right, len) == 0
@@ -24,6 +23,8 @@ static int	term_is_key_muted(char *buff, ssize_t len)
 		|| ft_strncmp(buff, "\t", len) == 0
 		|| ft_strncmp(buff, "\f", len) == 0
 		|| ft_strncmp(buff, "\v", len) == 0
+		|| ft_strncmp(buff, "\x1c", len) == 0
+		|| *buff < 0
 		|| ft_strncmp(buff, key_end, len) == 0);
 }
 
