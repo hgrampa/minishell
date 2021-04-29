@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 23:24:40 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 12:11:45 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:30:56 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	factory_command_set_pipe(t_list **words, struct s_build_context *context)
 {
 	if ((*words)->next == NULL)
-		return (err_print_untoken("newline", 0));
+		return (err_print(_ERR_MULTL, 0, 258));
 	*words = (*words)->next;
 	context->command->is_pipe = 1;
 	return (1);
@@ -49,7 +49,7 @@ int	factory_command_set_input(t_list **words, struct s_build_context *context)
 	return (1);
 }
 
-int	factory_command_set_output(t_list **words, struct s_build_context *context,
+int	factory_command_set_output(t_list **words, struct s_bu
 	int to_end)
 {
 	int		fd;

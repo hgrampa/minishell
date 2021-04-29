@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:35:48 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 11:02:24 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:13:30 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,11 @@ int	pcontext_end_process(struct s_pcontext *context, int status)
 	context->process = 0;
 	return (status);
 }
+
+int	pcontext_error(struct s_pcontext *context, int status)
+{
+	context->error = 1;
+	return (pcontext_end_process(context, status));
+}
+
+

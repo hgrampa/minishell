@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:05 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:04:44 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:08:40 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "parser.h"
 #include "environment.h"
 #include "errors.h"
-
-// TODO norm delete all comments 
 
 static char	*get_var_name(char **line)
 {

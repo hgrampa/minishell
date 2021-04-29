@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:18:43 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:09:26 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:28:25 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	factory_wait_command(t_dlist *node)
 	{
 		waitpid(command->pid, &status, 0);
 		factory_close_pipes(node);
-		exit_code_clamp_set(status);
+		if (!(status == 130 || status == 131))
+			exit_code_clamp_set(status);
 	}
 	return (1);
 }

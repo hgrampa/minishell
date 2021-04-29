@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 14:54:10 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:16:59 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:10:45 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 // //	buildins - поменять bash в предупреждениях
 
-// Убрать pid из минишела
+// // Убрать pid из минишела
 
 // // echo | echo - ломет каретку
 
@@ -44,9 +44,9 @@
 
 // "yes | head" ломает сигналы (говорять нужно в самом конце exit сделать)
 
-// коды возврата так и не работают (от вейтпида)
+// // коды возврата так и не работают (от вейтпида)
 
-// >> foo.txt - не создает файл
+// // >> foo.txt - не создает файл
 
 //// при пайпе не работают сигналы
 
@@ -57,23 +57,17 @@ static int	process(t_minishell *shell)
 	while (shell->process)
 	{
 		minishell_at_newline(shell);
-
-		// TODO работаться уже с возвращаем значении
 		if (!input_get_next_line(shell->input, &shell->line, shell))
-			return (0); // TODO очистку при ошибках (вроде есть)
+			return (0);
 		if (shell->line == NULL)
 			continue ;
-
-		// Добавляю instance в историю
 		if (!history_add(shell->history, shell->line))
 		{
 			free (shell->line);
-			return (0); // TODO возврат ошибки
+			return (0);
 		}
-
-		// Получаю слова от парсера
 		if (!parse_line(shell, shell->line, &shell->words))
-			return (1); // TODO возврат ошибки
+			return (0);
 	}
 	return (1);
 }

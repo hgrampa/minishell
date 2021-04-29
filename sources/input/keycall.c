@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 18:07:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 10:48:08 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:07:29 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,18 @@ int	keycall_backspace(t_minishell *shell)
 		tputs(cursor_left, 1, ft_putchar);
 		tputs(clr_eos, 1, ft_putchar);
 		shell->input->line_len -= 1;
-		// TODO если не ASCII символ то неккорктно работает
 	}
 	return (1);
 }
 
 int	keycall_cntrl_c(t_minishell *shell)
 {
-	write(1, "\n", 1);// TODO омега костыль
+	write(1, "\n", 1);
 	exit_code_set(1);
 	shell->input->abort = 1;
 	return (1);
 }
 
-// TODO пишется ли команда exit в историю?
 int	keycall_cntrl_d(t_minishell *shell)
 {
 	if (shell->input->line_len > 0)

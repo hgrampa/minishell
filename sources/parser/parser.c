@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:04:19 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 11:21:12 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:12:15 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	parse_context_init(struct s_pcontext *context, t_env *env,
 	context->buffer = NULL;
 	context->words = NULL;
 	context->process = 1;
+	context->error = 0;
 	context->env = env;
 }
 
@@ -49,7 +50,7 @@ int	parse_line(t_minishell *shell, char *line, t_list **words)
 		if (context.buffer != NULL)
 			sbuffer_destroy(context.buffer);
 		*words = context.words;
-		if (result == 1)
+		if (result == 1 && !context.error)
 			result = factory_run_line(shell->factory, *words, shell);
 		if (!result)
 			break ;
