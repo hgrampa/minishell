@@ -24,12 +24,6 @@ static char	*dash_case(char *str, t_pair *old_pwd_pair)
 		return (str);
 }
 
-static void	set_new_value(t_pair *pair, char *new_value)
-{
-	free(pair->value);
-	pair->value = ft_strdup(new_value);
-}
-
 static char	*set_pwd(t_pair *pwd_pair)
 {
 	if (pwd_pair)

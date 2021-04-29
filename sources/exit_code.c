@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 12:00:07 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 10:42:57 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 13:05:15 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	exit_code_set(int code)
 
 void	exit_code_clamp_set(int code)
 {
-	if (code > 255)
+	if (code == 256)
+		exit_code_set(1);
+	else if (code > 255)
 		exit_code_set(code % 256);
 	else
 		exit_code_set(code);

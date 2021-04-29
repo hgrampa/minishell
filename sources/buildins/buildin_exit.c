@@ -41,7 +41,7 @@ int	buildin_exit(char **argv, t_minishell *shell)
 		if (argv[2] == 0)
 		{
 			ft_putstr_fd("exit\n", 1);
-			minishell_exit(shell, ft_atoi(argv[1]) % 255);
+			minishell_exit(shell, ft_atoi(argv[1]) % 256);
 		}			
 		else
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
