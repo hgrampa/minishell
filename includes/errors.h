@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 12:03:00 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/27 10:58:39 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:25:48 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@
 # define _ERR_UNTOKEN_BEGIN "syntax error near unexpected token `"
 # define _ERR_UNTOKEN_END "\'"
 # define _ERR_NOFILE "No such file or directory"
+# define _ERR_NOCOMMAND "command not found"
 
-// int	err_fatal(char *messege, int status);
-int	cd_err_print(char *messege, int return_status, int exit_code, char *arg);
+int	err_cd_print(char *messege, int return_status, int exit_code, char *arg);
 int	err_print(char *messege, int return_status, int exit_code);
 int	err_print_untoken(char *token, int status);
 int	err_print_nofile(char *file, int status);
+int	err_print_nocommand(char *file, int status);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:03:49 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:21:23 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:08:27 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	pstate_core(char **line, struct s_pcontext *context)
 {
 	while (21)
 	{
-		if (**line == '\0') // TODO тут Invalid read of size 1
+		if (**line == '\0')
 			return (pstate_core_exit(context));
 		else if (**line == '$')
 			return (pcontext_set_state(context, pstate_env));

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:16:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 12:29:03 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:08:20 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	pstate_cntrl(char **line, struct s_pcontext *context)
 	if (!pbuffer_close(context) || !pbuffer_open(context, type)
 		|| !cntrl_add_value(type, context) || !pbuffer_close(context))
 		return (0);
-	if (type == EWT_REDIR_APPEND) // TODO delete comment --> проматываю line
+	if (type == EWT_REDIR_APPEND)
 		(*line) += 2;
 	else
 		(*line)++;

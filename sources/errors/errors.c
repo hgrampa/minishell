@@ -6,13 +6,13 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:32:22 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 13:07:58 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:25:53 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "errors.h"
 
-int	cd_err_print(char *messege, int return_status, int exit_code, char *arg)
+int	err_cd_print(char *messege, int return_status, int exit_code, char *arg)
 {
 	if (messege == NULL)
 		messege = strerror(errno);
@@ -54,6 +54,16 @@ int	err_print_nofile(char *file, int status)
 	ft_putstr_fd(file, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putendl_fd(messege, STDERR_FILENO);
+	exit_code_set(127);
+	return (status);
+}
+
+int	err_print_nocommand(char *file, int status)
+{	
+	ft_putstr_fd(_ERR_TITLE, STDERR_FILENO);
+	ft_putstr_fd(file, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putendl_fd(_ERR_NOCOMMAND, STDERR_FILENO);
 	exit_code_set(127);
 	return (status);
 }

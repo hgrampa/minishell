@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:28:16 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:19:14 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:08:06 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_minishell	*minishell_create(const char *title, const char **envp)
 	if (shell->title == NULL || shell->env == NULL || shell->input == NULL
 		|| shell->history == NULL || shell->factory == NULL)
 	{
-		err_print(NULL, 0, 1); // TODO delete comment --> сомнительно конеч
+		err_print(NULL, 0, 1);
 		minishell_destroy(shell);
 		return (NULL);
 	}

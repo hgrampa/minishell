@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 13:15:25 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:13:45 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ struct s_pcontext
 	t_list				*words;
 	t_env				*env;
 	unsigned char		process :1;
+	unsigned char		error :1;
 };
 
 int				parse_line(t_minishell *shell, char *line, t_list **words);
@@ -50,6 +51,7 @@ int				pcontext_set_state(struct s_pcontext *context,
 int				pcontext_return_state(struct s_pcontext *context);
 t_state_body	pcontext_previous_state(struct s_pcontext *context);
 int				pcontext_end_process(struct s_pcontext *context, int status);
+int				pcontext_error(struct s_pcontext *context, int status);
 
 int				pstate_core(char **line, struct s_pcontext *context);
 int				pstate_squotes(char **line, struct s_pcontext *context);
