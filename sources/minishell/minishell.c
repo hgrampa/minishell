@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 17:28:16 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 14:08:06 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:52:54 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ t_minishell	*minishell_create(const char *title, const char **envp)
 
 void	minishell_exit(t_minishell *shell, int status)
 {
-	history_serealize(shell->history);
+	if (shell->history != NULL)
+		history_serealize(shell->history);
 	minishell_destroy(shell);
 	exit(status);
 }
