@@ -21,6 +21,17 @@ static int	check_digit(char *str)
 	return (1);
 }
 
+static int	calc_exit_value(char *str)
+{
+	int	n;
+
+	n = ft_atoi(str);
+	if (n < 256)
+		return (n);
+	else
+		return (n % 256);
+}
+
 int	buildin_exit(char **argv, t_minishell *shell)
 {
 	if (argv[1] == 0)
@@ -41,7 +52,7 @@ int	buildin_exit(char **argv, t_minishell *shell)
 		if (argv[2] == 0)
 		{
 			ft_putstr_fd("exit\n", 1);
-			minishell_exit(shell, ft_atoi(argv[1]) % 256);
+			minishell_exit(shell, calc_exit_value(argv[1]));
 		}			
 		else
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);

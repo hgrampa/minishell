@@ -19,9 +19,8 @@ void	exit_code_set(int code)
 
 void	exit_code_clamp_set(int code)
 {
-	if (code == 256)
-		exit_code_set(1);
-	else if (code > 255)
+	code /= 256;
+	if (code > 255)
 		exit_code_set(code % 256);
 	else
 		exit_code_set(code);
