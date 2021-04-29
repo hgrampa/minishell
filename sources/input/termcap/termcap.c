@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:30:03 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 13:54:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:48:14 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,24 +67,3 @@ int	term_destroy(t_terminal *term)
 	free(term);
 	return (1);
 }	
-
-// int main(int argc, char const *argv[])
-// {
-// 	t_terminal	*term;
-// 	char	buff[256];
-// 	ssize_t read_len;
-// 	// 
-// 	term = term_create();
-// 	// printf("t_terminal = %lu\n", sizeof(t_terminal));
-// 	if (!term_init(term))
-// 		exit(1);
-// 	// в начале ввода команды
-// 	tputs(save_cursor, 1, ft_putchar);
-// 	while (21)
-// 	{
-// 		ft_bzero(buff, 256 * sizeof(char));
-// 		read_len = read(0, buff, 255);
-// 		term_take_input(buff, read_len);
-// 	}
-// 	return 0;
-// }

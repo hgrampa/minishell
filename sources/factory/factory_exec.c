@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:18:43 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 14:28:25 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 18:05:24 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,15 @@ int	factory_close_pipes(t_dlist *node)
 int	factory_wait_command(t_dlist *node)
 {
 	int			status;
+	int			exit_code;
 	t_command	*command;
 
 	command = (t_command *)node->data;
 	if (command->pid != -1)
 	{
+		exit_code = exit_code_get();
 		waitpid(command->pid, &status, 0);
-		factory_close_pipes(node);
-		if (!(status == 130 || status == 131))
+		if (!(exit_code == 130 || exit_code == 131))
 			exit_code_clamp_set(status);
 	}
 	return (1);
@@ -59,9 +60,11 @@ int	factory_exec_commands(t_factory *factory, t_minishell *shell)
 	{
 		if (!factory_exec_command(node, shell))
 		{
+			factory_close_pipes(node);
 			factory->result = 0;
 			break ;
 		}
+		factory_close_pipes(node);
 		node = node->next;
 	}
 	node = factory->commands;

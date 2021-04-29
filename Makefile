@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/29 12:23:59 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/29 15:53:22 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			= minishell
 
 CC				= gcc
 
-CC_FLAGS		:= -Wall -Wextra -Werror
+CC_FLAGS		:= -g -Wall -Wextra -Werror
 CC_LIBS			:=
 
 FT_PATH			= ./libft

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 16:56:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:12:49 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:57:39 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	history_serealize(t_history *history)
 	t_dlist	*root;
 
 	root = history->root;
+	if (root == NULL)
+		return (0);
 	fd = open(_HISTORY_FILE_NAME, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd)
 	{
