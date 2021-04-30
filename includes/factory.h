@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 18:24:23 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:19:51 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 20:35:47 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int					factory_exec_commands(t_factory *factory,
 int					factory_biuld_command(t_factory *factory, t_list **words,
 	struct s_build_context *context);
 char				*factory_find_path(t_factory *factory, char *bin);
+char				*factory_check_path(char *path, char *name);
 
 int					factory_command_set_pipe(t_list **words,
 	struct s_build_context *context);

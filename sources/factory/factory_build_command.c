@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:04:18 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 15:27:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 19:25:23 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_command	*factory_command_finde(t_factory *factory, t_command *command,
 		if (command->name == NULL)
 		{
 			command_destroy(command);
-			err_print_nocommand(name, 0);
+			// err_print_nocommand(name, 0);
 			return (NULL);
 		}
 	}

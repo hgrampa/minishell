@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 17:10:40 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 13:18:18 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 20:37:54 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*find_required_rel_path(char **path_array, char *str)
 	return (NULL);
 }
 
-static int	check_abs_path(char *str)
+static int	if_abs_rel_path(char *str)
 {
 	while (*str)
 	{
@@ -56,19 +56,43 @@ static char	*find_required_abs_path(char *str)
 	return (NULL);
 }
 
-char	*factory_find_path(t_factory *factory, char *bin)
+static char *bin_finder(t_factory *factory, char *name)
 {
 	char	*path;
 
-	if (bin == NULL)
-		return (NULL);
-	if (bin[0] == '\0')
-		return (NULL);
-	if (check_abs_path(bin))
-		return (find_required_abs_path(bin));
 	if (factory->paths == NULL)
 		return (NULL);
 	else
-		path = find_required_rel_path(factory->paths, bin);
-	return (path);
+	{
+		path = find_required_rel_path(factory->paths, name);
+		if (path == NULL)
+		{
+			err_print_object(name, _ERR_NOCOMMAND, 127, 0);
+			return (NULL);
+		}
+		return (factory_check_path(path, name));
+	}
+	return(path);
+}
+
+char	*factory_find_path(t_factory *factory, char *name)
+{
+	char	*path;
+
+	if (name == NULL)
+		return (NULL);
+	if (name[0] == '\0')
+		return (NULL);
+	if (if_abs_rel_path(name))
+	{
+		path = find_required_abs_path(name);
+		if (path == NULL)
+		{
+			err_print_object(name, NULL, 127, 0);
+			return (NULL);
+		}
+		return(factory_check_path(path, name));
+	}
+	else
+		return (bin_finder(factory, name));
 }

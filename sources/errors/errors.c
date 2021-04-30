@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:32:22 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 15:25:53 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/29 19:25:53 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	err_print_nofile(char *file, int status)
 	ft_putstr_fd(file, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putendl_fd(messege, STDERR_FILENO);
-	exit_code_set(127);
+	exit_code_set(1);
 	return (status);
 }
 
@@ -67,3 +67,16 @@ int	err_print_nocommand(char *file, int status)
 	exit_code_set(127);
 	return (status);
 }
+
+int	err_print_object(char *object, char *messege, int exit_code, int status)
+{	
+	ft_putstr_fd(_ERR_TITLE, STDERR_FILENO);
+	ft_putstr_fd(object, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	if (messege == NULL)
+		messege = strerror(errno);
+	ft_putendl_fd(messege, STDERR_FILENO);
+	exit_code_set(exit_code);
+	return (status);
+}
+
