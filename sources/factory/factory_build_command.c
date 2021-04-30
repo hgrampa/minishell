@@ -6,14 +6,11 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 13:04:18 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/30 13:48:56 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:38:08 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "factory.h"
-
-//  список аргументов
-//	вывод ошибки No such file or directory раньше чем no comand
 
 static int	factory_command_set_redirect(enum e_pword_type type, t_list **words,
 	struct s_build_context *context)
@@ -48,8 +45,7 @@ static int	factory_build_command_param(t_list **words,
 			return (factory_command_set_pipe(words, context));
 		else if (word->type == EWT_SEMICOLON)
 			return (factory_command_set_semicolon(words, context));
-		else if (word->type == EWT_REDIR_IN || word->type == EWT_REDIR_OUT
-			|| word->type == EWT_REDIR_APPEND)
+		else if (factory_is_redirection(word->type))
 		{
 			if (!factory_command_set_redirect(word->type, words, context))
 				return (0);
@@ -63,17 +59,15 @@ static int	factory_build_command_param(t_list **words,
 		}	
 		*words = (*words)->next;
 	}
-	// TODO а вто тут поиск и валидация имени
 	context->process = 0;
 	return (1);
 }
 
 t_command	*factory_command_finde(t_factory *factory, t_command *command,
-	char *name, struct s_build_context *context) // TODO поменять возвращаемое значение на 1/0
+	char *name, struct s_build_context *context)
 {
 	t_buildin	buildin;
 
-	// TODO тут проверку name на NULL
 	buildin = buildin_find(name);
 	if (buildin != NULL)
 		command_set_buildin(command, buildin);
@@ -87,7 +81,7 @@ t_command	*factory_command_finde(t_factory *factory, t_command *command,
 			return (NULL);
 		}
 	}
-	if (!ft_list_add(&context->argl, command->name)) // TODO можно тут push
+	if (!ft_list_add(&context->argl, command->name))
 	{
 		command_destroy(command);
 		return (NULL);

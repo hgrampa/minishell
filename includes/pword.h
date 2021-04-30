@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 13:56:44 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 12:28:47 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:30:01 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ enum e_pword_type
 	EWT_WORD,
 	EWT_PIPE,
 	EWT_SEMICOLON,
-	EWT_REDIR_IN, // < TODO norm delete comment
-	EWT_REDIR_OUT, // >
-	EWT_REDIR_APPEND, // >>
+	EWT_REDIR_IN,
+	EWT_REDIR_OUT,
+	EWT_REDIR_APPEND,
 };
 
 typedef struct s_pword

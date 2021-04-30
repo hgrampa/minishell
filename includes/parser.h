@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:35:39 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 15:13:45 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:29:44 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # define _PRS_QUOTES "\"\'"
 # define _PRS_BUFFSIZE 40
 
-struct			s_pcontext;
+struct						s_pcontext;
 
 typedef struct s_minishell	t_minishell;
 
-typedef int		(*t_state_body)(char**, struct s_pcontext*);
+typedef int					(*t_state_body)(char**, struct s_pcontext*);
 
 struct s_pcontext
 {

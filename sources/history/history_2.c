@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 16:56:32 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 15:57:39 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:35:14 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	history_deserealize(t_history *history)
 			return (0);
 		}
 	}
-	ft_dlist_add(&history->root, ft_strdup(line)); // TODO суда бы защиту от ошибки
+	ft_dlist_add(&history->root, ft_strdup(line));
 	free(line);
 	close(fd);
 	return (1);

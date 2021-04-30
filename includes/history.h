@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:52:46 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/21 00:56:40 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:25:17 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_history
 {
 	t_dlist	*root;
 	t_dlist	*carriage;
-}				t_history;
+}	t_history;
 
 t_history	*history_create(void);
 int			history_init(t_history *history);

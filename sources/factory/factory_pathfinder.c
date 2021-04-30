@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 17:10:40 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 20:37:54 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:34:57 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*find_required_abs_path(char *str)
 	return (NULL);
 }
 
-static char *bin_finder(t_factory *factory, char *name)
+static char	*bin_finder(t_factory *factory, char *name)
 {
 	char	*path;
 
@@ -72,7 +72,7 @@ static char *bin_finder(t_factory *factory, char *name)
 		}
 		return (factory_check_path(path, name));
 	}
-	return(path);
+	return (path);
 }
 
 char	*factory_find_path(t_factory *factory, char *name)
@@ -91,7 +91,7 @@ char	*factory_find_path(t_factory *factory, char *name)
 			err_print_object(name, NULL, 127, 0);
 			return (NULL);
 		}
-		return(factory_check_path(path, name));
+		return (factory_check_path(path, name));
 	}
 	else
 		return (bin_finder(factory, name));

@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 12:03:00 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/30 13:54:12 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:31:36 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	err_cd_print(char *messege, int return_status, int exit_code, char *arg);
 int	err_print(char *messege, int return_status, int exit_code);
 int	err_print_untoken(char *token, int status);
 int	err_print_nofile(char *file, int status);
-int	err_print_nocommand(char *file, int status);
 int	err_print_object(char *object, char *messege, int exit_code, int status);
 
 #endif
