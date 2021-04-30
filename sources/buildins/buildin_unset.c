@@ -29,27 +29,25 @@ static int	error_option(char c)
 
 static int	treat_arg(t_env	*env, char const *arg_str)
 {
-	t_pair	*new_pair;
 	int		result;
+	char	*str;
 
 	result = 0;
-	new_pair = env_pair_from_str(arg_str);
-	if (new_pair->key[0] == '-')
-		result = error_option(new_pair->key[1]);
-	else if (unset_check_invalid_key(new_pair->key))
+	str = (char *)arg_str;
+	if (str[0] == '-')
+		result = error_option(str[1]);
+	else if (unset_check_invalid_key(str))
 	{
 		ft_putstr_fd("minishell: unset: ", 2);
-		ft_putstr_fd(new_pair->key, 2);
+		ft_putstr_fd(str, 2);
 		ft_putstr_fd("' : not a valid identifier\n", 2);
 		result = -1;
 	}
 	if (result == 0)
 	{
-		if (!env_unset(env, arg_str))
+		if (!env_unset(env, str))
 			result = 0;
 	}
-	env_free_pair(new_pair);
-	free(new_pair);
 	return (result);
 }
 
