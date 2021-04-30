@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:18:43 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 18:05:24 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 12:56:46 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	factory_wait_command(t_dlist *node)
 	command = (t_command *)node->data;
 	if (command->pid != -1)
 	{
-		exit_code = exit_code_get();
 		waitpid(command->pid, &status, 0);
+		exit_code = exit_code_peek();
 		if (!(exit_code == 130 || exit_code == 131))
 			exit_code_clamp_set(status);
 	}

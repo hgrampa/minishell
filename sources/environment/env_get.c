@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:04:03 by ssentine          #+#    #+#             */
-/*   Updated: 2021/04/28 17:33:59 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 12:44:08 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*env_get_exit_code(t_env *env)
 {
 	if (env->exit_code != NULL)
 		free(env->exit_code);
-	env->exit_code = ft_itoa(exit_code_get());
+	env->exit_code = ft_itoa(exit_code_take());
 	return (env->exit_code);
 }
 
