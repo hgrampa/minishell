@@ -10,6 +10,8 @@ static int	check_digit(char *str)
 	int	i;
 
 	i = 0;
+	if (ft_strcmp (str, "-") == 0)
+		return (0);
 	if (str[i] != '-' && !(ft_isdigit(str[i])))
 		return (0);
 	i++;
