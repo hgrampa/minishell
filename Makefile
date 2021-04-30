@@ -6,7 +6,7 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/10 15:01:24 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/29 15:53:22 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/29 19:19:36 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,7 @@ SRC				=	main.c \
 					factory_exec_command.c \
 					factory_command_set.c \
 					factory_pathfinder.c \
+					factory_pathfinder_stats.c \
 					buildin.c \
 					buildin_cd.c \
 					buildin_echo.c \
