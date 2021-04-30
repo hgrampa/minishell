@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:17:58 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/24 22:25:16 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:53:46 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ char			**ft_list_tosa(t_list *list);
 
 t_dlist			*ft_dlist_new(void *data);
 void			ft_dlist_free(t_dlist **root, void (*del)(void*));
-// int				ft_dlist_pull(t_dlist **root, t_dlist *new_dlist);
 int				ft_dlist_pull(t_dlist **root, void *data);
 void			ft_dlist_foreach(t_dlist *root, void (*f)(void *));
 int				ft_dlist_add(t_dlist **root, void *data);

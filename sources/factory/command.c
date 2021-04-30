@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 21:33:59 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/28 18:19:28 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:53:52 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,3 @@ void	command_print_argv(void *data)
 	argv = (char *)data;
 	printf("\t\t%s,\n", argv);
 }
-
-// void	command_print(void *data)
-// {
-// 	t_command *command;
-//
-// 	command = (t_command *)data;
-// 	printf("[\n\tname: %s,\n", command->name);
-// 	printf("\targv:\n\t[\n");
-// 	// ft_list_foreach(command->argl, command_print_argv);
-// 	printf("\t]\n");
-// 	printf("\tis_pipe: %d,\n", command->is_pipe);
-// 	printf("\tis_buildin: %d,\n", command->is_buildin);
-// 	printf("\tpipe: [%d,%d],\n", command->pipe[0], command->pipe[0]);
-// 	printf("\tinput: %d,\n", command->input);
-// 	printf("\toutput: %d,\n", command->output);
-// 	printf("\tbuildin: %p,\n", command->buildin);
-// 	printf("]\n");
-// }
