@@ -6,7 +6,7 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 13:00:48 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/30 13:46:54 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:08:56 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	factory_build_commands(t_factory *factory, t_list *words)
 		if (result == 0)
 		{
 			ft_list_free(&context.argl, NULL);
-			command_destroy(context.command);
+			if (context.command != NULL)
+				command_destroy(context.command);
 			return (0);
 		}
 		if (context.command == NULL)
