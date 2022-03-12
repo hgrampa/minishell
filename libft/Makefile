@@ -6,14 +6,14 @@
 #    By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/31 11:39:03 by hgrampa           #+#    #+#              #
-#    Updated: 2021/04/24 22:25:37 by hgrampa          ###   ########.fr        #
+#    Updated: 2021/04/30 14:48:50 by hgrampa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= libft.a
 
 CC				= gcc
-FLAGS			= -Wall -Wextra -Werror -g
+FLAGS			= -Wall -Wextra -Werror
 
 INCL_DIR 		= includes/
 OBJ_DIR			= objects/

@@ -6,13 +6,12 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 12:07:46 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/29 18:00:03 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:34:28 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "factory.h"
 #include "minishell.h"
-
 
 struct s_comm_pair	factory_get_com_pair(t_dlist *node)
 {

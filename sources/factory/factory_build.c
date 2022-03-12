@@ -6,11 +6,17 @@
 /*   By: hgrampa <hgrampa@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 13:00:48 by hgrampa           #+#    #+#             */
-/*   Updated: 2021/04/30 14:08:56 by hgrampa          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:47:02 by hgrampa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "factory.h"
+
+int	factory_is_redirection(enum e_pword_type type)
+{
+	return (type == EWT_REDIR_IN || type == EWT_REDIR_OUT
+		|| type == EWT_REDIR_APPEND);
+}
 
 int	factory_build_commands(t_factory *factory, t_list *words)
 {
